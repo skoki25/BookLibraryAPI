@@ -42,9 +42,7 @@ namespace BookLibraryAPI.Controllers
         {
             var result = await _authorService.CreateAuthor(author);
             if (result.IsSuccess)
-            {
                 return Ok(result.Data);
-            }
             return BadRequest(result.ErrorMessage);
         }
     }
