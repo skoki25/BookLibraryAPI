@@ -58,7 +58,7 @@ namespace BookLibraryAPI.Controllers
             {
                 return Ok(_borrowService.ReturnBook(id));
             }
-            catch(Exception ex)
+            catch(ValidationErrorExeption ex)
             {
                 return BadRequest(ex.Message);  
             }

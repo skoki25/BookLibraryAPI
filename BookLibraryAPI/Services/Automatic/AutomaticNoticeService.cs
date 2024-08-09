@@ -20,13 +20,13 @@ namespace BookLibraryAPI.Services.Automatic
         protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero,
+            _timer = new Timer(SendEmail, null, TimeSpan.Zero,
                 TimeSpan.FromSeconds(60));
 
             return Task.CompletedTask;
         }
 
-        private void DoWork(object? state)
+        private void SendEmail(object? state)
         {
             var count = Interlocked.Increment(ref executionCount);
 

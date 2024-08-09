@@ -13,11 +13,14 @@ namespace BookLibraryAPI.Services
         public void CreateBook(Book book)
         {
             CreateBookValidation createBookValid = new CreateBookValidation();
-            if(book == null) { }
+            
             if (!createBookValid.Validate(book, out string error))
             {
                 throw new ValidationErrorExeption(error);
             }
+
+            _context.Book.Add(book);
+            _context.SaveChanges();
         }
 
         public void DeleteBook(int id)

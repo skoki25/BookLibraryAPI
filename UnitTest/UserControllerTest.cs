@@ -1,5 +1,6 @@
 using BookLibraryAPI.Controllers;
 using BookLibraryAPI.Models;
+using BookLibraryAPI.Services;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace UnitTest
 
         public UserControllerTest()
         {
-            userController = new UserController(new Logger<UserController>(new LoggerFactory()));
+            userController = new UserController(new UserService());
         }
 
         [TestMethod]

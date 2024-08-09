@@ -82,6 +82,11 @@ namespace BookLibraryAPI.Services
                throw new ValidationErrorExeption("Not found!");
             }
 
+            if (bookBorrow.IsReturned)
+            {
+                throw new ValidationErrorExeption("Book wasnt borrowed!");
+            }
+
             bookBorrow.IsReturned = true;
             bookBorrow.ReturnedDated = DateTime.Now;
             _context.SaveChanges();

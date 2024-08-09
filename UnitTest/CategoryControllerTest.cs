@@ -1,4 +1,5 @@
 ﻿using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace UnitTest
         [TestInitialize]
         public void Inicialization()
         {
-            categoryController = new CategoryController();
+            categoryController = new CategoryController(new CategoryService());
 
         }
         [TestMethod]
