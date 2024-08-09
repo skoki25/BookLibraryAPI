@@ -12,6 +12,7 @@ namespace BookLibraryAPI.Installation
             services.AddScoped<IBookInfoService, BookInfoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookBorrowService, BookBorrowService>();
+            services.AddScoped<IAuthorService, AuthorService>();
         }
     }
 }
