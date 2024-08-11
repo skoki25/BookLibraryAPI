@@ -11,17 +11,17 @@ namespace BookLibraryAPI.Services
     {
         private LibraryDbContext _context = new LibraryDbContext();
 
-        public void Borrow(int id, string userEmail)
+        public ServiceResult<string> BorrowBook(int id, string userEmail)
         {
             if (CheckIfBookIsBorrowed(id))
             {
-                throw new ValidationErrorExeption("Book is borrowed");
+                return ServiceResult<string>.Failure("Book is borrowed");
             }
             User user = _context.User.Where(x => x.Email == userEmail).SingleOrDefault();
 
             if (user == null)
             {
-                throw new ValidationErrorExeption("Problem");
+                return ServiceResult<string>.Failure("Problem");
             }
 
             List<BookBorrow> borrowBooksList = _context.BookBorrow.Where(x => x.UserId == user.Id && !x.IsReturned)
@@ -29,7 +29,7 @@ namespace BookLibraryAPI.Services
 
             if (borrowBooksList.Count >= Config.MaxBorrowedBook)
             {
-                throw new ValidationErrorExeption($"User had borrow {Config.MaxBorrowedBook} books already");
+                return ServiceResult<string>.Failure($"User had borrow {Config.MaxBorrowedBook} books already");
             }
 
             BookBorrow bookBorrow = new BookBorrowBuilder()
@@ -41,56 +41,47 @@ namespace BookLibraryAPI.Services
 
             _context.BookBorrow.Add(bookBorrow);
             _context.SaveChanges();
+            return ServiceResult<string>.Success("Success");
         }
 
-
-
-        public Book GetBookById(int id)
+        public ServiceResult<Book> GetBookById(int id)
         {
             if (CheckIfBookIsBorrowed(id))
             {
-                throw new ValidationErrorExeption("Book is borrowed");
+                ServiceResult<Book>.Failure("Book is borrowed");
             }
 
             Book book = _context.Book.Where(x => x.Id == id).SingleOrDefault();
 
             if (book == null)
             {
-                throw new ValidationErrorExeption("Book dosnt exist");
+                ServiceResult<Book>.Failure("Book dosnt exist");
             }
 
-            return book;
+            return ServiceResult<Book>.Success(book);
         }
 
-        public List<BookBorrow> GetBorrowHistory(int userId)
+        public ServiceResult<List<BookBorrow>> GetBorrowHistory(int userId)
         {
-            User userExist = _context.User.Where(x => x.Id == userId).SingleOrDefault();
-            if(userExist == null)
-            {
-                throw new ValidationErrorExeption("User with this id dosnt exist");
-            }
-
-            return _context.BookBorrow.Where(x => x.UserId == userId).ToList();
+            List<BookBorrow>bookBorrows = _context.BookBorrow.Where(x => x.UserId == userId)
+                .ToList();
+            return ServiceResult<List<BookBorrow>>.Success(bookBorrows);
         }
 
-        public string ReturnBook(int id)
+        public ServiceResult<BookBorrow> ReturnBook(int bookId)
         {
-            BookBorrow bookBorrow = _context.BookBorrow.Where(x => x.Id == id).SingleOrDefault();
+            BookBorrow bookBorrow = _context.BookBorrow.Where(x => x.BookId == bookId && !x.IsReturned)
+                .SingleOrDefault();
 
             if (bookBorrow == null)
             {
-               throw new ValidationErrorExeption("Not found!");
-            }
-
-            if (bookBorrow.IsReturned)
-            {
-                throw new ValidationErrorExeption("Book wasnt borrowed!");
+                return ServiceResult<BookBorrow>.Failure("Not found!");
             }
 
             bookBorrow.IsReturned = true;
             bookBorrow.ReturnedDated = DateTime.Now;
             _context.SaveChanges();
-            return "Success";
+            return ServiceResult<BookBorrow>.Success(bookBorrow);
         }
 
         public bool CheckIfBookIsBorrowed(int id)

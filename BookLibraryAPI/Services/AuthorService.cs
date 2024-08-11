@@ -6,7 +6,8 @@ namespace BookLibraryAPI.Services
 {
     public class AuthorService : IAuthorService
     {
-        public async Task<ServiceResult<Author>> CreateAuthor(Author author)
+        private LibraryDbContext _context = new LibraryDbContext();
+        public ServiceResult<Author> CreateAuthor(Author author)
         {
             AuthorValidation validationRules = new AuthorValidation();
 
@@ -15,27 +16,66 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<Author>.Failure(error);
             }
 
-            throw new ValidationErrorExeption("");
+            _context.Add(author);
+            return ServiceResult<Author>.Success(author);
         }
 
-        public Task<string> DeleteAuthor(int id)
+        public ServiceResult<string> DeleteAuthor(int id)
         {
-            throw new NotImplementedException();
+            Author author = _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            if(author == null)
+            {
+                return ServiceResult<string>.Failure("Author want found");
+            }
+
+            List<BookInfo> bookInfo = _context.BookInfo.Where(x=> x.AuthorId == id).ToList();
+
+            if(bookInfo.Count > 0)
+            {
+                return ServiceResult<string>.Failure("Author cannot be remove");
+            }
+
+            _context.Author.Remove(author);
+
+            return ServiceResult<string>.Success("Success!");
         }
 
-        public Task<Author> EditAuthor(int id, Author author)
+        public ServiceResult<Author> EditAuthor(int id, Author author)
         {
-            throw new NotImplementedException();
+            Author authorResult = _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            if (author == null)
+            {
+                return ServiceResult<Author>.Failure("Author wanst found");
+            }
+
+            AuthorValidation validationRules = new AuthorValidation();
+
+            if (!validationRules.Validate(author, out string error))
+            {
+                return ServiceResult<Author>.Failure(error);
+            }
+
+            authorResult.Age = author.Age;
+            authorResult.FirstName = author.FirstName;
+            authorResult.LastName = author.LastName;
+            _context.SaveChanges();
+            return ServiceResult<Author>.Success(authorResult);
         }
 
-        public Task<Author> GetAuthorById(int id)
+        public ServiceResult<Author> GetAuthorById(int id)
         {
-            throw new NotImplementedException();
+            Author author = _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            if (author == null)
+            {
+                return ServiceResult<Author>.Failure("Author wanst found");
+            }
+
+            return ServiceResult<Author>.Success(author);
         }
 
-        public Task<List<Author>> GetAuthors()
+        public ServiceResult<List<Author>> GetAuthors()
         {
-            throw new NotImplementedException();
+            return ServiceResult<List<Author>>.Success(_context.Author.ToList());
         }
     }
 }

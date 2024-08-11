@@ -1,10 +1,12 @@
-﻿namespace BookLibraryAPI.Services
+﻿using BookLibraryAPI.Data.Messages;
+
+namespace BookLibraryAPI.Services
 {
     public class ServiceResult<T>
     {
         public T Data { get; private set; }
         public bool IsSuccess { get; private set; }
-        public string ErrorMessage { get; private set; }
+        public ErrorMessage ErrorMessage { get; private set; }
 
         public static ServiceResult<T> Success(T data)
         {
@@ -13,7 +15,7 @@
 
         public static ServiceResult<T> Failure(string error)
         {
-            return new ServiceResult<T> { IsSuccess = false, ErrorMessage = error };
+            return new ServiceResult<T> { IsSuccess = false, ErrorMessage = new ErrorMessage(error) };
         }
     }
 }

@@ -4,8 +4,10 @@ using BookLibraryAPI.Services;
 using BookLibraryAPI.Services.Automatic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,11 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,6 +32,12 @@ builder.Services.AddHostedService<AutomaticNoticeService>();
 builder.Services.AddApplicationServices();
 builder.Services.AddAuthenticationExtension();
 builder.Services.AddSwaggerExtension();
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options => {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    }
+);
 
 var app = builder.Build();
 

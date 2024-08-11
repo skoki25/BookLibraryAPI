@@ -6,10 +6,10 @@ namespace BookLibraryAPI.Services
 {
     public interface IBookBorrowService
     {
-        Book GetBookById(int id);
-        void Borrow(int id, string userEmail);
-        string ReturnBook(int id);
-        List<BookBorrow>GetBorrowHistory(int userId);
+        ServiceResult<Book> GetBookById(int id);
+        ServiceResult<string> BorrowBook(int id, string userEmail);
+        ServiceResult<BookBorrow> ReturnBook(int id);
+        ServiceResult<List<BookBorrow>>GetBorrowHistory(int userId);
         bool CheckIfBookIsBorrowed(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.Installation;
+using BookLibraryAPI.Models;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,32 +19,29 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
-        [Route("/{id}")]
-        public async Task<Author>  GetAuthorById(int id)
+        [Route("{id}")]
+        public async Task<IActionResult>  GetAuthorById(int id)
         {
-            return await _authorService.GetAuthorById(id);
+            return this.ServiceToActionResult(_authorService.GetAuthorById(id));
         }
 
         [HttpGet]
-        public async Task<List<Author>> GetAuthors()
+        public async Task<IActionResult> GetAuthors()
         {
-            return await _authorService.GetAuthors();
+            return this.ServiceToActionResult(_authorService.GetAuthors());
         }
 
         [HttpPut]
-        [Route("/{id}")]
-        public async Task<Author> EditAuthor(int id, Author author)
+        [Route("{id}")]
+        public async Task<IActionResult> EditAuthor(int id, Author author)
         {
-            return await _authorService.EditAuthor(id, author);
+            return this.ServiceToActionResult(_authorService.EditAuthor(id, author));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAuthor(Author author)
         {
-            var result = await _authorService.CreateAuthor(author);
-            if (result.IsSuccess)
-                return Ok(result.Data);
-            return BadRequest(result.ErrorMessage);
+            return this.ServiceToActionResult(_authorService.CreateAuthor(author));
         }
     }
 }

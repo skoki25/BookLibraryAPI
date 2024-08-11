@@ -1,5 +1,4 @@
-﻿using BookLibraryAPI.Data.CustomException;
-using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.Installation;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,60 +22,31 @@ namespace BookLibraryAPI.Controllers
         [Route("Check")]
         public IActionResult GetBookById(int id)
         {
-            try
-            {
-                Book book = _borrowService.GetBookById(id);
-                return Ok(book);
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return this.ServiceToActionResult(_borrowService.GetBookById(id));
         }
 
         [HttpPost]
         [Route("Borrow")]
         public IActionResult Borrow(int id)
         {
-            try
-            {
-                string userId = User.FindFirst(ClaimTypes.Name)?.Value;
-                _borrowService.Borrow(id, userId);
-                return Ok("Success");
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            string userId = User.FindFirst(ClaimTypes.Name)?.Value;
+            var result = _borrowService.BorrowBook(id, userId);
+            return this.ServiceToActionResult(result);
         }
 
         [HttpPatch]
-        [Route("Return")]
-        public IActionResult ReturnBook(int id) 
+        [Route("Return/{bookId}")]
+        public IActionResult ReturnBook(int bookId) 
         {
-            try
-            {
-                return Ok(_borrowService.ReturnBook(id));
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);  
-            }
+            return this.ServiceToActionResult(_borrowService.ReturnBook(bookId));
         }
 
         [HttpGet]
         [Route("History/user/{userId}")]
         public IActionResult GetBorrowHistory(int userId)
         {
-            try
-            {
-                List<BookBorrow> bookBorrows = _borrowService.GetBorrowHistory(userId);
-                return Ok(bookBorrows);
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var result = _borrowService.GetBorrowHistory(userId);
+            return this.ServiceToActionResult(result);
         }
     }
 }
