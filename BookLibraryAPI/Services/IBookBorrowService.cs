@@ -1,4 +1,5 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.DTO;
+using BookLibraryAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices;
 
@@ -9,7 +10,7 @@ namespace BookLibraryAPI.Services
         ServiceResult<Book> GetBookById(int id);
         ServiceResult<string> BorrowBook(int id, string userEmail);
         ServiceResult<BookBorrow> ReturnBook(int id);
-        ServiceResult<List<BookBorrow>>GetBorrowHistory(int userId);
+        ServiceResult<List<BookBorrowDto>>GetBorrowHistory(int userId);
         bool CheckIfBookIsBorrowed(int id);
     }
 }

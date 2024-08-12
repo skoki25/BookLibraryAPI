@@ -1,8 +1,12 @@
-﻿using BookLibraryAPI.Data.Builder;
+﻿using AutoMapper;
+using BookLibraryAPI.Data.Builder;
 using BookLibraryAPI.Data.Config;
 using BookLibraryAPI.Data.CustomException;
+using BookLibraryAPI.DTO;
+using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace BookLibraryAPI.Services
@@ -10,6 +14,12 @@ namespace BookLibraryAPI.Services
     public class BookBorrowService : IBookBorrowService
     {
         private LibraryDbContext _context = new LibraryDbContext();
+        private IMapper _map;
+
+        public BookBorrowService(IMapper map)
+        {
+            _map = map;
+        }
 
         public ServiceResult<string> BorrowBook(int id, string userEmail)
         {
@@ -61,11 +71,15 @@ namespace BookLibraryAPI.Services
             return ServiceResult<Book>.Success(book);
         }
 
-        public ServiceResult<List<BookBorrow>> GetBorrowHistory(int userId)
+        public ServiceResult<List<BookBorrowDto>> GetBorrowHistory(int userId)
         {
             List<BookBorrow>bookBorrows = _context.BookBorrow.Where(x => x.UserId == userId)
+                .Include(x=> x.Book)
+                .ThenInclude(x=> x.BookInfo)
                 .ToList();
-            return ServiceResult<List<BookBorrow>>.Success(bookBorrows);
+            List<BookBorrowDto>mapped  =_map.Map<List<BookBorrowDto>>(bookBorrows);
+
+            return ServiceResult<List<BookBorrowDto>>.Success(mapped);
         }
 
         public ServiceResult<BookBorrow> ReturnBook(int bookId)

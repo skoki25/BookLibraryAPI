@@ -1,4 +1,5 @@
-﻿using BookLibraryAPI.Services;
+﻿using BookLibraryAPI.Mapper;
+using BookLibraryAPI.Services;
 using System.Runtime.CompilerServices;
 
 namespace BookLibraryAPI.Installation
@@ -13,6 +14,8 @@ namespace BookLibraryAPI.Installation
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookBorrowService, BookBorrowService>();
             services.AddScoped<IAuthorService, AuthorService>();
+
+            services.AddAutoMapper(typeof(ProfileMapping));
         }
     }
 }

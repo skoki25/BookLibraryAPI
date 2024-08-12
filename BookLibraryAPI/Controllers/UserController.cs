@@ -1,5 +1,7 @@
 using BookLibraryAPI.Data;
 using BookLibraryAPI.Data.CustomException;
+using BookLibraryAPI.DTO;
+using BookLibraryAPI.Installation;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Services;
@@ -38,9 +40,9 @@ namespace BookLibraryAPI.Controllers
 
         [HttpGet()]
         [Authorize]
-        public async Task<ActionResult<User>> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
-            return _userService.GetUserById(id);
+            return await this.ServiceToActionTask<UserDto>(_userService.GetUserById(id));
         }
 
         [HttpPost]

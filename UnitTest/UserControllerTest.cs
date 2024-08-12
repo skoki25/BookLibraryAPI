@@ -1,4 +1,6 @@
+using AutoMapper;
 using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore;
@@ -15,7 +17,11 @@ namespace UnitTest
 
         public UserControllerTest()
         {
-            userController = new UserController(new UserService());
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new ProfileMapping());
+            });
+            userController = new UserController(new UserService(config.CreateMapper()));
         }
 
         [TestMethod]

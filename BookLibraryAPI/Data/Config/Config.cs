@@ -7,5 +7,7 @@
         const string User = "User";
 
         public const int MaxBorrowedBook = 2;
+
+        public const string SuccessMessage = "Success Request";
     }
 }

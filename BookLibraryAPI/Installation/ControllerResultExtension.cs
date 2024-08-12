@@ -12,7 +12,17 @@ namespace BookLibraryAPI.Installation
                 return controllerBase.Ok(serviceResult.Data);
             }
 
-            return controllerBase.BadRequest(serviceResult.ErrorMessage);
+            return controllerBase.BadRequest(serviceResult.ResultMessage);
+        }
+
+        public static async Task<IActionResult> ServiceToActionTask<T>(this ControllerBase controllerBase, ServiceResult<T> serviceResult)
+        {
+            if (serviceResult.IsSuccess)
+            {
+                return controllerBase.Ok(serviceResult.Data);
+            }
+
+            return controllerBase.BadRequest(serviceResult.ResultMessage);
         }
     }
 }
