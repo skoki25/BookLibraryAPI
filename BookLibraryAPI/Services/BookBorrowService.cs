@@ -23,9 +23,15 @@ namespace BookLibraryAPI.Services
 
         public ServiceResult<string> BorrowBook(int id, string userEmail)
         {
+            Book book = _context.Book.Where(x => x.Id == id).SingleOrDefault();
+            if(book == null)
+            {
+                return ServiceResult<string>.Failure("Book dosnt exist!");
+            }
+
             if (CheckIfBookIsBorrowed(id))
             {
-                return ServiceResult<string>.Failure("Book is borrowed");
+                return ServiceResult<string>.Failure("Book is borrowed!");
             }
             User user = _context.User.Where(x => x.Email == userEmail).SingleOrDefault();
 
@@ -100,7 +106,7 @@ namespace BookLibraryAPI.Services
 
         public bool CheckIfBookIsBorrowed(int id)
         {
-            BookBorrow isBookBorrower = _context.BookBorrow.Where(x => x.Book.Id == id && !x.IsReturned)
+            BookBorrow isBookBorrower = _context.BookBorrow.Where(x => x.BookId == id && !x.IsReturned)
                 .Include(x => x.Book)
                 .FirstOrDefault();
             return isBookBorrower != null ? true : false;
