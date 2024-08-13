@@ -1,12 +1,20 @@
 ﻿using BookLibraryAPI.Data.CustomException;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
+using BookLibraryAPI.Repositories;
 
 namespace BookLibraryAPI.Services
 {
     public class AuthorService : IAuthorService
     {
-        private LibraryDbContext _context = new LibraryDbContext();
+
+        IAuthorRepository _authorRepository;
+
+        public AuthorService(IAuthorRepository authorRepository)
+        {
+            _authorRepository = authorRepository;
+        }
+
         public ServiceResult<Author> CreateAuthor(Author author)
         {
             AuthorValidation validationRules = new AuthorValidation();
@@ -16,19 +24,19 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<Author>.Failure(error);
             }
 
-            _context.Add(author);
+            _authorRepository.CreateAuthor(author);     
             return ServiceResult<Author>.Success(author);
         }
 
         public ServiceResult<string> DeleteAuthor(int id)
         {
-            Author author = _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            Author author = _authorRepository.FindAuthor(id);
             if(author == null)
             {
                 return ServiceResult<string>.Failure("Author want found");
             }
 
-            List<BookInfo> bookInfo = _context.BookInfo.Where(x=> x.AuthorId == id).ToList();
+            List<BookInfo> bookInfo = _authorRepository.GetBookInfoByAuthorId(id);
 
             if(bookInfo.Count > 0)
             {
@@ -42,7 +50,7 @@ namespace BookLibraryAPI.Services
 
         public ServiceResult<Author> EditAuthor(int id, Author author)
         {
-            Author authorResult = _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            Author authorResult = _authorRepository.FindAuthor(id);
             if (author == null)
             {
                 return ServiceResult<Author>.Failure("Author wanst found");
@@ -55,16 +63,12 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<Author>.Failure(error);
             }
 
-            authorResult.Age = author.Age;
-            authorResult.FirstName = author.FirstName;
-            authorResult.LastName = author.LastName;
-            _context.SaveChanges();
-            return ServiceResult<Author>.Success(authorResult);
+            return ServiceResult<Author>.Success(_authorRepository.Update(id, author));
         }
 
         public ServiceResult<Author> GetAuthorById(int id)
         {
-            Author author = _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            Author author = _authorRepository.FindAuthor(id);
             if (author == null)
             {
                 return ServiceResult<Author>.Failure("Author wanst found");
@@ -75,7 +79,7 @@ namespace BookLibraryAPI.Services
 
         public ServiceResult<List<Author>> GetAuthors()
         {
-            return ServiceResult<List<Author>>.Success(_context.Author.ToList());
+            return ServiceResult<List<Author>>.Success(_authorRepository.GetAuthors());
         }
     }
 }
