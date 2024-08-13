@@ -15,6 +15,7 @@ namespace UnitTest.FakeRepositories
         public AuthorTestRepository()
         {
             authorList = new List<Author>();
+            AddTestAuthors();
         }
 
         private void AddTestAuthors()
@@ -33,15 +34,15 @@ namespace UnitTest.FakeRepositories
 
         }
 
-        public Author FindAuthor(int author)
+        public Author FindAuthor(int id)
         {
 
-            return authorList.Where(x=> x.Id == author).FirstOrDefault();
+            return authorList.Where(x=> x.Id == id).FirstOrDefault();
         }
 
         public List<Author> GetAuthors()
         {
-            throw new NotImplementedException();
+            return authorList;
         }
 
         public List<BookInfo> GetBookInfoByAuthorId(int id)

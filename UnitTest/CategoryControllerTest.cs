@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace UnitTest
 {
     [TestClass]
-    internal class CategoryControllerTest
+    public class CategoryControllerTest
     {
         CategoryController categoryController;
 

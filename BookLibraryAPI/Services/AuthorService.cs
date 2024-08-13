@@ -43,7 +43,7 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<string>.Failure("Author cannot be remove");
             }
 
-            _context.Author.Remove(author);
+           // _context.Author.Remove(author);
 
             return ServiceResult<string>.Success("Success!");
         }

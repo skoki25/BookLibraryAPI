@@ -1,17 +1,15 @@
 ﻿using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Models;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using UnitTest.FakeRepositories;
 
 namespace UnitTest
 {
     [TestClass]
-    internal class AuthorControllerTest
+    public class AuthorControllerTest
     {
         private AuthorController _authorController;
 
@@ -25,9 +23,21 @@ namespace UnitTest
 
 
         [TestMethod]
-        public void TestGetAuthor()
+        public async Task TestGetAuthor()
         {
-            _authorController.GetAuthorById(1);
+            IActionResult result = await _authorController.GetAuthorById(1);
+            //Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            //OkObjectResult okObjectResult = (OkObjectResult)result;
+            //Assert.IsInstanceOfType(okObjectResult.Value, typeof(Author));
+            //Author author = (Author)okObjectResult.Value;
+            //Assert.Fail();
+
+            if(result is BadRequestObjectResult)
+            {
+                BadRequestObjectResult badRequestObjectResult = (BadRequestObjectResult)result;
+                string error = JsonConvert.SerializeObject(badRequestObjectResult.Value);
+                Assert.Fail(error);
+            }
         }
     }
 
