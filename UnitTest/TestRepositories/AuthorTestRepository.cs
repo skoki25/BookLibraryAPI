@@ -52,7 +52,12 @@ namespace UnitTest.FakeRepositories
 
         public Author Update(int id, Author author)
         {
-            throw new NotImplementedException();
+            Author authorSearch = authorList.Where(x => x.Id == id).SingleOrDefault();
+            authorSearch.FirstName = author.FirstName;
+            authorSearch.LastName = author.LastName;
+            authorSearch.Age = author.Age;
+            return authorSearch;
+
         }
     }
 }
