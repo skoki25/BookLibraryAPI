@@ -3,51 +3,64 @@ using BookLibraryAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using BookLibraryAPI.Data.CustomException;
 using Microsoft.EntityFrameworkCore;
+using BookLibraryAPI.Repositories;
 
 namespace BookLibraryAPI.Services
 {
     public class BookService : IBookService
     {
-        private LibraryDbContext _context = new LibraryDbContext();
-
-        public void CreateBook(Book book)
+        private readonly IBookRepository _bookRepository;
+        public BookService(IBookRepository bookRepository)
+        {
+            _bookRepository = bookRepository;
+        }
+        public ServiceResult<Book> CreateBook(Book book)
         {
             CreateBookValidation createBookValid = new CreateBookValidation();
             
             if (!createBookValid.Validate(book, out string error))
             {
-                throw new ValidationErrorExeption(error);
+                return ServiceResult<Book>.Failure(error);
             }
 
-            _context.Book.Add(book);
-            _context.SaveChanges();
+            _bookRepository.CreateBook(book);
+            return ServiceResult<Book>.Success(book);
         }
 
-        public void DeleteBook(int id)
+        public ServiceResult<Book> EditBook(int id, Book book)
         {
-            Book book = _context.Book.Where(x => x.Id == id).SingleOrDefault();
+            CreateBookValidation createBookValid = new CreateBookValidation();
+
+            if (!createBookValid.Validate(book, out string error))
+            {
+                return ServiceResult<Book>.Failure(error);
+            }
+
+            Book bookResult = _bookRepository.GetBookById(id);
+            if(bookResult == null)
+            {
+                return ServiceResult<Book>.Failure("Book wasnt found");
+            }
+
+            return ServiceResult<Book>.Success(_bookRepository.EditBook(id, book));
+        }
+
+        public ServiceResult<string> DeleteBook(int id)
+        {
+            Book book = _bookRepository.GetBookById(id);
 
             if(book == null ) 
             {
-                throw new ValidationErrorExeption("Not found!");
+               return ServiceResult<string>.Failure("Not found!");
             }
 
-            List<BookInfo> bookInfo = _context.BookInfo.Where(x => x.Id == book.BookInfoId)
-                .Include(x => x.Books)
-                .ToList();
-
-            _context.Remove(book);
-            if(bookInfo.Count() == 1)
-            {
-                _context.Remove(bookInfo[0]);
-            }
-
-            _context.SaveChanges();
+            _bookRepository.DeleteBook(book);
+            return ServiceResult<string>.Success("Success");
         }
 
-        public List<Book> GetAllBooks()
+        public ServiceResult<List<Book>> GetAllBooks()
         {
-            return _context.Book.ToList();
+            return ServiceResult<List<Book>>.Success(_bookRepository.GetAllBooks());
         }
     }
 }

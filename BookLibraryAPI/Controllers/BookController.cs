@@ -1,4 +1,5 @@
 ﻿using BookLibraryAPI.Data.CustomException;
+using BookLibraryAPI.Installation;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Services;
@@ -22,33 +23,24 @@ namespace BookLibraryAPI.Controllers
         [HttpGet]
         public IActionResult GetAllBooks()
         {
-            List<Book>books = _bookService.GetAllBooks();
-            if (books.Count == 0)
-            {
-                return NoContent();
-            }
-            return Ok(books);
+            return this.ServiceToActionResult(_bookService.GetAllBooks());
         }
 
         [HttpPost]
         public IActionResult CreateBook(Book book) 
-        {           
-            try
-            {
-                _bookService.CreateBook(book);
-                return Ok("Sucess");
-
-            }
-            catch (ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        {
+            return this.ServiceToActionResult(_bookService.CreateBook(book));
         }
+
+        public IActionResult EditBook(int id, Book book)
+        {
+            return this.ServiceToActionResult(_bookService.EditBook(id, book));
+        }
+
         [HttpDelete]
         public IActionResult DeleteBook(int id)
         {
-            _bookService.DeleteBook(id);
-            return Ok();
+            return this.ServiceToActionResult(_bookService.DeleteBook(id));
         }
     }
 }

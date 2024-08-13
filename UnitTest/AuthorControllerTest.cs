@@ -6,6 +6,7 @@ using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using UnitTest.Data;
 using UnitTest.FakeRepositories;
 
 namespace UnitTest
@@ -29,38 +30,30 @@ namespace UnitTest
         {
             IActionResult result = await _authorController.GetAuthorById(1);
 
-            CheckIfIsBadRequest(result);
+            TestMethod.CheckIfIsBadRequest(result);
+            TestMethod.IsBadRequest(result);
 
-            if (result is OkObjectResult)
+            OkObjectResult okRequest = (OkObjectResult)result;
+            Author author = (Author)okRequest.Value;
+            if(author == null)
             {
-                OkObjectResult okRequest = (OkObjectResult)result;
+                Assert.Fail("Author nebol najdeny");
             }
-            else
-            {
-                Assert.Fail("Zly request");
 
-            }
         }
 
         [TestMethod]
         public async Task GetAuthorsTest()
         {
             IActionResult result = await _authorController.GetAuthors();
-            CheckIfIsBadRequest(result);
+            TestMethod.CheckIfIsBadRequest(result);
+            TestMethod.IsBadRequest(result);
 
-            if (result is OkObjectResult)
+            OkObjectResult okRequest = (OkObjectResult)result;
+            List<Author> listAuthor = (List<Author>)okRequest.Value;
+            if(listAuthor.Count() == 0)
             {
-                OkObjectResult okRequest = (OkObjectResult)result;
-                List<Author> listAuthor = (List<Author>)okRequest.Value;
-                if(listAuthor.Count() == 0)
-                {
-                    Assert.Fail("Canntot be null");
-
-                }
-            }
-            else
-            {
-                Assert.Fail("Zly request");
+                Assert.Fail("Canntot be null");
 
             }
         }
@@ -74,17 +67,9 @@ namespace UnitTest
             Author authorEdit = new Author { Id = 1, Age = 30, FirstName = firstNameChange, LastName = secondNameChange };
 
             IActionResult result = await _authorController.EditAuthor(1, authorEdit);
-            CheckIfIsBadRequest(result);
-
-            if (result is OkObjectResult)
-            {
-                CheckAuthor(firstNameChange, secondNameChange, result);
-            }
-            else
-            {
-                Assert.Fail("Zly request");
-
-            }
+            TestMethod.CheckIfIsBadRequest(result);
+            TestMethod.IsBadRequest(result);
+            CheckAuthor(firstNameChange, secondNameChange, result);
         }
 
 
@@ -97,15 +82,8 @@ namespace UnitTest
 
             Author authorCreate = new Author { Id = 1, Age = 30, FirstName = firstNameChange, LastName = secondNameChange };
             IActionResult result = await _authorController.CreateAuthor(authorCreate);
-            if (result is OkObjectResult)
-            {
-                CheckAuthor(firstNameChange, secondNameChange, result);
-            }
-            else
-            {
-                Assert.Fail("Zly request");
-
-            }
+            TestMethod.IsBadRequest(result);
+            CheckAuthor(firstNameChange, secondNameChange, result);
 
         }
         private static void CheckAuthor(string firstNameChange, string secondNameChange, IActionResult result)
@@ -123,16 +101,6 @@ namespace UnitTest
             if (!author.LastName.Equals(secondNameChange))
             {
                 Assert.Fail("First name wasnt change");
-            }
-        }
-
-        private void CheckIfIsBadRequest(IActionResult result)
-        {
-            if (result is BadRequestObjectResult)
-            {
-                BadRequestObjectResult badRequestObjectResult = (BadRequestObjectResult)result;
-                string error = JsonConvert.SerializeObject(badRequestObjectResult.Value);
-                Assert.Fail(error);
             }
         }
     }

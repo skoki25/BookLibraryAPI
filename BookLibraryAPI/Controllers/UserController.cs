@@ -49,15 +49,7 @@ namespace BookLibraryAPI.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(User user)
         {
-            try
-            {
-                return Ok(_userService.Login(user));
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await this.ServiceToActionTask(_userService.Login(user));
         }
-
     }
 }
