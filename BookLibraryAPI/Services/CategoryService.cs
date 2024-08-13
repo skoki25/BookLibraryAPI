@@ -8,45 +8,45 @@ namespace BookLibraryAPI.Services
     {
         private LibraryDbContext _context = new LibraryDbContext();
 
-        public Category AddCategory(Category category)
+        public ServiceResult<Category> AddCategory(Category category)
         {
             CategoryCreateValidation validationRules = new CategoryCreateValidation();
 
             if(!validationRules.Validate(category,out string error))
             {
-                throw new ValidationErrorExeption(error);
+                return ServiceResult<Category>.Failure(error);
             }
 
             Category catergoryResult = _context.Category.Where(x=> x.Type.Equals(category.Type)).FirstOrDefault();
 
             if( catergoryResult != null )
             {
-                throw new ValidationErrorExeption("This category already exist");
+                return ServiceResult<Category>.Failure("This category already exist");
             }
 
             _context.Category.Add(category);
             _context.SaveChanges();
-            return category;
+            return ServiceResult<Category>.Success(category);
         }
 
-        public Category? EditCategory(int id, Category category)
+        public ServiceResult<Category> EditCategory(int id, Category category)
         {
             Category catergoryResult = _context.Category.Where(x => x.Id == id).FirstOrDefault();
 
             if (catergoryResult == null)
             {
-                return null;
+                return ServiceResult<Category>.Failure("Not found");
             }
 
             catergoryResult.Type = category.Type;
             _context.SaveChanges();
 
-            return catergoryResult;
+            return ServiceResult<Category>.Success(catergoryResult);
         }
 
-        public List<Category> GetAllCategory()
+        public ServiceResult<List<Category>> GetAllCategory()
         {
-            return _context.Category.ToList();
+            return ServiceResult<List<Category>>.Success(_context.Category.ToList());
         }
     }
 }

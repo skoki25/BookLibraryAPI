@@ -4,8 +4,8 @@ namespace BookLibraryAPI.Services
 {
     public interface ICategoryService
     {
-        List<Category> GetAllCategory();
-        Category EditCategory(int id, Category category);
-        Category AddCategory(Category category);
+        ServiceResult<List<Category>> GetAllCategory();
+        ServiceResult<Category> EditCategory(int id, Category category);
+        ServiceResult<Category> AddCategory(Category category);
     }
 }
