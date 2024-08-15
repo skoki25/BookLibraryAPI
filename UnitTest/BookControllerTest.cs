@@ -67,10 +67,8 @@ namespace UnitTest
         {
             OkObjectResult okRequest = (OkObjectResult)result;
             Book book = (Book)okRequest.Value;
-            if (book == null)
-            {
-                Assert.Fail("Nenajdena kniha");
-            }
+            TestDataGetItem.IsObjectNull(book);
+
             if (!book.ISO.Equals(isoChange))
             {
                 Assert.Fail($"Iso wasnt change {book.ISO}");

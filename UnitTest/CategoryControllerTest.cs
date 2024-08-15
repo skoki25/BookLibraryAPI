@@ -16,7 +16,7 @@ namespace UnitTest
         [TestInitialize]
         public void Inicialization()
         {
-            ICategoryRepository categoryRepository = new CategoryRepositoryTest();
+            ICategoryRepository categoryRepository = new CategoryTestRepository();
             ICategoryService categoryService = new CategoryService(categoryRepository);
             categoryController = new CategoryController(categoryService);
 

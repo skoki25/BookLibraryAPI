@@ -2,8 +2,10 @@ using AutoMapper;
 using BookLibraryAPI.Controllers;
 using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Models;
+using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using UnitTest.TestRepositories;
 using Xunit.Sdk;
 
 namespace UnitTest
@@ -13,19 +15,23 @@ namespace UnitTest
     {
         private UserController userController;
 
-        public UserControllerTest()
+        [TestInitialize]
+        public void Initialize()
         {
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ProfileMapping());
             });
-            userController = new UserController(new UserService(config.CreateMapper(), null));
+            IUserRepository repository = new UserTestRepository();
+            IUserService service = new UserService(config.CreateMapper(), repository);
+
+            userController = new UserController(service);
         }
 
         [TestMethod]
         public void TestCorrectLogin()
         {
-            User user = new User { Email = "peter.hokage@gmail.com", Password = "Password1234" };
+            User user = new User { Email = "peter.radiator@gmail.com", Password = "Password1234" };
             if (!Login(user))
             {
                 Assert.Fail();
@@ -35,7 +41,8 @@ namespace UnitTest
         [TestMethod]
         public void TestWrongLogin()
         {
-            User user = new User { Email = "peter.hokage@gmail.com", Password = "WrongPassword" };
+            string email = "peter.radiator@gmail.com";
+            User user = new User { Email = "peter.radiator@gmail.com", Password = "WrongPassword" };
             if (Login(user))
             {
                 Assert.Fail();

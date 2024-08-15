@@ -50,7 +50,6 @@ namespace UnitTest
             if(listAuthor.Count() == 0)
             {
                 Assert.Fail("Canntot be null");
-
             }
         }
 
@@ -86,10 +85,7 @@ namespace UnitTest
         {
             OkObjectResult okRequest = (OkObjectResult)result;
             Author author = (Author)okRequest.Value;
-            if (author == null)
-            {
-                Assert.Fail("Nenajdeny author");
-            }
+            TestDataGetItem.IsObjectNull(author);
             if (!author.FirstName.Equals(firstNameChange))
             {
                 Assert.Fail($"First name wasnt change {author.FirstName}");

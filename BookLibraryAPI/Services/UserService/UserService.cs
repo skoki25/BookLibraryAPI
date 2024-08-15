@@ -6,20 +6,21 @@ using BookLibraryAPI.Data.Messages;
 using BookLibraryAPI.DTO;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
+using BookLibraryAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookLibraryAPI.Services
 {
     public class UserService : IUserService
     {
-        private LibraryDbContext _context;
         private TokenService _tokenService = new TokenService();
+        private IUserRepository _userRepository;
         private IMapper _map;
 
-        public UserService(IMapper map,LibraryDbContext context) 
+        public UserService(IMapper map, IUserRepository userRepository) 
         {
             _map = map;
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public ServiceResult<UserDto> CreateUser(User user)
@@ -29,22 +30,20 @@ namespace BookLibraryAPI.Services
             {
                 return ServiceResult<UserDto>.Failure(error);
             }
-            User result = _context.User.Where(x => x.Email == user.Email).FirstOrDefault();
+            User result = _userRepository.GetUserByEmail(user.Email);
 
             if (result != null)
             {
                 return ServiceResult<UserDto>.Failure("Email already exist!");
             }
-
-            _context.User.Add(user);
-            _context.SaveChanges();
+            _userRepository.CreateUser(user);
 
             return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
         }
 
         public ServiceResult<UserDto> GetUserById(int id)
         {
-            User user = _context.User.Where(x => x.Id == id).SingleOrDefault();
+            User user = _userRepository.GetUserById(id);
 
             if(user == null)
             {
@@ -56,9 +55,7 @@ namespace BookLibraryAPI.Services
 
         public ServiceResult<TokenMessage> Login(User user)
         {
-            var userResult = _context.User.Where(x => x.Email == user.Email)
-                .Include(x => x.Role)
-                .SingleOrDefault();
+            var userResult = _userRepository.GetUserByEmailWithRole(user.Email);
 
             if (userResult == null)
             {

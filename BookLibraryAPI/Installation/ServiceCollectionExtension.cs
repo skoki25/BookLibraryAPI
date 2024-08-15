@@ -19,6 +19,7 @@ namespace BookLibraryAPI.Installation
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(typeof(ProfileMapping));
         }

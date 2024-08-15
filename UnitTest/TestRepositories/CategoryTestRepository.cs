@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace UnitTest.TestRepositories
 {
-    public class CategoryRepositoryTest :ICategoryRepository
+    public class CategoryTestRepository :ICategoryRepository
     {
         public List<Category> listCategory;
-        public CategoryRepositoryTest()
+        public CategoryTestRepository()
         {
             listCategory = new List<Category>();
             AddCategory();
