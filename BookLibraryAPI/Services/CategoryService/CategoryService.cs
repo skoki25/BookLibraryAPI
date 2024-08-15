@@ -1,13 +1,18 @@
 ﻿using BookLibraryAPI.Data.CustomException;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
+using BookLibraryAPI.Repositories;
 
 namespace BookLibraryAPI.Services
 {
     public class CategoryService : ICategoryService
     {
-        private LibraryDbContext _context = new LibraryDbContext();
+        private ICategoryRepository _categoryRepository;
 
+        public CategoryService(ICategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
         public ServiceResult<Category> AddCategory(Category category)
         {
             CategoryCreateValidation validationRules = new CategoryCreateValidation();
@@ -17,36 +22,40 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<Category>.Failure(error);
             }
 
-            Category catergoryResult = _context.Category.Where(x=> x.Type.Equals(category.Type)).FirstOrDefault();
+            Category catergoryResult = _categoryRepository.GetCategoryByType(category.Type);
 
-            if( catergoryResult != null )
+            if ( catergoryResult != null )
             {
                 return ServiceResult<Category>.Failure("This category already exist");
             }
+            _categoryRepository.CreateCategory(category);
 
-            _context.Category.Add(category);
-            _context.SaveChanges();
+            return ServiceResult<Category>.Success(category);
+        }
+
+        public ServiceResult<Category> GetCategoryById(int id)
+        {
+            Category category = _categoryRepository.GetCategoryById(id);
             return ServiceResult<Category>.Success(category);
         }
 
         public ServiceResult<Category> EditCategory(int id, Category category)
         {
-            Category catergoryResult = _context.Category.Where(x => x.Id == id).FirstOrDefault();
+            Category catergoryResult = _categoryRepository.GetCategoryById(id);
 
             if (catergoryResult == null)
             {
                 return ServiceResult<Category>.Failure("Not found");
             }
+            _categoryRepository.EditCategory(id, category);
 
-            catergoryResult.Type = category.Type;
-            _context.SaveChanges();
 
             return ServiceResult<Category>.Success(catergoryResult);
         }
 
         public ServiceResult<List<Category>> GetAllCategory()
         {
-            return ServiceResult<List<Category>>.Success(_context.Category.ToList());
+            return ServiceResult<List<Category>>.Success(_categoryRepository.GetAllCategories());
         }
     }
 }

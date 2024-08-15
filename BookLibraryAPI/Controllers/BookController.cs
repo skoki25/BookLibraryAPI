@@ -32,6 +32,7 @@ namespace BookLibraryAPI.Controllers
             return this.ServiceToActionResult(_bookService.CreateBook(book));
         }
 
+        [HttpPut]
         public IActionResult EditBook(int id, Book book)
         {
             return this.ServiceToActionResult(_bookService.EditBook(id, book));

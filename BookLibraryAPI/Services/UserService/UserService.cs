@@ -12,13 +12,14 @@ namespace BookLibraryAPI.Services
 {
     public class UserService : IUserService
     {
-        private LibraryDbContext _context = new LibraryDbContext();
+        private LibraryDbContext _context;
         private TokenService _tokenService = new TokenService();
         private IMapper _map;
 
-        public UserService(IMapper map) 
+        public UserService(IMapper map,LibraryDbContext context) 
         {
             _map = map;
+            _context = context;
         }
 
         public ServiceResult<UserDto> CreateUser(User user)

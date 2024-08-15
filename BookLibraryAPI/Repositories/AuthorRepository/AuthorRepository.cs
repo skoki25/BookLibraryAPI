@@ -4,7 +4,13 @@ namespace BookLibraryAPI.Repositories
 {
     public class AuthorRepository: IAuthorRepository
     {
-        private LibraryDbContext _context = new LibraryDbContext();
+        private LibraryDbContext _context;
+        private bool _disposed =false;
+
+        public AuthorRepository(LibraryDbContext context)
+        {
+            _context = context;
+        }
 
         public Author CreateAuthor(Author author)
         {

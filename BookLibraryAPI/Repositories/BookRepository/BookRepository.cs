@@ -5,8 +5,12 @@ namespace BookLibraryAPI.Repositories
 {
     public class BookRepository: IBookRepository
     {
-        private LibraryDbContext _context = new LibraryDbContext();
+        private LibraryDbContext _context;
 
+        public BookRepository(LibraryDbContext context) 
+        {
+            _context = context;
+        }
         public Book CreateBook(Book book)
         {
             _context.Book.Add(book);

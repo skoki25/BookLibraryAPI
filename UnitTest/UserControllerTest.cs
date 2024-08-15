@@ -3,9 +3,7 @@ using BookLibraryAPI.Controllers;
 using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Services;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Xunit.Sdk;
 
 namespace UnitTest
@@ -21,7 +19,7 @@ namespace UnitTest
             {
                 cfg.AddProfile(new ProfileMapping());
             });
-            userController = new UserController(new UserService(config.CreateMapper()));
+            userController = new UserController(new UserService(config.CreateMapper(), null));
         }
 
         [TestMethod]

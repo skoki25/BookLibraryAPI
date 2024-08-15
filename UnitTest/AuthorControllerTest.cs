@@ -1,11 +1,8 @@
 ﻿using BookLibraryAPI.Controllers;
-using BookLibraryAPI.Data.Messages;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using UnitTest.Data;
 using UnitTest.FakeRepositories;
 
@@ -39,7 +36,6 @@ namespace UnitTest
             {
                 Assert.Fail("Author nebol najdeny");
             }
-
         }
 
         [TestMethod]

@@ -26,6 +26,12 @@ namespace BookLibraryAPI.Controllers
             return this.ServiceToActionResult(_categoryService.GetAllCategory());
         }
 
+        [HttpGet]
+        public IActionResult GetCategoryById(int id)
+        {
+            return this.ServiceToActionResult(_categoryService.GetCategoryById(id));
+        }
+
         [HttpPut]
         [Authorize]
         public IActionResult EditCategory([FromForm]int id, [FromBody]Category category) 
