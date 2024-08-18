@@ -4,7 +4,6 @@ namespace BookLibraryAPI.Models
 {
     public class BookInfo
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int CategoryId { get; set; }
         public int AuthorId { get;set; }

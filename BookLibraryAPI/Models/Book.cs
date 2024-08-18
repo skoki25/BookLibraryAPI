@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookLibraryAPI.Models
 {
-    [Index(nameof(EanCode), IsUnique = true)]
-    [Index(nameof(ISO), IsUnique = true)]
     public class Book
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int BookInfoId { get;set; }
 

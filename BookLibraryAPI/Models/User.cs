@@ -8,11 +8,9 @@ namespace BookLibraryAPI.Models
 {
     public class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Name { get; set; }
         public string Email { get; set; }
-        [JsonIgnore(Condition= JsonIgnoreCondition.WhenWritingDefault)]
         public string? Password { get; set; }
         public string? Phone { get; set; }
         public string? Address { get; set; }

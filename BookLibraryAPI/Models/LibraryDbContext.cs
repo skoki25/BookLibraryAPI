@@ -14,6 +14,48 @@ public partial class LibraryDbContext : DbContext
         : base(options)
     {
     }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Author>(author =>
+        {
+            author.HasKey(x => x.Id);
+            author.Property(x => x.Id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<Book>(book =>
+        {
+            book.HasKey(x => x.Id);
+            book.HasIndex(x => x.EanCode).IsUnique();
+            book.HasIndex(x => x.ISO).IsUnique();
+        });
+
+        modelBuilder.Entity<BookBorrow>(bookBorrow =>
+        {
+            bookBorrow.HasKey(x => x.Id);
+        });
+
+        modelBuilder.Entity<BookInfo>(booInfo =>
+        {
+            booInfo.HasKey(x => x.Id);
+        });
+
+        modelBuilder.Entity<Category>(category =>
+        {
+            category.HasKey(x => x.Id);
+        });
+
+        modelBuilder.Entity<Role>(role =>
+        {
+            role.HasKey(x => x.Id);
+            role.HasIndex(x => x.Type).IsUnique();
+        });
+
+        modelBuilder.Entity<User>(user =>
+        {
+            user.HasKey(x => x.Id);
+            user.HasIndex(x => x.Email).IsUnique();
+        });
+    }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
