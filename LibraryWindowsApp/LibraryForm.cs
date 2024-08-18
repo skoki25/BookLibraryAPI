@@ -1,8 +1,8 @@
 namespace LibraryWindowsApp
 {
-    public partial class Form1 : Form
+    public partial class LibraryForm : Form
     {
-        public Form1()
+        public LibraryForm()
         {
             InitializeComponent();
         }

@@ -14,7 +14,6 @@
     <Compile Include="..\BookLibraryAPI\Models\BookBorrow.cs" Link="Model\BookBorrow.cs" />
     <Compile Include="..\BookLibraryAPI\Models\BookInfo.cs" Link="Model\BookInfo.cs" />
     <Compile Include="..\BookLibraryAPI\Models\Category.cs" Link="Model\Category.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\LibraryDbContext.cs" Link="Model\LibraryDbContext.cs" />
     <Compile Include="..\BookLibraryAPI\Models\Role.cs" Link="Model\Role.cs" />
     <Compile Include="..\BookLibraryAPI\Models\User.cs" Link="Model\User.cs" />
   </ItemGroup>

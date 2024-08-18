@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BookLibraryAPI.Models
+﻿namespace BookLibraryAPI.Models
 {
     public class BookBorrow
     {
