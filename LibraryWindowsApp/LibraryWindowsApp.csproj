@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\BookLibraryAPI\Data\Messages\TokenMessage.cs" Link="Model\TokenMessage.cs" />
+    <Compile Include="..\BookLibraryAPI\DTO\UserDto.cs" Link="Model\UserDto.cs" />
     <Compile Include="..\BookLibraryAPI\Models\Author.cs" Link="Model\Author.cs" />
     <Compile Include="..\BookLibraryAPI\Models\Book.cs" Link="Model\Book.cs" />
     <Compile Include="..\BookLibraryAPI\Models\BookBorrow.cs" Link="Model\BookBorrow.cs" />
@@ -19,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

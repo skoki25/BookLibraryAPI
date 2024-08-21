@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
+            label3 = new Label();
+            label2 = new Label();
             tbLgin = new TextBox();
             tbPassword = new TextBox();
             label1 = new Label();
             btLogin = new Button();
-            label2 = new Label();
-            label3 = new Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,6 +54,26 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Size = new Size(497, 100);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Location = new Point(182, 50);
+            label3.Name = "label3";
+            label3.Size = new Size(63, 50);
+            label3.TabIndex = 4;
+            label3.Text = "Password: ";
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Location = new Point(176, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(69, 50);
+            label2.TabIndex = 3;
+            label2.Text = "User name: ";
             // 
             // tbLgin
             // 
@@ -81,33 +101,13 @@
             // 
             // btLogin
             // 
-            btLogin.Location = new Point(221, 197);
+            btLogin.Location = new Point(164, 194);
             btLogin.Name = "btLogin";
             btLogin.Size = new Size(93, 23);
             btLogin.TabIndex = 2;
             btLogin.Text = "Login";
             btLogin.UseVisualStyleBackColor = true;
             btLogin.Click += btLogin_Click;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.Location = new Point(176, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(69, 50);
-            label2.TabIndex = 3;
-            label2.Text = "User name: ";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Location = new Point(182, 50);
-            label3.Name = "label3";
-            label3.Size = new Size(63, 50);
-            label3.TabIndex = 4;
-            label3.Text = "Password: ";
             // 
             // LoginForm
             // 
@@ -118,6 +118,7 @@
             Controls.Add(label1);
             Controls.Add(tableLayoutPanel1);
             Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();

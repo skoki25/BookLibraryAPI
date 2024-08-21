@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BookLibraryAPI.Controllers
 {
@@ -28,14 +29,7 @@ namespace BookLibraryAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreateUser(User user)
         {
-            try
-            {
-                _userService.CreateUser(user);
-                return Ok(user);
-            }catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return this.ServiceToActionResult(_userService.CreateUser(user));
         }
 
         [HttpGet()]
@@ -43,6 +37,22 @@ namespace BookLibraryAPI.Controllers
         public async Task<IActionResult> GetUserById(int id)
         {
             return await this.ServiceToActionTask<UserDto>(_userService.GetUserById(id));
+        }
+        [HttpGet()]
+        [Authorize]
+        [Route("email ={email}")]
+        public async Task<IActionResult> GetUserByEmail(string email)
+        {
+            return await this.ServiceToActionTask<UserDto>(_userService.GetUserByEmail(email));
+        }
+
+        [HttpGet()]
+        [Authorize]
+        [Route("Me")]
+        public async Task<IActionResult> GetMyself()
+        {
+            string userId = User.FindFirst(ClaimTypes.Name)?.Value;
+            return await this.ServiceToActionTask<UserDto>(_userService.GetUserByEmail(userId));
         }
 
         [HttpPost]

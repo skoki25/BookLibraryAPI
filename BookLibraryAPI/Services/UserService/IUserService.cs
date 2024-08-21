@@ -8,6 +8,7 @@ namespace BookLibraryAPI.Services
     {
         ServiceResult<UserDto> CreateUser(User user);
         ServiceResult<UserDto> GetUserById(int id);
+        ServiceResult<UserDto> GetUserByEmail(string id);
         ServiceResult<TokenMessage> Login(User user);
     }
 }

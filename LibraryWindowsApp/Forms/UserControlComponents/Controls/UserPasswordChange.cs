@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp.API_Controll.User_Control
+namespace LibraryWindowsApp.Forms.UserControlComponents.Controls
 {
-    public partial class Form1 : Form
+    public partial class UserPasswordChange : UserControl
     {
-        public Form1()
+        public UserPasswordChange()
         {
             InitializeComponent();
         }

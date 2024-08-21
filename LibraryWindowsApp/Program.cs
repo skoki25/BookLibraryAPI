@@ -1,3 +1,5 @@
+using LibraryWindowsApp.APIControll;
+
 namespace LibraryWindowsApp
 {
     internal static class Program
@@ -8,10 +10,19 @@ namespace LibraryWindowsApp
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new LibraryForm());
+
+            IApiService apiService = new ApiService(new HttpClient());
+            UserApiController _userApiController = new UserApiController(apiService);
+
+            MainViewModelView mainView = new MainViewModelView(_userApiController);
+            LoginForm loginForm = new LoginForm(mainView);
+            Application.Run(loginForm);
+
+            if (loginForm.UserSuccessfullyAuthenticated)
+            {
+                Application.Run(new LibraryForm(mainView));
+            }
         }
     }
 }

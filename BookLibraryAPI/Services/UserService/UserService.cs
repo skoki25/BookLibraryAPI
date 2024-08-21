@@ -52,6 +52,17 @@ namespace BookLibraryAPI.Services
 
             return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
         }
+        public ServiceResult<UserDto> GetUserByEmail(string email)
+        {
+            User user = _userRepository.GetUserByEmail(email);
+
+            if (user == null)
+            {
+                return ServiceResult<UserDto>.Failure("Wasnt foudd");
+            }
+
+            return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
+        }
 
         public ServiceResult<TokenMessage> Login(User user)
         {

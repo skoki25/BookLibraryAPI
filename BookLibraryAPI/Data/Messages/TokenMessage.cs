@@ -1,4 +1,6 @@
-﻿namespace BookLibraryAPI.Data.Messages
+﻿using BookLibraryAPI.DTO;
+
+namespace BookLibraryAPI.Data.Messages
 {
     public class TokenMessage
     {

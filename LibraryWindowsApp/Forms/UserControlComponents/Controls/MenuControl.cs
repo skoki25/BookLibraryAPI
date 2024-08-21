@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryWindowsApp.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,17 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp
+namespace LibraryWindowsApp.Forms.UserControlComponents.Controls
 {
-    public partial class LoginForm : Form
+    public partial class MenuControl : UserControl
     {
-        public LoginForm()
+        public MenuControl()
         {
             InitializeComponent();
-        }
 
-        private void btLogin_Click(object sender, EventArgs e)
-        {
 
         }
     }

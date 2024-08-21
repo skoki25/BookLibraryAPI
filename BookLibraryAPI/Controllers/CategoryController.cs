@@ -27,6 +27,7 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public IActionResult GetCategoryById(int id)
         {
             return this.ServiceToActionResult(_categoryService.GetCategoryById(id));
