@@ -36,7 +36,9 @@
             label2 = new Label();
             lbFirstName = new Label();
             label4 = new Label();
+            tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -126,12 +128,27 @@
             label4.AutoEllipsis = true;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label4.Location = new Point(353, 20);
+            label4.Location = new Point(371, 0);
             label4.Name = "label4";
             label4.Size = new Size(187, 45);
             label4.TabIndex = 1;
             label4.Text = "User Profile";
             label4.Click += label4_Click;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel2.Controls.Add(label4, 1, 0);
+            tableLayoutPanel2.Location = new Point(0, 24);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.Size = new Size(932, 55);
+            tableLayoutPanel2.TabIndex = 2;
             // 
             // UserInfoControl
             // 
@@ -139,14 +156,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ControlLightLight;
-            Controls.Add(label4);
+            Controls.Add(tableLayoutPanel2);
             Controls.Add(tableLayoutPanel1);
             Name = "UserInfoControl";
             Size = new Size(935, 448);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -159,5 +177,6 @@
         private Label label4;
         private Label label3;
         private Label lbAdress;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }

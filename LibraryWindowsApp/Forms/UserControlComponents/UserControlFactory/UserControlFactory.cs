@@ -1,4 +1,5 @@
 ﻿using LibraryWindowsApp.Forms.UserControlComponents.Controls;
+using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +10,27 @@ namespace LibraryWindowsApp.Forms.UserControlComponents.UserComponentBuilder
 {
     public class UserControlFactory 
     {
-        public UserInfoControl UserInfoControl { get; set; }
-        public UserPasswordChange UserChangeControl { get; set; }
-        public MenuControl MenuControl { get; set; }
 
         private MainViewModelView _viewModel;
 
         public UserControlFactory(MainViewModelView viewModel)
         {
             _viewModel = viewModel;
-            UserInfoControl = new UserInfoControl(viewModel);
-            UserChangeControl = new UserPasswordChange();
-            MenuControl = new MenuControl();
+        }
+
+        public UserControl CreateUserControl(EnumControl controlType)
+        {
+            switch (controlType)
+            {
+                case EnumControl.Menu:
+                    return new MenuControl();
+                case EnumControl.UserInfo:
+                    return new UserInfoControl(_viewModel);
+                case EnumControl.UserPassword:
+                    return new UserPasswordChange();
+                default:
+                    return new UserControl();
+            }
         }
     }
 }
