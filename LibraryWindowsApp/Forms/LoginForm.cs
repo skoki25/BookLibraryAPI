@@ -12,19 +12,19 @@ namespace LibraryWindowsApp
 {
     public partial class LoginForm : Form
     {
-        private readonly MainViewModelView _mainViewMode;
+        private readonly MainViewModel _mainViewMode;
         public bool UserSuccessfullyAuthenticated { get; private set; } = false;
-        public LoginForm(MainViewModelView mainViewMode)
+        public LoginForm(MainViewModel mainViewMode)
         {
             InitializeComponent();
             this._mainViewMode = mainViewMode;
         }
 
-        private async  void btLogin_Click(object sender, EventArgs e)
+        private async void btLogin_Click(object sender, EventArgs e)
         {
             try
             {
-                bool response = await _mainViewMode.Login(tbLgin.Text, tbPassword.Text);
+                bool response =  await _mainViewMode.Login(tbLgin.Text, tbPassword.Text);
                 if (response)
                 {
                     UserSuccessfullyAuthenticated = true;

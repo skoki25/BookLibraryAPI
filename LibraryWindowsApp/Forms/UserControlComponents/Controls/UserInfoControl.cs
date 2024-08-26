@@ -13,9 +13,9 @@ namespace LibraryWindowsApp.Forms
 {
     public partial class UserInfoControl : UserControl
     {
-        private MainViewModelView _mainViewModelView;
+        private MainViewModel _mainViewModelView;
         private UserData currentUser;
-        public UserInfoControl(MainViewModelView mainViewModelView)
+        public UserInfoControl(MainViewModel mainViewModelView)
         {
             InitializeComponent();
             _mainViewModelView = mainViewModelView;

@@ -4,8 +4,8 @@ namespace LibraryWindowsApp
 {
     public partial class LibraryForm : Form
     {
-        MainViewModelView _mainViewModelView;
-        public LibraryForm(MainViewModelView mainViewModelView)
+        MainViewModel _mainViewModelView;
+        public LibraryForm(MainViewModel mainViewModelView)
         {
             InitializeComponent();
 

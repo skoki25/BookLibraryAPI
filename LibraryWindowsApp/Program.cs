@@ -1,3 +1,4 @@
+using LibraryWindowsApp.API_Controll.UserApiController;
 using LibraryWindowsApp.APIControll;
 
 namespace LibraryWindowsApp
@@ -13,9 +14,10 @@ namespace LibraryWindowsApp
             ApplicationConfiguration.Initialize();
 
             IApiService apiService = new ApiService(new HttpClient());
-            UserApiController _userApiController = new UserApiController(apiService);
 
-            MainViewModelView mainView = new MainViewModelView(_userApiController);
+            MainViewModel mainView = new MainViewModel(
+                new UserApiController(apiService),
+                new BookApiController(apiService));
             LoginForm loginForm = new LoginForm(mainView);
             Application.Run(loginForm);
 

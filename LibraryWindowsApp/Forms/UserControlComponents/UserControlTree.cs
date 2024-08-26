@@ -6,35 +6,64 @@ namespace LibraryWindowsApp.Forms
 {
     public class UserControlTree
     {
-        public UserControlTree(MainViewModelView viewModel, Panel contentPanel, Panel navigationPanel) 
+        private Panel _contentPanel;
+        private Panel _navigationPanel;
+        private MainViewModel _viewModel;
+        Composter main;
+
+        public UserControlTree(MainViewModel viewModel, Panel contentPanel, Panel navigationPanel) 
         {
-            UserControlFactory userFactory = new UserControlFactory(viewModel);
-            Composter main = new Composter("Menu", userFactory.CreateUserControl(EnumControl.Menu), navigationPanel, contentPanel);
-            Composter composterUserMain = new Composter("User", userFactory.CreateUserControl(EnumControl.UserInfo), navigationPanel, contentPanel);
-            Composter composterBookMain = new Composter("Book",new UserControl(), navigationPanel, contentPanel);
-            Composter composterBorrowedBook = new Composter("Borrowed Book",new UserControl(), navigationPanel, contentPanel);
-            UserContainer conentUserEdit = new UserContainer("Edit Profil",new UserControl(),contentPanel);
-            UserContainer conentUserPassword = new UserContainer("Change Password", userFactory.CreateUserControl(EnumControl.UserPassword), contentPanel);
-            UserContainer bookContentCreate= new UserContainer("Create Book",new UserControl(),contentPanel);
-            UserContainer bookContentEdit = new UserContainer("Edit Book", new UserControl(), contentPanel);
-            UserContainer bookContentDelete = new UserContainer("Delete Book", new UserControl(), contentPanel);
+            _contentPanel = contentPanel;
+            _navigationPanel = navigationPanel;
+            _viewModel = viewModel;
+
+            main = new Composter("Menu", viewModel, EnumControl.Menu, navigationPanel, contentPanel);
+            
+            Composter composterUserMain = new Composter("User", viewModel, EnumControl.UserInfo, navigationPanel, contentPanel);
+            UserContainer conentUserEdit = new UserContainer("Edit Profil", viewModel, EnumControl.UserInfo, contentPanel);
+            UserContainer conentUserPassword = new UserContainer("Change Password", viewModel,EnumControl.UserPassword, contentPanel);
 
             main.Add(composterUserMain);
-            main.Add(composterBookMain);
-            main.Add(composterBorrowedBook);
+            main.Add(BookButtons());
+            main.Add(BorrowBookButtons());
             composterUserMain.Add(main);
-            composterBookMain.Add(main);
-            composterBorrowedBook.Add(main);
 
 
             composterUserMain.Add(conentUserEdit);
             composterUserMain.Add(conentUserPassword);
 
+
+
+            main.Button.PerformClick();
+        }
+
+        public Composter BorrowBookButtons()
+        {
+            Composter composterBorrowedBook = new Composter("Borrowed Book",
+                _viewModel,EnumControl.Book, _navigationPanel, _contentPanel);
+            UserContainer bookBorrowMyHistory = new UserContainer("My borrow history", 
+               _viewModel, EnumControl.BorrowHistory, _contentPanel);
+
+            composterBorrowedBook.Add(main);
+            composterBorrowedBook.Add(bookBorrowMyHistory);
+
+            return composterBorrowedBook;
+        }
+
+        public Composter BookButtons()
+        {
+            Composter composterBookMain = new Composter("Book", _viewModel, EnumControl.Book,
+                _navigationPanel, _contentPanel);
+            UserContainer bookContentCreate = new UserContainer("Create Book", _viewModel, EnumControl.other, _contentPanel);
+            UserContainer bookContentEdit = new UserContainer("Edit Book", _viewModel, EnumControl.other, _contentPanel);
+            UserContainer bookContentDelete = new UserContainer("Delete Book", _viewModel, EnumControl.other, _contentPanel);
+
+            composterBookMain.Add(main);
             composterBookMain.Add(bookContentCreate);
             composterBookMain.Add(bookContentEdit);
             composterBookMain.Add(bookContentDelete);
 
-            main.Button.PerformClick();
+            return composterBookMain;
         }
     }
 }

@@ -11,5 +11,8 @@ namespace LibraryWindowsApp
         public const string ApiUserMyself = "User/Me";
         public const string ApiUserLogin  = "User/Login";
 
+
+        public const string ApiBook  = "Book";
+
     }
 }

@@ -42,7 +42,9 @@ namespace BookLibraryAPI.Repositories
 
         public List<Book> GetAllBooks()
         {
-            return _context.Book.ToList();
+            return _context.Book
+                .Include(x=> x.BookInfo) 
+                .ToList();
         }
 
         public List<BookInfo> GetBookBookInfoId(int bookInfoId)

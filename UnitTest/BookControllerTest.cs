@@ -1,4 +1,6 @@
-﻿using BookLibraryAPI.Controllers;
+﻿using AutoMapper;
+using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
@@ -16,8 +18,12 @@ namespace UnitTest
         [TestInitialize]
         public void TestInicialize()
         {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new ProfileMapping());
+            });
             IBookRepository bookRepository = new BookTestRepository();
-            BookService bookService = new BookService(bookRepository);
+            BookService bookService = new BookService(bookRepository, config.CreateMapper());
             bookController = new BookController(bookService);
         }
 

@@ -4,15 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using BookLibraryAPI.Data.CustomException;
 using Microsoft.EntityFrameworkCore;
 using BookLibraryAPI.Repositories;
+using AutoMapper;
+using BookLibraryAPI.DTO;
 
 namespace BookLibraryAPI.Services
 {
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-        public BookService(IBookRepository bookRepository)
+        private IMapper _mapper;
+        public BookService(IBookRepository bookRepository,IMapper mapper)
         {
             _bookRepository = bookRepository;
+            _mapper = mapper;
         }
         public ServiceResult<Book> CreateBook(Book book)
         {
@@ -58,9 +62,13 @@ namespace BookLibraryAPI.Services
             return ServiceResult<string>.Success("Success");
         }
 
-        public ServiceResult<List<Book>> GetAllBooks()
+        public ServiceResult<List<BookDto>> GetAllBooks()
         {
-            return ServiceResult<List<Book>>.Success(_bookRepository.GetAllBooks());
+            List<Book> books = _bookRepository.GetAllBooks();
+
+            
+
+            return ServiceResult<List<BookDto>>.Success(_mapper.Map<List<BookDto>>(books));
         }
     }
 }

@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LibraryWindowsApp.Forms.UserControlComponents.UserComponentBuilder;
+using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
 
 namespace LibraryWindowsApp.Forms
 {
     public abstract class ComponentAbstract
     {
         public string Name { get; set; }
-        public UserControl UserControl { get; set; }
         public ComponentAbstract Parent { get; set; }
         public Button Button { get; set; }
         public Panel PanelContent { get; set; }
+        public MainViewModel ViewModel { get; set; }
+        public EnumControl EnumControl { get; set; }
         public abstract void GenerateMenu();
-        public abstract void AddParent(ComponentAbstract parent);
-
         public Button CreateButton(string name)
         {
             string nameWithoutSpace = name.Replace(" ", "_");
@@ -28,13 +24,17 @@ namespace LibraryWindowsApp.Forms
             button.Click += ButtonClick;
             return button;
         }
-
+        public void AddParent(ComponentAbstract parent)
+        {
+            Parent = parent;
+        }
         void ButtonClick(Object sender, EventArgs e)
         {
             PanelContent.Controls.Clear();
             GenerateMenu();
-            PanelContent.Controls.Add(UserControl);
-            UserControl.Dock = DockStyle.Fill;
+            UserControl userControl = UserControlFactory.CreateUserControl(EnumControl,ViewModel);
+            PanelContent.Controls.Add(userControl);
+            userControl.Dock = DockStyle.Fill;
 
         }
     }

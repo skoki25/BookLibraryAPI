@@ -6,5 +6,7 @@
         UserInfo,
         UserPassword,
         Book,
+        BorrowHistory,
+        other,
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace LibraryWindowsApp.Forms
+﻿using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
+
+namespace LibraryWindowsApp.Forms
 {
     public class Composter: ComponentAbstract
     {
@@ -6,10 +8,11 @@
         public Panel PanelNavigation { get; set; }
         public ComponentAbstract parent { get; set; }
 
-        public Composter(string name, UserControl userControl, Panel panelContent,Panel panelNavigation)
+        public Composter(string name,MainViewModel viewModel, EnumControl enumControl, Panel panelContent,Panel panelNavigation)
         {
             Name = name;
-            UserControl = userControl;
+            ViewModel = viewModel;
+            EnumControl = enumControl;
             PanelContent = panelContent;
             PanelNavigation = panelNavigation;
             Button = CreateButton(Name);
@@ -20,10 +23,7 @@
             component.AddParent(this);
             components.Add(component);
         }
-        public override void AddParent(ComponentAbstract parent)
-        {
-            Parent = parent;
-        }
+
         public override void GenerateMenu()
         {
             PanelNavigation.Controls.Clear();
