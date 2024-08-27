@@ -7,6 +7,9 @@
         UserPassword,
         Book,
         BorrowHistory,
-        other,
+        Other,
+        Category,
+        CategoryCreate,
+        CategoryEdit
     }
 }

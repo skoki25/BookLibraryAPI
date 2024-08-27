@@ -21,7 +21,7 @@ namespace BookLibraryAPI.Services
 
             if (!validationRules.Validate(author,out string error))
             {
-                return ServiceResult<Author>.Failure(error);
+                return ServiceResult<Author>.Failure(error, ResultType.BadRequest);
             }
 
             _authorRepository.CreateAuthor(author);     
@@ -33,14 +33,14 @@ namespace BookLibraryAPI.Services
             Author author = _authorRepository.FindAuthor(id);
             if(author == null)
             {
-                return ServiceResult<string>.Failure("Author want found");
+                return ServiceResult<string>.Failure("Author want found", ResultType.NotFound);
             }
 
             List<BookInfo> bookInfo = _authorRepository.GetBookInfoByAuthorId(id);
 
             if(bookInfo.Count > 0)
             {
-                return ServiceResult<string>.Failure("Author cannot be remove");
+                return ServiceResult<string>.Failure("Author cannot be remove", ResultType.BadRequest);
             }
 
            // _context.Author.Remove(author);
@@ -53,14 +53,14 @@ namespace BookLibraryAPI.Services
             Author authorResult = _authorRepository.FindAuthor(id);
             if (author == null)
             {
-                return ServiceResult<Author>.Failure("Author wanst found");
+                return ServiceResult<Author>.Failure("Author wanst found", ResultType.NotFound);
             }
 
             AuthorValidation validationRules = new AuthorValidation();
 
             if (!validationRules.Validate(author, out string error))
             {
-                return ServiceResult<Author>.Failure(error);
+                return ServiceResult<Author>.Failure(error, ResultType.BadRequest);
             }
 
             return ServiceResult<Author>.Success(_authorRepository.Update(id, author));
@@ -71,7 +71,7 @@ namespace BookLibraryAPI.Services
             Author author = _authorRepository.FindAuthor(id);
             if (author == null)
             {
-                return ServiceResult<Author>.Failure("Author wanst found");
+                return ServiceResult<Author>.Failure("Author wanst found", ResultType.NotFound);
             }
 
             return ServiceResult<Author>.Success(author);

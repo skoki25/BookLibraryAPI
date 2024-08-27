@@ -14,5 +14,8 @@ namespace LibraryWindowsApp
 
         public const string ApiBook  = "Book";
 
+
+        public const string ApiBookInfoExtra  = "BookInfo/Info";
+
     }
 }

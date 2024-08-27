@@ -22,7 +22,17 @@ namespace BookLibraryAPI.Installation
                 return controllerBase.Ok(serviceResult.Data);
             }
 
-            return controllerBase.BadRequest(serviceResult.ResultMessage);
+            switch (serviceResult.ResultType)
+            {
+                case ResultType.BadRequest:
+                    return controllerBase.BadRequest(serviceResult.ResultMessage);
+                case ResultType.NotFound:
+                    return controllerBase.NotFound(serviceResult.ResultMessage);
+                case ResultType.NonContent:
+                    return controllerBase.NoContent();
+                default:
+                    return controllerBase.BadRequest(serviceResult.ResultMessage);
+            }
         }
     }
 }

@@ -1,73 +1,76 @@
-﻿using BookLibraryAPI.Data.CustomException;
-using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
-using Microsoft.EntityFrameworkCore;
+using BookLibraryAPI.Repositories;
 
 namespace BookLibraryAPI.Services
 {
     public class BookInfoService : IBookInfoService
     {
-        private LibraryDbContext _context = new LibraryDbContext();
-        
-        public void CreateBookInfo(BookInfo bookInfo)
+        IBookInfoRepository _bookInfoRepository;
+
+        public BookInfoService(IBookInfoRepository bookInfoRepository)
+        {
+            _bookInfoRepository = bookInfoRepository;
+        }
+
+        public ServiceResult<BookInfo> CreateBookInfo(BookInfo bookInfo)
         {
             CreateBookInfoValidation validationRules = new CreateBookInfoValidation();
 
             if (!validationRules.Validate(bookInfo,out string error))
             {
-                throw new ValidationErrorExeption(error);
+                ServiceResult<BookInfo>.Failure(error, ResultType.BadRequest);
             }
 
-            _context.BookInfo.Add(bookInfo);
-            _context.SaveChanges();
+            _bookInfoRepository.CreateBookInfo(bookInfo);
+
+            return ServiceResult<BookInfo>.Success(bookInfo);
         }
 
-        public void DeleteBookInfo(int id)
+        public ServiceResult<string> DeleteBookInfo(int id)
         {
-            BookInfo bookInfo = _context.BookInfo.Where(x => x.Id == id)
-                .Include(x=> x.Books)
-                .FirstOrDefault();
+            BookInfo bookInfo = _bookInfoRepository.GetBookInfoWithBooks(id);
 
             if (bookInfo == null)
             {
-                throw new ValidationErrorExeption("Wasnt found");
+                return ServiceResult<string>.Failure("Wasnt found", ResultType.NotFound);
             }
 
             if(bookInfo.Books.Count() != 0)
             {
-                throw new ValidationErrorExeption("Book info has book");
+                return ServiceResult<string>.Failure("Book info has book", ResultType.BadRequest);
             }
 
-            _context.Remove(bookInfo);
+            _bookInfoRepository.DeleteBookInfo(bookInfo);
+            return ServiceResult<string>.Success("Success");
         }
 
-        public void EditBookInfo(int id, BookInfo bookInfo)
+        public ServiceResult<BookInfo> EditBookInfo(int id, BookInfo bookInfo)
         {
             CreateBookInfoValidation validationRules = new CreateBookInfoValidation();
 
             if (!validationRules.Validate(bookInfo, out string error))
             {
-                throw new ValidationErrorExeption(error);
+                return ServiceResult<BookInfo>.Failure(error, ResultType.BadRequest);
             }
 
-            BookInfo editBookInfo = _context.BookInfo.Where(x => x.Id == id).SingleOrDefault();
+            BookInfo editBookInfo = _bookInfoRepository.GetBookInfoWithBooks(id);
 
             if(editBookInfo == null)
             {
-                throw new ValidationErrorExeption("Not found");
+                return ServiceResult<BookInfo>.Failure(error, ResultType.NotFound);
             }
-
-            editBookInfo.AuthorId = bookInfo.AuthorId;
-            editBookInfo.CategoryId = bookInfo.CategoryId;
-            editBookInfo.Description = bookInfo.Description;
-            editBookInfo.Title = bookInfo.Title;
-
-            _context.SaveChanges();
+            return ServiceResult<BookInfo>.Success(editBookInfo);
         }
 
-        public BookInfo GetBookInfo(int id)
+        public ServiceResult<BookInfo> GetBookInfo(int id)
         {
-            return _context.BookInfo.Where(x => x.Id == id).SingleOrDefault();
+            return ServiceResult<BookInfo>.Success(_bookInfoRepository.GetBookInfoWithBooks(id));
+        }
+
+        public ServiceResult<BookInfo> GetBookInfoExtraData(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

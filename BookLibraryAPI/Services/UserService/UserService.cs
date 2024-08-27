@@ -28,13 +28,13 @@ namespace BookLibraryAPI.Services
             CreateUserValidation userValidator = new CreateUserValidation();
             if (!userValidator.Validate(user, out string error))
             {
-                return ServiceResult<UserDto>.Failure(error);
+                return ServiceResult<UserDto>.Failure(error, ResultType.BadRequest);
             }
             User result = _userRepository.GetUserByEmail(user.Email);
 
             if (result != null)
             {
-                return ServiceResult<UserDto>.Failure("Email already exist!");
+                return ServiceResult<UserDto>.Failure("Email already exist!", ResultType.BadRequest);
             }
             _userRepository.CreateUser(user);
 
@@ -47,7 +47,7 @@ namespace BookLibraryAPI.Services
 
             if(user == null)
             {
-                return ServiceResult<UserDto>.Failure("Wasnt foudd");
+                return ServiceResult<UserDto>.Failure("Wasnt foudd", ResultType.NotFound);
             }
 
             return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
@@ -58,7 +58,7 @@ namespace BookLibraryAPI.Services
 
             if (user == null)
             {
-                return ServiceResult<UserDto>.Failure("Wasnt foudd");
+                return ServiceResult<UserDto>.Failure("Wasnt found", ResultType.NotFound);
             }
 
             return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
@@ -70,21 +70,21 @@ namespace BookLibraryAPI.Services
 
             if (userResult == null)
             {
-                return ServiceResult<TokenMessage>.Failure("User dosnt exit");
+                return ServiceResult<TokenMessage>.Failure("User dosnt exit", ResultType.NotFound);
             }
 
             if (userResult.Password != user.Password)
             {
-                return ServiceResult<TokenMessage>.Failure("Unauthorized");
+                return ServiceResult<TokenMessage>.Failure("Unauthorized", ResultType.NotAuthorized);
             }
 
             if (userResult.Role == null)
             {
-                return ServiceResult<TokenMessage>.Failure("User dont have any role");
+                return ServiceResult<TokenMessage>.Failure("User dont have any role", ResultType.NotFound);
             }
             if (userResult.Role.Count() == 0)
             {
-                return ServiceResult<TokenMessage>.Failure("User dont have any role");
+                return ServiceResult<TokenMessage>.Failure("User dont have any role", ResultType.NotFound);
             }
 
             string token = _tokenService.GenerateJwtToken(userResult.Email, userResult.Role.ToList());

@@ -17,7 +17,8 @@ namespace LibraryWindowsApp
 
             MainViewModel mainView = new MainViewModel(
                 new UserApiController(apiService),
-                new BookApiController(apiService));
+                new BookApiController(apiService),
+                new BookInfoApiController(apiService));
             LoginForm loginForm = new LoginForm(mainView);
             Application.Run(loginForm);
 

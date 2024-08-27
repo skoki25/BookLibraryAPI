@@ -1,4 +1,5 @@
 ﻿using BookLibraryAPI.Data.CustomException;
+using BookLibraryAPI.Installation;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -7,65 +8,45 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookLibraryAPI.Controllers
 {
     [Authorize]
+    [Route("[controller]")]
     public class BookInfoController: ControllerBase
     {
         private IBookInfoService _bookInfoService;
+
         public BookInfoController(IBookInfoService bookInfoService)
         {
             _bookInfoService = bookInfoService;
         }
 
         [HttpGet]
-        public IActionResult GetBookInfo(int id)
+        public Task<IActionResult> GetBookInfo(int id)
         {
-            BookInfo bookInfo = _bookInfoService.GetBookInfo(id);
-            if(bookInfo == null)
-            {
-                return NoContent();
-            }
-            return Ok(bookInfo);
+            return this.ServiceToActionTask(_bookInfoService.GetBookInfo(id));
+        }
+
+        [HttpGet]
+        [Route("Info/{id}")]
+        public Task<IActionResult> GetBookInfoExtra(int id)
+        {
+            return this.ServiceToActionTask(_bookInfoService.GetBookInfo(id));
         }
 
         [HttpPost]
-        public IActionResult CreateBookInfo(BookInfo bookInfo)
+        public Task<IActionResult> CreateBookInfo(BookInfo bookInfo)
         {
-            try
-            {
-                _bookInfoService.CreateBookInfo(bookInfo);
-                return Ok(bookInfo);
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return this.ServiceToActionTask(_bookInfoService.CreateBookInfo(bookInfo));
         }
 
-        [HttpPost]
-        public IActionResult UpdateBookInfo([FromForm] int id, BookInfo bookInfo)
+        [HttpPut]
+        public Task<IActionResult> UpdateBookInfo([FromForm] int id, BookInfo bookInfo)
         {
-            try
-            {
-                _bookInfoService.EditBookInfo(id,bookInfo);
-                return Ok();
-            }
-            catch (ValidationErrorExeption ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return this.ServiceToActionTask(_bookInfoService.EditBookInfo(id, bookInfo));
         }
 
         [HttpDelete]
-        public IActionResult DeleteBookInfo([FromForm] int id)
+        public Task<IActionResult> DeleteBookInfo([FromForm] int id)
         {
-            try
-            {
-                _bookInfoService.DeleteBookInfo(id);
-                return Ok();
-            }
-            catch(ValidationErrorExeption ex)
-            {
-                return BadRequest(ex);
-            }
+            return this.ServiceToActionTask(_bookInfoService.DeleteBookInfo(id));
         }
     }
 }

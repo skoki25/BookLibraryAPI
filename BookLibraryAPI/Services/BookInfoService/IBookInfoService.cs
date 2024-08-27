@@ -4,9 +4,10 @@ namespace BookLibraryAPI.Services
 {
     public interface IBookInfoService
     {
-        void CreateBookInfo(BookInfo bookInfo);
-        void EditBookInfo(int id,BookInfo bookInfo);
-        void DeleteBookInfo(int id);
-        BookInfo GetBookInfo(int id);
+        ServiceResult<BookInfo> CreateBookInfo(BookInfo bookInfo);
+        ServiceResult<BookInfo> EditBookInfo(int id,BookInfo bookInfo);
+        ServiceResult<string> DeleteBookInfo(int id);
+        ServiceResult<BookInfo> GetBookInfo(int id);
+        ServiceResult<BookInfo> GetBookInfoExtraData(int id);
     }
 }

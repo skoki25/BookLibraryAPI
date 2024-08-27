@@ -10,5 +10,21 @@
         public Author Author { get; set; }
         public Category Category { get; set; }
         public IEnumerable<Book> Books { get; set; }
+
+        public string GetAuthorName()
+        {
+            if (Author == null)
+                return string.Empty;
+
+            return $"{Author.FirstName} {Author.LastName}";
+        }
+
+        public string GetCategory()
+        {
+            if (Category == null)
+                return string.Empty;
+
+            return Category.Type;
+        }
     }
 }

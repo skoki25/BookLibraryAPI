@@ -19,14 +19,14 @@ namespace BookLibraryAPI.Services
 
             if(!validationRules.Validate(category,out string error))
             {
-                return ServiceResult<Category>.Failure(error);
+                return ServiceResult<Category>.Failure(error, ResultType.BadRequest);
             }
 
             Category catergoryResult = _categoryRepository.GetCategoryByType(category.Type);
 
             if ( catergoryResult != null )
             {
-                return ServiceResult<Category>.Failure("This category already exist");
+                return ServiceResult<Category>.Failure("This category already exist", ResultType.BadRequest);
             }
             _categoryRepository.CreateCategory(category);
 
@@ -45,7 +45,7 @@ namespace BookLibraryAPI.Services
 
             if (catergoryResult == null)
             {
-                return ServiceResult<Category>.Failure("Not found");
+                return ServiceResult<Category>.Failure("Not found",ResultType.NotFound);
             }
             _categoryRepository.EditCategory(id, category);
 

@@ -26,18 +26,18 @@ namespace BookLibraryAPI.Services
             Book book = _context.Book.Where(x => x.Id == id).SingleOrDefault();
             if(book == null)
             {
-                return ServiceResult<string>.Failure("Book dosnt exist!");
+                return ServiceResult<string>.Failure("Book dosnt exist!", ResultType.NotFound);
             }
 
             if (CheckIfBookIsBorrowed(id))
             {
-                return ServiceResult<string>.Failure("Book is borrowed!");
+                return ServiceResult<string>.Failure("Book is borrowed!", ResultType.BadRequest);
             }
             User user = _context.User.Where(x => x.Email == userEmail).SingleOrDefault();
 
             if (user == null)
             {
-                return ServiceResult<string>.Failure("Problem");
+                return ServiceResult<string>.Failure("Problem",ResultType.NotFound);
             }
 
             List<BookBorrow> borrowBooksList = _context.BookBorrow.Where(x => x.UserId == user.Id && !x.IsReturned)
@@ -45,7 +45,7 @@ namespace BookLibraryAPI.Services
 
             if (borrowBooksList.Count >= Config.MaxBorrowedBook)
             {
-                return ServiceResult<string>.Failure($"User had borrow {Config.MaxBorrowedBook} books already");
+                return ServiceResult<string>.Failure($"User had borrow {Config.MaxBorrowedBook} books already",ResultType.BadRequest);
             }
 
             BookBorrow bookBorrow = new BookBorrowBuilder()
@@ -64,14 +64,14 @@ namespace BookLibraryAPI.Services
         {
             if (CheckIfBookIsBorrowed(id))
             {
-                ServiceResult<Book>.Failure("Book is borrowed");
+                ServiceResult<Book>.Failure("Book is borrowed", ResultType.BadRequest);
             }
 
             Book book = _context.Book.Where(x => x.Id == id).SingleOrDefault();
 
             if (book == null)
             {
-                ServiceResult<Book>.Failure("Book dosnt exist");
+                ServiceResult<Book>.Failure("Book dosnt exist", ResultType.NotFound);
             }
 
             return ServiceResult<Book>.Success(book);
@@ -95,7 +95,7 @@ namespace BookLibraryAPI.Services
 
             if (bookBorrow == null)
             {
-                return ServiceResult<BookBorrow>.Failure("Not found!");
+                return ServiceResult<BookBorrow>.Failure("Not found!", ResultType.NotFound);
             }
 
             bookBorrow.IsReturned = true;

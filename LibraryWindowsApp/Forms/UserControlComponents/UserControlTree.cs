@@ -26,6 +26,7 @@ namespace LibraryWindowsApp.Forms
             main.Add(composterUserMain);
             main.Add(BookButtons());
             main.Add(BorrowBookButtons());
+            main.Add(CategoryButtons());
             composterUserMain.Add(main);
 
 
@@ -54,9 +55,9 @@ namespace LibraryWindowsApp.Forms
         {
             Composter composterBookMain = new Composter("Book", _viewModel, EnumControl.Book,
                 _navigationPanel, _contentPanel);
-            UserContainer bookContentCreate = new UserContainer("Create Book", _viewModel, EnumControl.other, _contentPanel);
-            UserContainer bookContentEdit = new UserContainer("Edit Book", _viewModel, EnumControl.other, _contentPanel);
-            UserContainer bookContentDelete = new UserContainer("Delete Book", _viewModel, EnumControl.other, _contentPanel);
+            UserContainer bookContentCreate = new UserContainer("Create Book", _viewModel, EnumControl.Other, _contentPanel);
+            UserContainer bookContentEdit = new UserContainer("Edit Book", _viewModel, EnumControl.Other, _contentPanel);
+            UserContainer bookContentDelete = new UserContainer("Delete Book", _viewModel, EnumControl.Other, _contentPanel);
 
             composterBookMain.Add(main);
             composterBookMain.Add(bookContentCreate);
@@ -64,6 +65,19 @@ namespace LibraryWindowsApp.Forms
             composterBookMain.Add(bookContentDelete);
 
             return composterBookMain;
+        }
+
+        public Composter CategoryButtons()
+        {
+            Composter composterCategory = new Composter("Category", _viewModel, EnumControl.Book,
+                _navigationPanel, _contentPanel);
+
+            UserContainer categoryCreate = new UserContainer("Create Category", _viewModel, EnumControl.Other, _contentPanel);
+            UserContainer categoryEdit = new UserContainer("Edit Category", _viewModel, EnumControl.Other, _contentPanel);
+
+            composterCategory.Add(categoryCreate);
+            composterCategory.Add(categoryEdit);
+            return composterCategory;
         }
     }
 }

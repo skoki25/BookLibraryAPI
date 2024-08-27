@@ -9,13 +9,15 @@ namespace LibraryWindowsApp
     {
         public UserApiController _userApiController;
         public BookApiController _bookApiController;
+        public BookInfoApiController _bookInfoApiController;
         public UserData currentUserData;
 
 
-        public MainViewModel(UserApiController userApiController, BookApiController bookApiController)
+        public MainViewModel(UserApiController userApiController, BookApiController bookApiController, BookInfoApiController bookInfoApiController)
         {
             _userApiController = userApiController;
             _bookApiController = bookApiController;
+            _bookInfoApiController = bookInfoApiController ;
         }
 
         public async Task<bool> Login(string loginName, string password)
@@ -38,6 +40,11 @@ namespace LibraryWindowsApp
             }
 
             return await _bookApiController.GetAllBook(currentUserData.GetToken());
+        }
+
+        public async Task<BookInfo> GetBookInfoExtra(int id)
+        {
+            return await _bookInfoApiController.GetBookInfoExtra(id, currentUserData.GetToken());
         }
     }
 }

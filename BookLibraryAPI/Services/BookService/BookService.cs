@@ -24,7 +24,7 @@ namespace BookLibraryAPI.Services
             
             if (!createBookValid.Validate(book, out string error))
             {
-                return ServiceResult<Book>.Failure(error);
+                return ServiceResult<Book>.Failure(error, ResultType.BadRequest);
             }
 
             _bookRepository.CreateBook(book);
@@ -37,13 +37,13 @@ namespace BookLibraryAPI.Services
 
             if (!createBookValid.Validate(book, out string error))
             {
-                return ServiceResult<Book>.Failure(error);
+                return ServiceResult<Book>.Failure(error, ResultType.BadRequest);
             }
 
             Book bookResult = _bookRepository.GetBookById(id);
             if(bookResult == null)
             {
-                return ServiceResult<Book>.Failure("Book wasnt found");
+                return ServiceResult<Book>.Failure("Book wasnt found", ResultType.NotFound);
             }
 
             return ServiceResult<Book>.Success(_bookRepository.EditBook(id, book));
@@ -55,7 +55,7 @@ namespace BookLibraryAPI.Services
 
             if(book == null ) 
             {
-               return ServiceResult<string>.Failure("Not found!");
+               return ServiceResult<string>.Failure("Not found!", ResultType.NotFound);
             }
 
             _bookRepository.DeleteBook(book);
