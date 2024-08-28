@@ -3,10 +3,10 @@ using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
 
 namespace LibraryWindowsApp.Forms
 {
-    public abstract class ComponentAbstract
+    public abstract class MenuComponentBase
     {
         public string Name { get; set; }
-        public ComponentAbstract Parent { get; set; }
+        public MenuComponentBase Parent { get; set; }
         public Button Button { get; set; }
         public Panel PanelContent { get; set; }
         public MainViewModel ViewModel { get; set; }
@@ -24,7 +24,7 @@ namespace LibraryWindowsApp.Forms
             button.Click += ButtonClick;
             return button;
         }
-        public void AddParent(ComponentAbstract parent)
+        public void SetParent(MenuComponentBase parent)
         {
             Parent = parent;
         }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace LibraryWindowsApp.Forms.UserControlComponents
 {
-    public class UserContainer : ComponentAbstract
+    public class MenuItem : MenuComponentBase
     {
-        public UserContainer(string name, MainViewModel viewModel, EnumControl enumControl, Panel panelContent)
+        public MenuItem(string name, EnumControl enumControl, ComponentContext context)
         {
             Name = name;
-            PanelContent = panelContent;
-            ViewModel = viewModel;
+            PanelContent = context.ContentPanel;
+            ViewModel = context.ViewModel;
             EnumControl = enumControl;
             Button = CreateButton(Name);
         }

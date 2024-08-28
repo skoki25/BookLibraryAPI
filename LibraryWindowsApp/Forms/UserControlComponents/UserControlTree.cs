@@ -6,78 +6,66 @@ namespace LibraryWindowsApp.Forms
 {
     public class UserControlTree
     {
-        private Panel _contentPanel;
-        private Panel _navigationPanel;
-        private MainViewModel _viewModel;
-        Composter main;
+        private ComponentContext _context;
+        private MenuComposite _main;
 
         public UserControlTree(MainViewModel viewModel, Panel contentPanel, Panel navigationPanel) 
         {
-            _contentPanel = contentPanel;
-            _navigationPanel = navigationPanel;
-            _viewModel = viewModel;
-
-            main = new Composter("Menu", viewModel, EnumControl.Menu, navigationPanel, contentPanel);
-            
-            Composter composterUserMain = new Composter("User", viewModel, EnumControl.UserInfo, navigationPanel, contentPanel);
-            UserContainer conentUserEdit = new UserContainer("Edit Profil", viewModel, EnumControl.UserInfo, contentPanel);
-            UserContainer conentUserPassword = new UserContainer("Change Password", viewModel,EnumControl.UserPassword, contentPanel);
-
-            main.Add(composterUserMain);
-            main.Add(BookButtons());
-            main.Add(BorrowBookButtons());
-            main.Add(CategoryButtons());
-            composterUserMain.Add(main);
-
-
-            composterUserMain.Add(conentUserEdit);
-            composterUserMain.Add(conentUserPassword);
-
-
-
-            main.Button.PerformClick();
+            _context = new ComponentContext(viewModel, contentPanel, navigationPanel);
+            _main = new MenuComposite("Menu", EnumControl.Menu, _context);
+            _main.Add(CreateUserMenu());
+            _main.Add(CreateBookMenu());
+            _main.Add(CreateBorrowBookMenu());
+            _main.Add(CreateCategoryMenu());
+            _main.Button.PerformClick();
         }
 
-        public Composter BorrowBookButtons()
+        public MenuComposite CreateUserMenu()
         {
-            Composter composterBorrowedBook = new Composter("Borrowed Book",
-                _viewModel,EnumControl.Book, _navigationPanel, _contentPanel);
-            UserContainer bookBorrowMyHistory = new UserContainer("My borrow history", 
-               _viewModel, EnumControl.BorrowHistory, _contentPanel);
+            MenuComposite menuComposite = new MenuComposite("User", EnumControl.UserInfo, _context);
+            MenuItem conentUserEdit = new MenuItem("Edit Profil", EnumControl.UserInfo, _context);
+            MenuItem conentUserPassword = new MenuItem("Change Password", EnumControl.UserPassword, _context);
 
-            composterBorrowedBook.Add(main);
-            composterBorrowedBook.Add(bookBorrowMyHistory);
+            menuComposite.Add(_main);
+            menuComposite.Add(conentUserEdit);
+            menuComposite.Add(conentUserPassword);
 
-            return composterBorrowedBook;
+            return menuComposite;
         }
 
-        public Composter BookButtons()
+        public MenuComposite CreateBorrowBookMenu()
         {
-            Composter composterBookMain = new Composter("Book", _viewModel, EnumControl.Book,
-                _navigationPanel, _contentPanel);
-            UserContainer bookContentCreate = new UserContainer("Create Book", _viewModel, EnumControl.Other, _contentPanel);
-            UserContainer bookContentEdit = new UserContainer("Edit Book", _viewModel, EnumControl.Other, _contentPanel);
-            UserContainer bookContentDelete = new UserContainer("Delete Book", _viewModel, EnumControl.Other, _contentPanel);
+            MenuComposite menuComposite = new MenuComposite("Borrowed Book",EnumControl.Book, _context);
+            MenuItem bookBorrowMyHistory = new MenuItem("My borrow history",  EnumControl.BorrowHistory, _context);
 
-            composterBookMain.Add(main);
-            composterBookMain.Add(bookContentCreate);
-            composterBookMain.Add(bookContentEdit);
-            composterBookMain.Add(bookContentDelete);
-
-            return composterBookMain;
+            menuComposite.Add(_main);
+            menuComposite.Add(bookBorrowMyHistory);
+            return menuComposite;
         }
 
-        public Composter CategoryButtons()
+        public MenuComposite CreateBookMenu()
         {
-            Composter composterCategory = new Composter("Category", _viewModel, EnumControl.Book,
-                _navigationPanel, _contentPanel);
+            MenuComposite menuComposite = new MenuComposite("Book", EnumControl.Book, _context);
+            MenuItem bookCreateItem = new MenuItem("Create Book", EnumControl.Other, _context);
+            MenuItem bookEditItem = new MenuItem("Edit Book", EnumControl.Other, _context);
+            MenuItem bookDeleteItem = new MenuItem("Delete Book", EnumControl.Other, _context);
 
-            UserContainer categoryCreate = new UserContainer("Create Category", _viewModel, EnumControl.Other, _contentPanel);
-            UserContainer categoryEdit = new UserContainer("Edit Category", _viewModel, EnumControl.Other, _contentPanel);
+            menuComposite.Add(_main);
+            menuComposite.Add(bookCreateItem);
+            menuComposite.Add(bookEditItem);
+            menuComposite.Add(bookDeleteItem);
+            return menuComposite;
+        }
 
-            composterCategory.Add(categoryCreate);
-            composterCategory.Add(categoryEdit);
-            return composterCategory;
+        public MenuComposite CreateCategoryMenu()
+        {
+            MenuComposite menuComposite = new MenuComposite("Category", EnumControl.Book,_context);
+            MenuItem categoryCreateItem = new MenuItem("Create Category", EnumControl.Other, _context);
+            MenuItem categoryEditItem = new MenuItem("Edit Category",EnumControl.Other, _context);
+
+            menuComposite.Add(categoryCreateItem);
+            menuComposite.Add(categoryEditItem);
+            return menuComposite;
         }
     }
 }
