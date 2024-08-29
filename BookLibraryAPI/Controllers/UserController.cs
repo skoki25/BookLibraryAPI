@@ -27,39 +27,39 @@ namespace BookLibraryAPI.Controllers
 
         [HttpPost()]
         [Authorize(Roles = "Admin")]
-        public IActionResult CreateUser(User user)
+        public Task<IActionResult> CreateUser(User user)
         {
-            return this.ServiceToActionResult(_userService.CreateUser(user));
+            return _userService.CreateUser(user).Result();
         }
 
         [HttpGet()]
         [Authorize]
-        public async Task<IActionResult> GetUserById(int id)
+        public  Task<IActionResult> GetUserById(int id)
         {
-            return await this.ServiceToActionTask<UserDto>(_userService.GetUserById(id));
+            return _userService.GetUserById(id).Result();
         }
         [HttpGet()]
         [Authorize]
         [Route("email ={email}")]
-        public async Task<IActionResult> GetUserByEmail(string email)
+        public Task<IActionResult> GetUserByEmail(string email)
         {
-            return await this.ServiceToActionTask<UserDto>(_userService.GetUserByEmail(email));
+            return _userService.GetUserByEmail(email).Result();
         }
 
         [HttpGet()]
         [Authorize]
         [Route("Me")]
-        public async Task<IActionResult> GetMyself()
+        public Task<IActionResult> GetMyself()
         {
             string userId = User.FindFirst(ClaimTypes.Name)?.Value;
-            return await this.ServiceToActionTask<UserDto>(_userService.GetUserByEmail(userId));
+            return _userService.GetUserByEmail(userId).Result();
         }
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login(User user)
+        public Task<IActionResult> Login(User user)
         {
-            return await this.ServiceToActionTask(_userService.Login(user));
+            return _userService.Login(user).Result();
         }
     }
 }

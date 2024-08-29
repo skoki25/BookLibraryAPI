@@ -1,4 +1,5 @@
 ﻿using BookLibraryAPI.Data.Messages;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Services
 {
@@ -17,6 +18,26 @@ namespace BookLibraryAPI.Services
         public static ServiceResult<T> Failure(string error, ResultType resultType)
         {
             return new ServiceResult<T> { IsSuccess = false, ResultMessage = new ResultMessage<T>(error), ResultType = resultType };
+        }
+
+        public async Task<IActionResult> Result()
+        {
+            if (IsSuccess)
+            {
+                return new OkObjectResult(Data);
+            }
+
+            switch (ResultType)
+            {
+                case ResultType.BadRequest:
+                    return new BadRequestObjectResult(ResultMessage);
+                case ResultType.NotFound:
+                    return new NotFoundResult();
+                case ResultType.NonContent:
+                    return new NoContentResult();
+                default:
+                    return new BadRequestObjectResult(ResultMessage);
+            }
         }
     }
 }

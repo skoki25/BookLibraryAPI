@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookLibraryAPI.Controllers;
+using BookLibraryAPI.DTO;
 using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Repositories;
@@ -30,12 +31,12 @@ namespace UnitTest
         [TestMethod]
         public void GetAllBookTest()
         {
-            IActionResult result = bookController.GetAllBooks();
+            IActionResult result = bookController.GetAllBooks().Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
 
             OkObjectResult okRequest = (OkObjectResult)result;
-            List<Book> bookList = (List<Book>)okRequest.Value;
+            List<BookDto> bookList = (List<BookDto>)okRequest.Value;
             if (bookList.Count() == 0)
             {
                 Assert.Fail("Count cannot be 0");
@@ -49,7 +50,7 @@ namespace UnitTest
             string isoChange = "ISO66666";
             string eanChange = "AAAA-BBBB-CCCC";
             Book bookCreate = new Book { ISO = isoChange, EanCode = eanChange, PublicationDate = DateTime.Now };
-            IActionResult result = bookController.CreateBook(bookCreate);
+            IActionResult result = bookController.CreateBook(bookCreate).Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
 
@@ -62,7 +63,7 @@ namespace UnitTest
             string isoChange = "ISO66666";
             string eanChange = "AAAA-BBBB-CCCC";
             Book bookUpdate = new Book { ISO = isoChange, EanCode = eanChange, PublicationDate = DateTime.Now };
-            IActionResult result = bookController.EditBook(2,bookUpdate);
+            IActionResult result = bookController.EditBook(2,bookUpdate).Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
 

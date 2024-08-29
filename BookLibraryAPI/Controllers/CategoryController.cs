@@ -21,30 +21,30 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllCategory()
+        public Task<IActionResult> GetAllCategory()
         {
-            return this.ServiceToActionResult(_categoryService.GetAllCategory());
+            return _categoryService.GetAllCategory().Result();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetCategoryById(int id)
+        public Task<IActionResult> GetCategoryById(int id)
         {
-            return this.ServiceToActionResult(_categoryService.GetCategoryById(id));
+            return _categoryService.GetCategoryById(id).Result();
         }
 
         [HttpPut]
         [Authorize]
-        public IActionResult EditCategory([FromForm]int id, [FromBody]Category category) 
+        public Task<IActionResult> EditCategory([FromForm]int id, [FromBody]Category category) 
         {
-            return this.ServiceToActionResult(_categoryService.EditCategory(id, category));
+            return _categoryService.EditCategory(id, category).Result();
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddCategory(Category category)
+        public Task<IActionResult> AddCategory(Category category)
         {
-            return this.ServiceToActionResult(_categoryService.AddCategory(category));
+            return _categoryService.AddCategory(category).Result();
         }
     }
 }

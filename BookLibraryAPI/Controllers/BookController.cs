@@ -21,27 +21,27 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllBooks()
+        public Task<IActionResult> GetAllBooks()
         {
-            return this.ServiceToActionResult(_bookService.GetAllBooks());
+            return _bookService.GetAllBooks().Result();
         }
 
         [HttpPost]
-        public IActionResult CreateBook(Book book) 
+        public Task<IActionResult> CreateBook(Book book) 
         {
-            return this.ServiceToActionResult(_bookService.CreateBook(book));
+            return _bookService.CreateBook(book).Result();
         }
 
         [HttpPut]
-        public IActionResult EditBook(int id, Book book)
+        public Task<IActionResult> EditBook(int id, Book book)
         {
-            return this.ServiceToActionResult(_bookService.EditBook(id, book));
+            return _bookService.EditBook(id, book).Result();
         }
 
         [HttpDelete]
-        public IActionResult DeleteBook(int id)
+        public Task<IActionResult> DeleteBook(int id)
         {
-            return this.ServiceToActionResult(_bookService.DeleteBook(id));
+            return _bookService.DeleteBook(id).Result();
         }
     }
 }

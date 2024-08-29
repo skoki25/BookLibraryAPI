@@ -20,28 +20,28 @@ namespace BookLibraryAPI.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult>  GetAuthorById(int id)
+        public Task<IActionResult>  GetAuthorById(int id)
         {
-            return this.ServiceToActionResult(_authorService.GetAuthorById(id));
+            return _authorService.GetAuthorById(id).Result();
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAuthors()
+        public Task<IActionResult> GetAuthors()
         {
-            return this.ServiceToActionResult(_authorService.GetAuthors());
+            return _authorService.GetAuthors().Result();
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> EditAuthor(int id, Author author)
+        public  Task<IActionResult> EditAuthor(int id, Author author)
         {
-            return this.ServiceToActionResult(_authorService.EditAuthor(id, author));
+            return _authorService.EditAuthor(id, author).Result();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAuthor(Author author)
+        public Task<IActionResult> CreateAuthor(Author author)
         {
-            return this.ServiceToActionResult(_authorService.CreateAuthor(author));
+            return _authorService.CreateAuthor(author).Result();
         }
     }
 }

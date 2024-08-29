@@ -25,7 +25,7 @@ namespace UnitTest
         public void GetCategoryByIdTest()
         {
             int id = 2;
-            IActionResult result = categoryController.GetCategoryById(id);
+            IActionResult result = categoryController.GetCategoryById(id).Result;
             Category category = TestDataGetItem.ConvertItem<Category>(result);
             TestDataGetItem.IsObjectNull(category);
         }
@@ -33,7 +33,7 @@ namespace UnitTest
         [TestMethod]
         public void TestGetAllCategories()
         {
-            var result = categoryController.GetAllCategory();
+            var result = categoryController.GetAllCategory().Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
 
@@ -52,10 +52,10 @@ namespace UnitTest
             int id = 2;
             string type = "Scifi-mici";
             Category category = new Category { Id = id, Type = type };
-            var result = categoryController.EditCategory(id, category);
+            var result = categoryController.EditCategory(id, category).Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
-            IActionResult result22 = categoryController.GetCategoryById(id);
+            IActionResult result22 = categoryController.GetCategoryById(id).Result;
             Category category2 = TestDataGetItem.ConvertItem<Category>(result);
             TestDataGetItem.IsObjectNull(category2);
             if(category2.Type != type)
@@ -68,10 +68,10 @@ namespace UnitTest
             int id = 500;
             string type = "Scifi-mici";
             Category category = new Category { Id = id, Type = type };
-            var result = categoryController.AddCategory(category);
+            var result = categoryController.AddCategory(category).Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
-            IActionResult result22 = categoryController.GetCategoryById(id);
+            IActionResult result22 = categoryController.GetCategoryById(id).Result;
             Category category2 = TestDataGetItem.ConvertItem<Category>(result);
             TestDataGetItem.IsObjectNull(category2);
             if (category2.Type != type)
