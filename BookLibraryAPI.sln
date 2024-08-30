@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.API", "BookLibr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{18D94713-274B-4E0E-9E7D-0E8EF9121B0C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryWindowsApp", "LibraryWindowsApp\LibraryWindowsApp.csproj", "{15A94107-2108-48EF-B0EA-A26C42F255D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.WinformApp", "LibraryWindowsApp\BookLibrary.WinformApp.csproj", "{15A94107-2108-48EF-B0EA-A26C42F255D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.Model", "BookLibrary.Model\BookLibrary.Model.csproj", "{7721C6E5-3421-4386-A229-D9C234F5CAEB}"
 EndProject
