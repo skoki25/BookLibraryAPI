@@ -1,4 +1,5 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.DTO;
+using BookLibraryAPI.Models;
 
 namespace BookLibraryAPI.Services
 {
@@ -8,6 +9,6 @@ namespace BookLibraryAPI.Services
         ServiceResult<BookInfo> EditBookInfo(int id,BookInfo bookInfo);
         ServiceResult<string> DeleteBookInfo(int id);
         ServiceResult<BookInfo> GetBookInfo(int id);
-        ServiceResult<BookInfo> GetBookInfoExtraData(int id);
+        ServiceResult<BookInfoDto> GetBookInfoExtraData(int id);
     }
 }

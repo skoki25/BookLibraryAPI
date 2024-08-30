@@ -1,4 +1,6 @@
-﻿using BookLibraryAPI.Models;
+﻿using AutoMapper;
+using BookLibraryAPI.DTO;
+using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Repositories;
 
@@ -7,10 +9,12 @@ namespace BookLibraryAPI.Services
     public class BookInfoService : IBookInfoService
     {
         IBookInfoRepository _bookInfoRepository;
+        IMapper _map;
 
-        public BookInfoService(IBookInfoRepository bookInfoRepository)
+        public BookInfoService(IBookInfoRepository bookInfoRepository,IMapper map)
         {
             _bookInfoRepository = bookInfoRepository;
+            _map = map;
         }
 
         public ServiceResult<BookInfo> CreateBookInfo(BookInfo bookInfo)
@@ -68,9 +72,10 @@ namespace BookLibraryAPI.Services
             return ServiceResult<BookInfo>.Success(_bookInfoRepository.GetBookInfoWithBooks(id));
         }
 
-        public ServiceResult<BookInfo> GetBookInfoExtraData(int id)
+        public ServiceResult<BookInfoDto> GetBookInfoExtraData(int id)
         {
-            throw new NotImplementedException();
+            BookInfoDto bookInfoDto = _map.Map<BookInfoDto>(_bookInfoRepository.GetBookInfoByIdWithExtra(id));
+            return ServiceResult<BookInfoDto>.Success(bookInfoDto);
         }
     }
 }

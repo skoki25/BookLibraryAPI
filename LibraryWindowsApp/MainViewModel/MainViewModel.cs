@@ -1,4 +1,5 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.DTO;
+using BookLibraryAPI.Models;
 using LibraryWindowsApp.API_Controll.UserApiController;
 using LibraryWindowsApp.APIControll;
 using LibraryWindowsApp.Model;
@@ -42,7 +43,7 @@ namespace LibraryWindowsApp
             return await _bookApiController.GetAllBook(currentUserData.GetToken());
         }
 
-        public async Task<BookInfo> GetBookInfoExtra(int id)
+        public async Task<BookInfoDto> GetBookInfoExtra(int id)
         {
             return await _bookInfoApiController.GetBookInfoExtra(id, currentUserData.GetToken());
         }

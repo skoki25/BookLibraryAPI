@@ -10,14 +10,6 @@
 
   <ItemGroup>
     <Compile Include="..\BookLibraryAPI\Data\Messages\TokenMessage.cs" Link="Model\TokenMessage.cs" />
-    <Compile Include="..\BookLibraryAPI\DTO\UserDto.cs" Link="Model\UserDto.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\Author.cs" Link="Model\Author.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\Book.cs" Link="Model\Book.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\BookBorrow.cs" Link="Model\BookBorrow.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\BookInfo.cs" Link="Model\BookInfo.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\Category.cs" Link="Model\Category.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\Role.cs" Link="Model\Role.cs" />
-    <Compile Include="..\BookLibraryAPI\Models\User.cs" Link="Model\User.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +18,10 @@
 
   <ItemGroup>
     <Folder Include="Installation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookLibrary.Model\BookLibrary.Model.csproj" />
   </ItemGroup>
 
 </Project>

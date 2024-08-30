@@ -1,4 +1,5 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibraryAPI.DTO;
+using BookLibraryAPI.Models;
 using LibraryWindowsApp.Forms.UserControlComponents.CustomObject;
 
 namespace LibraryWindowsApp.Forms.UserControlComponents
@@ -44,13 +45,14 @@ namespace LibraryWindowsApp.Forms.UserControlComponents
 
         private async void GetBookDetail(Book book)
         {
-            BookInfo bookInfo = await _mainViewModel.GetBookInfoExtra(book.BookInfoId);
+            BookInfoDto bookInfo = await _mainViewModel.GetBookInfoExtra(book.BookInfoId);
 
             if (bookInfo == null)
                 return;
 
             this.lbAuthor.Text = bookInfo.GetAuthorName();
             this.lbCategory.Text = bookInfo.GetCategory();
+            this.lbUsername.Text = bookInfo.Title;
             this.lbDescription.Text = bookInfo.Description;
             this.lbISO.Text = book.ISO;
         }

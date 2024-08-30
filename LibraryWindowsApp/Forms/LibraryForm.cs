@@ -10,7 +10,7 @@ namespace LibraryWindowsApp
             InitializeComponent();
 
             _mainViewModelView = mainViewModelView;
-            UserControlTree userControlTree = new UserControlTree(mainViewModelView,this.navigationPanel, this.contentPanel);
+            MenuNavigationTree userControlTree = new MenuNavigationTree(mainViewModelView,this.navigationPanel, this.contentPanel);
         }
     }
 }

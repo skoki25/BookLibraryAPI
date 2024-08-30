@@ -4,12 +4,12 @@ using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
 
 namespace LibraryWindowsApp.Forms
 {
-    public class UserControlTree
+    public class MenuNavigationTree
     {
         private ComponentContext _context;
         private MenuComposite _main;
 
-        public UserControlTree(MainViewModel viewModel, Panel contentPanel, Panel navigationPanel) 
+        public MenuNavigationTree(MainViewModel viewModel, Panel navigationPanel, Panel contentPanel) 
         {
             _context = new ComponentContext(viewModel, contentPanel, navigationPanel);
             _main = new MenuComposite("Menu", EnumControl.Menu, _context);
