@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents.Controls.BookBorrow
+namespace WinformApp.Forms.UserControlComponents.Controls.BookBorrow
 {
     public partial class BorrowBookControl : UserControl
     {

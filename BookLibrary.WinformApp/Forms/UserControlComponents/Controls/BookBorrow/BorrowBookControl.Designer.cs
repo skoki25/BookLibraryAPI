@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp.Forms.UserControlComponents.Controls.BookBorrow
+﻿namespace WinformApp.Forms.UserControlComponents.Controls.BookBorrow
 {
     partial class BorrowBookControl
     {

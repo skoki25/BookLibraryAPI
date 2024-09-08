@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp
+﻿namespace WinformApp
 {
     public partial class Config
     {

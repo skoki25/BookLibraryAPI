@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp.Forms.UserControlComponents.Controls
+﻿namespace WinformApp.Forms.UserControlComponents.Controls
 {
     partial class UserPasswordChange
     {

@@ -1,12 +1,13 @@
-﻿using LibraryWindowsApp.Forms.UserControlComponents.Controls;
-using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
+﻿using BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book;
+using WinformApp.Forms.UserControlComponents.Controls;
+using WinformApp.Forms.UserControlComponents.UserControlFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents.UserComponentBuilder
+namespace WinformApp.Forms.UserControlComponents.UserComponentBuilder
 {
     public class UserControlFactory 
     {
@@ -22,6 +23,10 @@ namespace LibraryWindowsApp.Forms.UserControlComponents.UserComponentBuilder
                     return new UserPasswordChange();
                 case EnumControl.Book:
                     return new BookControl(_viewModel);
+                case EnumControl.BookCreate:
+                    return new BookCreateControl(_viewModel);
+                case EnumControl.BookEdit:
+                    return new BookEditControl(_viewModel);
                 default:
                     return new UserControl();
             }

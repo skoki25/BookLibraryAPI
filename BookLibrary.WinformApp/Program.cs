@@ -1,7 +1,7 @@
-using LibraryWindowsApp.API_Controll.UserApiController;
-using LibraryWindowsApp.APIControll;
+using WinformApp.API_Controll.UserApiController;
+using WinformApp.APIControll;
 
-namespace LibraryWindowsApp
+namespace WinformApp
 {
     internal static class Program
     {

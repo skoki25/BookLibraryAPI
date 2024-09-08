@@ -1,13 +1,7 @@
-﻿using BookLibraryAPI.Models;
-using LibraryWindowsApp.APIControll;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookLibrary.Model.DTO;
+using WinformApp.APIControll;
 
-namespace LibraryWindowsApp.API_Controll.UserApiController
+namespace WinformApp.API_Controll.UserApiController
 {
     public  class BookInfoApiController
     {
@@ -17,12 +11,12 @@ namespace LibraryWindowsApp.API_Controll.UserApiController
             _apiService = apiService;
         }
 
-        public async Task<BookInfo?> GetBookInfoExtra(int id, string token)
+        public async Task<BookInfoDto?> GetBookInfoExtra(int id, string token)
         {
             try
             {
                 string loginEndPoint = Config.Settings.GetRoute(Config.ApiBookInfoExtra, id);
-                return await _apiService.GetAsync<BookInfo>(loginEndPoint, token);
+                return await _apiService.GetAsync<BookInfoDto>(loginEndPoint, token);
             }
             catch (Exception ex)
             {

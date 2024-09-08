@@ -1,6 +1,6 @@
-using LibraryWindowsApp.Forms;
+using WinformApp.Forms;
 
-namespace LibraryWindowsApp
+namespace WinformApp
 {
     public partial class LibraryForm : Form
     {

@@ -1,11 +1,11 @@
-﻿using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
+﻿using WinformApp.Forms.UserControlComponents.UserControlFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents
+namespace WinformApp.Forms.UserControlComponents
 {
     public class MenuItem : MenuComponentBase
     {

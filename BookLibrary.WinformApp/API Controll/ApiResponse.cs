@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp.APIControll
+﻿namespace WinformApp.APIControll
 {
     public class ApiResponse<T>
     {

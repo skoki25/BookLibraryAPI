@@ -1,10 +1,10 @@
-﻿using BookLibraryAPI.DTO;
-using BookLibraryAPI.Models;
-using LibraryWindowsApp.API_Controll.UserApiController;
-using LibraryWindowsApp.APIControll;
-using LibraryWindowsApp.Model;
+﻿using BookLibrary.Model.DTO;
+using BookLibrary.Models;
+using WinformApp.API_Controll.UserApiController;
+using WinformApp.APIControll;
+using WinformApp.Model;
 
-namespace LibraryWindowsApp
+namespace WinformApp
 {
     public class MainViewModel
     {

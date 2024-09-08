@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryWindowsApp.Model
+namespace WinformApp.Model
 {
     public class UserLogin
     {

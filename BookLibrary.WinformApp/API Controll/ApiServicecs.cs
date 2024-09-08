@@ -6,7 +6,7 @@ using System.Text;
 using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
-namespace LibraryWindowsApp.APIControll
+namespace WinformApp.APIControll
 {
     public class ApiService : IApiService
     {

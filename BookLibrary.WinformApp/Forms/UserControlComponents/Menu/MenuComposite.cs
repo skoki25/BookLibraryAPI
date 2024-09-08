@@ -1,7 +1,7 @@
-﻿using LibraryWindowsApp.Forms.UserControlComponents;
-using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
+﻿using WinformApp.Forms.UserControlComponents;
+using WinformApp.Forms.UserControlComponents.UserControlFactory;
 
-namespace LibraryWindowsApp.Forms
+namespace WinformApp.Forms
 {
     public class MenuComposite: MenuComponentBase
     {
@@ -17,12 +17,20 @@ namespace LibraryWindowsApp.Forms
             PanelContent = context.ContentPanel;
             PanelNavigation = context.NavigationPanel;
             Button = CreateButton(Name);
+            components.Add(this);
         }
 
-        public void Add(MenuComponentBase component)
+        public void Add(MenuComponentBase component, int? position = null)
         {
+            if(position is not null)
+            {
+                components.Insert(position.GetValueOrDefault(), component);
+            }
+            else
+            {
+                components.Add(component);
+            }
             component.SetParent(this);
-            components.Add(component);
         }
 
         public override void GenerateMenu()
@@ -31,8 +39,19 @@ namespace LibraryWindowsApp.Forms
             for(int i =0;i < components.Count();i++)
             {
                 MenuComponentBase component = components[i];
-                component.Button.Location = new Point(0, i * 34);
+                component.Button.Location = new Point(0, i * 38);
                 PanelNavigation.Controls.Add(component.Button);
+            }
+        }
+
+        public void ResetActive(MenuComponentBase activated)
+        {
+            foreach(MenuComponentBase component in components)
+            {
+                if(component != activated)
+                {
+                    component.SetActivate(false);
+                }
             }
         }
     }

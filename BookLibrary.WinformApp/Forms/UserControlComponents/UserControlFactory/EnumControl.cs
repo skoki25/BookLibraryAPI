@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory
+﻿namespace WinformApp.Forms.UserControlComponents.UserControlFactory
 {
     public enum EnumControl
     {
@@ -6,6 +6,9 @@
         UserInfo,
         UserPassword,
         Book,
+        BookCreate,
+        BookEdit,
+        BookDelete,
         BorrowHistory,
         Other,
         Category,

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents.Controls
+namespace WinformApp.Forms.UserControlComponents.Controls
 {
     public partial class UserPasswordChange : UserControl
     {

@@ -1,13 +1,7 @@
-﻿using BookLibraryAPI.Models;
-using LibraryWindowsApp.APIControll;
-using LibraryWindowsApp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookLibrary.Models;
+using WinformApp.APIControll;
 
-namespace LibraryWindowsApp.API_Controll.UserApiController
+namespace WinformApp.API_Controll.UserApiController
 {
     public class BookApiController
     {

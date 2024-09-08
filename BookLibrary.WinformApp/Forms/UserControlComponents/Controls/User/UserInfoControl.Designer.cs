@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp.Forms
+﻿namespace WinformApp.Forms
 {
     partial class UserInfoControl
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents.Controls.Category
+namespace WinformApp.Forms.UserControlComponents.Controls.Category
 {
     public partial class CategoryCreateControl : UserControl
     {

@@ -1,6 +1,6 @@
 ﻿
 
-namespace LibraryWindowsApp.APIControll
+namespace WinformApp.APIControll
 {
     public interface IApiService
     {

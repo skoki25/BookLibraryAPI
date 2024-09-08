@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace LibraryWindowsApp
+namespace WinformApp
 {
     public class XmlConvertor
     {

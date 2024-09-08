@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using BookLibrary.Model.DTO;
+using BookLibrary.Models;
 using BookLibraryAPI.Controllers;
-using BookLibraryAPI.DTO;
 using BookLibraryAPI.Mapper;
-using BookLibraryAPI.Models;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;

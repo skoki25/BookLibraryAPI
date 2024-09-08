@@ -1,6 +1,6 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibrary.Models;
 
-namespace BookLibraryAPI.DTO
+namespace BookLibrary.Model.DTO
 {
     public class BookInfoDto
     {
@@ -14,18 +14,12 @@ namespace BookLibraryAPI.DTO
 
         public string GetAuthorName()
         {
-            if (Author == null)
-                return string.Empty;
-
-            return Author.FirstName + " " + Author.LastName;
+            return Author?.FirstName ?? string.Empty + " " + Author?.LastName ?? string.Empty;
         }
 
         public string GetCategory()
         {
-            if (Category == null)
-                return string.Empty;
-
-            return Category.Type;
+            return Category?.Type ?? string.Empty;
         }
     }
 }

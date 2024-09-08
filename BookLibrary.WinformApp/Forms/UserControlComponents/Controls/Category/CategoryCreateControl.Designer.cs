@@ -1,4 +1,4 @@
-﻿namespace LibraryWindowsApp.Forms.UserControlComponents.Controls.Category
+﻿namespace WinformApp.Forms.UserControlComponents.Controls.Category
 {
     partial class CategoryCreateControl
     {

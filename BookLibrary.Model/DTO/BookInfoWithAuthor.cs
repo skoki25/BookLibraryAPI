@@ -1,6 +1,6 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibrary.Models;
 
-namespace BookLibraryAPI.DTO
+namespace BookLibrary.Model.DTO
 {
     public class BookInfoWithAuthor
     {

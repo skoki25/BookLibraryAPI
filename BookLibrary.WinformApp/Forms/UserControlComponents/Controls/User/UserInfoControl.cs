@@ -1,4 +1,4 @@
-﻿using LibraryWindowsApp.Model;
+﻿using WinformApp.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp.Forms
+namespace WinformApp.Forms
 {
     public partial class UserInfoControl : UserControl
     {

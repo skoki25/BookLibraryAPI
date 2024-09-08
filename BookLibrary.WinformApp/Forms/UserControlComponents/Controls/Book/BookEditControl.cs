@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +8,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinformApp.Forms.UserControlComponents.CustomObject;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents.Controls.Book
+namespace WinformApp.Forms.UserControlComponents
 {
     public partial class BookEditControl : UserControl
     {
-        public BookEditControl()
+        private MainViewModel _viewModel;
+        private List<Book> _books;
+
+        public BookEditControl(MainViewModel viewModel)
         {
             InitializeComponent();
+
+            _viewModel = viewModel;
+        }
+
+        public async void FillDataGridView()
+        {
+            _books = await _viewModel.GetAllBooks();
+
+            foreach (Book book in _books)
+            {
+                CustomDataRow<Book> row = new CustomDataRow<Book>(this.dataGridView1, book);
+                row.Add(book.ISO, book.EanCode, book.BookInfo.Title, "Edit");
+                this.dataGridView1.Rows.Add(row);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+            if (row is CustomDataRow<Book>)
+            {
+                CustomDataRow<Book> customDataRow = row as CustomDataRow<Book>;
+                panelBook.Controls.Clear();
+                panelBook.Controls.Add(new CreateEditBookPanel(_viewModel, customDataRow.GetData()));
+            }
         }
     }
 }

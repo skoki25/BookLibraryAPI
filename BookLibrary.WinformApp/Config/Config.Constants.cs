@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryWindowsApp
+namespace WinformApp
 {
     public partial class Config
     {

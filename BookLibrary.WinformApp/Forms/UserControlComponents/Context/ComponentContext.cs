@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents
+namespace WinformApp.Forms.UserControlComponents
 {
     public  class ComponentContext
     {

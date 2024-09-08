@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents.CustomObject
+namespace WinformApp.Forms.UserControlComponents.CustomObject
 {
     public class CustomDataRow<T>: DataGridViewRow
     {

@@ -1,8 +1,8 @@
-﻿using BookLibraryAPI.DTO;
-using BookLibraryAPI.Models;
-using LibraryWindowsApp.Forms.UserControlComponents.CustomObject;
+﻿using BookLibrary.Model.DTO;
+using BookLibrary.Models;
+using WinformApp.Forms.UserControlComponents.CustomObject;
 
-namespace LibraryWindowsApp.Forms.UserControlComponents
+namespace WinformApp.Forms.UserControlComponents
 {
     public partial class BookControl : UserControl
     {

@@ -1,16 +1,18 @@
-﻿using LibraryWindowsApp.Forms.UserControlComponents.UserComponentBuilder;
-using LibraryWindowsApp.Forms.UserControlComponents.UserControlFactory;
+﻿using WinformApp.Forms.UserControlComponents;
+using WinformApp.Forms.UserControlComponents.UserComponentBuilder;
+using WinformApp.Forms.UserControlComponents.UserControlFactory;
 
-namespace LibraryWindowsApp.Forms
+namespace WinformApp.Forms
 {
     public abstract class MenuComponentBase
     {
         public string Name { get; set; }
-        public MenuComponentBase Parent { get; set; }
+        public MenuComposite Parent { get; set; }
         public Button Button { get; set; }
         public Panel PanelContent { get; set; }
         public MainViewModel ViewModel { get; set; }
         public EnumControl EnumControl { get; set; }
+        public bool IsActivated { get; set; }
         public abstract void GenerateMenu();
         public Button CreateButton(string name)
         {
@@ -21,21 +23,57 @@ namespace LibraryWindowsApp.Forms
             button.Text = name;
             button.Name = "bt" + nameWithoutSpace;
             button.UseVisualStyleBackColor = true;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderColor = Color.Blue;
+            button.FlatAppearance.BorderSize = 2; 
             button.Click += ButtonClick;
             return button;
         }
-        public void SetParent(MenuComponentBase parent)
+        public void SetParent(MenuComposite parent)
         {
             Parent = parent;
         }
         void ButtonClick(Object sender, EventArgs e)
         {
+            SetActivate(true);
+            if (this is MenuItem)
+            {
+                Parent.ResetActive(this);
+            }
+            else
+            {
+                if(this is MenuComposite menu)
+                {
+                    menu.ResetActive(this);
+                }
+            }
+
             PanelContent.Controls.Clear();
             GenerateMenu();
             UserControl userControl = UserControlFactory.CreateUserControl(EnumControl,ViewModel);
             PanelContent.Controls.Add(userControl);
+
             userControl.Dock = DockStyle.Fill;
 
+        }
+
+        public void SetActivate(bool activate)
+        {
+            IsActivated = activate;
+            UpdateButtonStyle();
+        }
+
+        public void UpdateButtonStyle()
+        {
+            if (IsActivated)
+            {
+                Button.FlatAppearance.BorderColor = Color.Green;
+            }
+            else
+            {
+                Button.FlatAppearance.BorderColor = Color.White;
+
+            }
         }
     }
 }

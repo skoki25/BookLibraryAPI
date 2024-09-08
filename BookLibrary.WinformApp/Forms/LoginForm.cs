@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryWindowsApp
+namespace WinformApp
 {
     public partial class LoginForm : Form
     {

@@ -1,8 +1,8 @@
-﻿using BookLibraryAPI.Models;
+﻿using BookLibrary.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace BookLibraryAPI.DTO
+namespace BookLibrary.Model.DTO
 {
     public class UserDto
     {

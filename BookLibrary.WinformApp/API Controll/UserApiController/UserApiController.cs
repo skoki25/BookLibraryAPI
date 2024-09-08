@@ -1,13 +1,8 @@
-﻿using BookLibraryAPI.Data.Messages;
-using BookLibraryAPI.DTO;
-using LibraryWindowsApp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookLibrary.Model.DTO;
+using BookLibrary.Model.Messages;
+using WinformApp.Model;
 
-namespace LibraryWindowsApp.APIControll
+namespace WinformApp.APIControll
 {
     public class UserApiController
     {
