@@ -1,5 +1,5 @@
-﻿using BookLibraryAPI.Controllers;
-using BookLibraryAPI.Models;
+﻿using BookLibrary.Models;
+using BookLibraryAPI.Controllers;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;
