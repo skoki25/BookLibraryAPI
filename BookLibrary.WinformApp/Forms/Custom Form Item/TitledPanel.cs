@@ -76,12 +76,14 @@ namespace BookLibrary.WinformApp.Forms.Custom_Form_Item
             }
 
             Size textSize = TextRenderer.MeasureText(Title, TitleFont);
-            int titleHeight = textSize.Height;
+            int titleHeight = textSize.Height+ textSize.Height/2;
 
             e.Graphics.DrawRectangle(Pens.Black, 0, 0, Width - 1, Height - 1);
+            e.Graphics.DrawLine(Pens.Black, 0, titleHeight+1, Width - 1, titleHeight + 1);
 
-            e.Graphics.FillRectangle(Brushes.LightGray, 1, 1, Width-1, titleHeight-1);
-            using(Font font = TitleFont)
+            e.Graphics.FillRectangle(Brushes.LightGray, 1, 1, Width-2, titleHeight-1);
+
+            using (Font font = TitleFont)
             {
                 TextRenderer.DrawText(e.Graphics, _title, font, CalculatePosition(textSize,titleHeight), Color.Black);
             }

@@ -58,6 +58,7 @@
             Controls.Add(navigationPanel);
             Name = "LibraryForm";
             Text = "Form1";
+            Load += LibraryForm_Load;
             ResumeLayout(false);
         }
 

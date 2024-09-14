@@ -21,10 +21,12 @@
 
         public string GetCategory()
         {
-            if (Category == null)
-                return string.Empty;
+            return Category?.ToString() ?? string.Empty;
+        }
 
-            return Category.Type;
+        public BookInfo Clone()
+        {
+            return (BookInfo)this.MemberwiseClone();
         }
     }
 }

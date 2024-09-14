@@ -44,8 +44,9 @@
             // 
             createEditBookPanel1.Location = new Point(3, 3);
             createEditBookPanel1.Name = "createEditBookPanel1";
-            createEditBookPanel1.Size = new Size(615, 380);
+            createEditBookPanel1.Size = new Size(693, 395);
             createEditBookPanel1.TabIndex = 0;
+            createEditBookPanel1.Load += createEditBookPanel1_Load;
             // 
             // tableLayoutPanel2
             // 
@@ -55,7 +56,7 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.Location = new Point(378, 415);
+            tableLayoutPanel2.Location = new Point(416, 466);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -75,8 +76,9 @@
             dataGridView1.Location = new Point(3, 14);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(324, 452);
+            dataGridView1.Size = new Size(324, 503);
             dataGridView1.TabIndex = 3;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // ISOColumn
             // 
@@ -110,10 +112,11 @@
             // 
             // panelBook
             // 
+            panelBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelBook.Controls.Add(createEditBookPanel1);
             panelBook.Location = new Point(333, 14);
             panelBook.Name = "panelBook";
-            panelBook.Size = new Size(621, 386);
+            panelBook.Size = new Size(710, 446);
             panelBook.TabIndex = 4;
             // 
             // BookEditControl
@@ -124,7 +127,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(tableLayoutPanel2);
             Name = "BookEditControl";
-            Size = new Size(971, 483);
+            Size = new Size(1046, 534);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panelBook.ResumeLayout(false);
             ResumeLayout(false);

@@ -9,6 +9,7 @@ namespace BookLibraryAPI.Repositories
         void DeleteBookInfo(BookInfo bookInfo);
         BookInfo EditBookInfo(int id, BookInfo bookInfo);
         BookInfo GetBookInfoById(int id);
+        List<BookInfo> GetAllBookInfo();       
         BookInfo GetBookInfoByIdWithExtra(int id);
         BookInfo GetBookInfoWithBooks(int id);
     }

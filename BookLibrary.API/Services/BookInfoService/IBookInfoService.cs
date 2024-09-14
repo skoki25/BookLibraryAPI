@@ -10,5 +10,6 @@ namespace BookLibraryAPI.Services
         ServiceResult<string> DeleteBookInfo(int id);
         ServiceResult<BookInfo> GetBookInfo(int id);
         ServiceResult<BookInfoDto> GetBookInfoExtraData(int id);
+        ServiceResult<List<BookInfoDto>> GetAllBookInfo();
     }
 }

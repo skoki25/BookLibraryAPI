@@ -10,5 +10,10 @@
         public BookInfo? BookInfo { get; set; }
         public DateTime PublicationDate { get; set; }
         public IEnumerable<BookBorrow>? BookBorrow {get; set; }
+
+        public Book Clone()
+        {
+            return (Book)this.MemberwiseClone();
+        }
     }
 }

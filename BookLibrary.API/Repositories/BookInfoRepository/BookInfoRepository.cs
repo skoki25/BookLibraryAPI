@@ -58,5 +58,12 @@ namespace BookLibraryAPI.Repositories
                 .Include(x => x.Category)
                 .SingleOrDefault();
         }
+
+        public List<BookInfo> GetAllBookInfo()
+        {
+            return _context.BookInfo.Include(x => x.Author)
+                .Include(x => x.Category)
+                .ToList();
+        }
     }
 }

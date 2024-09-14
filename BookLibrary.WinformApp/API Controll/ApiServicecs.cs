@@ -17,9 +17,7 @@ namespace WinformApp.APIControll
             _httpClient = httpClient;
         }
 
-
-
-        public Task Deletesync(string endpoint, int id, string token)
+        public Task Delete(string endpoint, int id, string token)
         {
             throw new NotImplementedException();
         }
@@ -67,9 +65,16 @@ namespace WinformApp.APIControll
             return JsonConvert.DeserializeObject<T>(jsonResponse);
         }
 
-        public Task<T> PutAsync<T>(string endpoint, int id, object body, string token)
+        public async Task<T> PutAsync<T>(string endpoint, object body, string token)
         {
-            throw new NotImplementedException();
+            AddAuthorizationHeader(token);
+            string jsonContent = JsonConvert.SerializeObject(body);
+            HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PutAsync(endpoint, content);
+            response.EnsureSuccessStatusCode();
+
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<T>(jsonResponse);
         }
 
         private void AddAuthorizationHeader(string token)

@@ -34,6 +34,7 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpPut]
+        [Route("{id}")]
         public Task<IActionResult> EditBook(int id, Book book)
         {
             return _bookService.EditBook(id, book).Result();

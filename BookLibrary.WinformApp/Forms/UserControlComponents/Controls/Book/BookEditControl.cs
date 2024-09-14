@@ -22,6 +22,8 @@ namespace WinformApp.Forms.UserControlComponents
             InitializeComponent();
 
             _viewModel = viewModel;
+
+            FillDataGridView();
         }
 
         public async void FillDataGridView()
@@ -46,8 +48,15 @@ namespace WinformApp.Forms.UserControlComponents
             {
                 CustomDataRow<Book> customDataRow = row as CustomDataRow<Book>;
                 panelBook.Controls.Clear();
-                panelBook.Controls.Add(new CreateEditBookPanel(_viewModel, customDataRow.GetData()));
+                CreateEditBookPanel createEditBookPanel = new CreateEditBookPanel(_viewModel, customDataRow.GetData());
+                panelBook.Controls.Add(createEditBookPanel);
+                createEditBookPanel.Dock = DockStyle.Fill;
             }
+        }
+
+        private void createEditBookPanel1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

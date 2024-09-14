@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.DTO;
+using BookLibrary.Models;
 
 namespace WinformApp.Forms.UserControlComponents
 {
@@ -6,37 +7,79 @@ namespace WinformApp.Forms.UserControlComponents
     {
         public ModeType modeType;
         private MainViewModel _viewModel;
+        private Book _originBook;
         private Book _book;
 
-        public CreateEditBookPanel() {
+        public CreateEditBookPanel()
+        {
             InitializeComponent();
-
         }
 
-        public void Create(MainViewModel viewModel)
+        public CreateEditBookPanel(MainViewModel viewModel)
         {
+            InitializeComponent();
+
             this._viewModel = viewModel;
             this.modeType = ModeType.Create;
             _book = new Book();
-
-
+            Setup();
         }
 
-        public CreateEditBookPanel(MainViewModel viewModel,Book book)
+        public CreateEditBookPanel(MainViewModel viewModel, Book book)
         {
             InitializeComponent();
 
             this._viewModel = viewModel;
-            this._book = book;
+            this._originBook = book;
+            this._book = this._originBook.Clone();
             this.modeType = ModeType.Edit;
-            FillWithData();
+            Setup();
+        }
+        private void Setup() 
+        {
+            FillComboBookInfo();
+            BindingData();
         }
 
-        private void FillWithData()
+        private void BindingData()
         {
-            tbEanCode.Text = _book.EanCode;
-            tbIso.Text = _book.ISO;
-            dtPublicationDate.Value = _book.PublicationDate;
+            tbEanCode.DataBindings.Add(nameof(tbEanCode.Text), _book, nameof(_book.EanCode));;
+            tbIso.DataBindings.Add(nameof(tbIso.Text), _book, nameof(_book.ISO));
+            dtPublicationDate.DataBindings.Add(nameof(dtPublicationDate.Value), _book, nameof(_book.PublicationDate));
+            cbBookInfo.DataBindings.Add(nameof(cbBookInfo.SelectedValue), _book, nameof(_book.BookInfoId));
+        }
+
+        private async void FillComboBookInfo() 
+        {
+            List<BookInfoDto> bookInfoDtos = await _viewModel.GetAllBookInfo();
+
+            cbBookInfo.DataSource = bookInfoDtos;
+            cbBookInfo.DisplayMember = nameof(BookInfoDto.Title);
+            cbBookInfo.ValueMember = nameof(BookInfoDto.Id);
+        }
+
+        public void DisableAll(bool disable)
+        {
+            tbEanCode.Enabled = disable;
+            tbIso.Enabled = disable;
+            dtPublicationDate.Enabled = disable;
+        }
+
+        private void BtSaveBook(object sender, EventArgs e)
+        {
+            SaveOrEditBook();
+        }
+
+        public void SaveOrEditBook()
+        {
+            if (modeType == ModeType.Create)
+            {
+                _viewModel.CreateBook(_book);
+            }
+            else if(modeType == ModeType.Edit)
+            {
+                _viewModel.EditBook(_book);
+            }
         }
     }
 }

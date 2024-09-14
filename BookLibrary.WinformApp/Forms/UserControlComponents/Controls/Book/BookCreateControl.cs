@@ -19,7 +19,7 @@ namespace BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book
             InitializeComponent();
 
             _viewModel = viewModel;
-            createEditBookPanel1.Create(viewModel);
+            //createEditBookPanel1.Create(viewModel);
         }
     }
 }

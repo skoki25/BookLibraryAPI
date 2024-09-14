@@ -77,5 +77,11 @@ namespace BookLibraryAPI.Services
             BookInfoDto bookInfoDto = _map.Map<BookInfoDto>(_bookInfoRepository.GetBookInfoByIdWithExtra(id));
             return ServiceResult<BookInfoDto>.Success(bookInfoDto);
         }
+
+        public ServiceResult<List<BookInfoDto>> GetAllBookInfo()
+        {
+            List<BookInfoDto> bookInfoDtoList = _map.Map<List<BookInfoDto>>(_bookInfoRepository.GetAllBookInfo());
+            return ServiceResult<List<BookInfoDto>>.Success(bookInfoDtoList);
+        }
     }
 }

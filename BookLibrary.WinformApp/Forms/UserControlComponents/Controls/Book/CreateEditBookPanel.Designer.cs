@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             titlePanelCreate = new BookLibrary.WinformApp.Forms.Custom_Form_Item.TitledPanel();
+            button1 = new Button();
+            tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
@@ -36,18 +38,21 @@
             tbIso = new TextBox();
             dtPublicationDate = new DateTimePicker();
             label3 = new Label();
+            cbBookInfo = new ComboBox();
+            label4 = new Label();
             titlePanelCreate.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // titlePanelCreate
             // 
-            titlePanelCreate.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             titlePanelCreate.BorderColor = Color.Black;
+            titlePanelCreate.Controls.Add(button1);
+            titlePanelCreate.Controls.Add(tableLayoutPanel2);
             titlePanelCreate.Controls.Add(tableLayoutPanel1);
-            titlePanelCreate.Location = new Point(14, 3);
+            titlePanelCreate.Location = new Point(0, 0);
             titlePanelCreate.Name = "titlePanelCreate";
-            titlePanelCreate.Size = new Size(910, 484);
+            titlePanelCreate.Size = new Size(934, 501);
             titlePanelCreate.TabIndex = 0;
             titlePanelCreate.TextAligns = BookLibrary.WinformApp.Forms.Custom_Form_Item.TextAlign.Center;
             titlePanelCreate.Title = "Edit Book";
@@ -55,21 +60,51 @@
             titlePanelCreate.TitleFont = new Font("Arial", 12F);
             titlePanelCreate.TitleForeColor = Color.Black;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.Location = new Point(706, 426);
+            button1.Name = "button1";
+            button1.Size = new Size(202, 44);
+            button1.TabIndex = 1;
+            button1.Text = "Create";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += BtSaveBook;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.Anchor = AnchorStyles.Top;
+            tableLayoutPanel2.ColumnCount = 6;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 2.631579F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.68421F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.68421F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.68421F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.68421F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 2.631579F));
+            tableLayoutPanel2.Location = new Point(26, 335);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(882, 50);
+            tableLayoutPanel2.TabIndex = 2;
+            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.Top;
             tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
             tableLayoutPanel1.Controls.Add(label1, 1, 0);
             tableLayoutPanel1.Controls.Add(label2, 1, 1);
             tableLayoutPanel1.Controls.Add(tbEanCode, 2, 0);
             tableLayoutPanel1.Controls.Add(tbIso, 2, 1);
             tableLayoutPanel1.Controls.Add(dtPublicationDate, 2, 2);
             tableLayoutPanel1.Controls.Add(label3, 1, 2);
-            tableLayoutPanel1.Location = new Point(14, 44);
+            tableLayoutPanel1.Controls.Add(cbBookInfo, 2, 3);
+            tableLayoutPanel1.Controls.Add(label4, 1, 3);
+            tableLayoutPanel1.Location = new Point(26, 44);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
@@ -133,13 +168,33 @@
             label3.TabIndex = 5;
             label3.Text = "Publication Date:";
             // 
+            // cbBookInfo
+            // 
+            cbBookInfo.Anchor = AnchorStyles.Left;
+            cbBookInfo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbBookInfo.FormattingEnabled = true;
+            cbBookInfo.Location = new Point(443, 185);
+            cbBookInfo.Name = "cbBookInfo";
+            cbBookInfo.Size = new Size(200, 23);
+            cbBookInfo.TabIndex = 6;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Location = new Point(379, 189);
+            label4.Name = "label4";
+            label4.Size = new Size(58, 15);
+            label4.TabIndex = 7;
+            label4.Text = "BookInfo:";
+            // 
             // CreateEditBookPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(titlePanelCreate);
             Name = "CreateEditBookPanel";
-            Size = new Size(936, 505);
+            Size = new Size(934, 501);
             titlePanelCreate.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -156,5 +211,9 @@
         private TextBox tbIso;
         private DateTimePicker dtPublicationDate;
         private Label label3;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Button button1;
+        private ComboBox cbBookInfo;
+        private Label label4;
     }
 }

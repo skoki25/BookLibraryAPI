@@ -10,7 +10,7 @@ namespace BookLibraryAPI.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class BookInfoController: ControllerBase
+    public class BookInfoController : ControllerBase
     {
         private IBookInfoService _bookInfoService;
 
@@ -20,9 +20,16 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public Task<IActionResult> GetBookInfo(int id)
         {
             return _bookInfoService.GetBookInfo(id).Result();
+        }
+
+        [HttpGet]
+        public Task<IActionResult> GetAllBookInfo()
+        {
+            return _bookInfoService.GetAllBookInfo().Result();
         }
 
         [HttpGet]
