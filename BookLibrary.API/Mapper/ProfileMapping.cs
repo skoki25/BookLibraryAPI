@@ -11,6 +11,8 @@ namespace BookLibraryAPI.Mapper
             CreateMap<BookInfo, BookInfoDto>();
             CreateMap<BookBorrow,BookBorrowDto>();
             CreateMap<Book, BookDto>();
+            CreateMap<Book, BookSimpleDto>();
+            CreateMap<BookSimpleDto, Book>();
             CreateMap<User, UserDto>();
             CreateMap<Category, Category>();
         }

@@ -26,7 +26,7 @@ namespace BookLibraryAPI.Repositories
         public Category CreateCategory(Category category)
         {
             _context.Category.Add(category);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
             return category;
         }
 

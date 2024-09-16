@@ -16,7 +16,7 @@ namespace BookLibraryAPI.Repositories
         public BookInfo CreateBookInfo(BookInfo bookInfo)
         {
             _context.BookInfo.Add(bookInfo);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
             return bookInfo;
         }
 

@@ -1,7 +1,4 @@
 ﻿using BookLibrary.Models;
-using BookLibraryAPI.Data.CustomException;
-using BookLibraryAPI.Installation;
-using BookLibraryAPI.Models;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +43,7 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpPut]
-        public Task<IActionResult> UpdateBookInfo([FromForm] int id, BookInfo bookInfo)
+        public Task<IActionResult> EditBookInfo([FromForm] int id, BookInfo bookInfo)
         {
             return _bookInfoService.EditBookInfo(id, bookInfo).Result();
         }

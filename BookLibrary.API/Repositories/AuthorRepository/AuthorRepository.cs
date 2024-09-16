@@ -16,7 +16,7 @@ namespace BookLibraryAPI.Repositories
         public Author CreateAuthor(Author author)
         {
             _context.Author.Add(author);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
             return author;
         }
 

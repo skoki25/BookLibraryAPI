@@ -1,10 +1,11 @@
 ﻿using BookLibrary.Model.DTO;
 using BookLibrary.Model.Messages;
+using BookLibrary.WinformApp.API_Controll.UserApiController;
 using WinformApp.Model;
 
 namespace WinformApp.APIControll
 {
-    public class UserApiController
+    public class UserApiController: ApiControllerBase
     {
         private IApiService _apiService;
         public UserApiController(IApiService apiService)
@@ -16,12 +17,15 @@ namespace WinformApp.APIControll
         {
             UserData userData= new UserData();
             string loginEndPoint = Config.Settings.GetRoute(Config.ApiUserLogin);
-            TokenMessage tokenMessage = await _apiService.PostAsync<TokenMessage>(loginEndPoint, login);
-            if (tokenMessage != null)
+            ResultMessage<TokenMessage> resultMessage = await _apiService.PostAsync<TokenMessage>(loginEndPoint, login);
+            if (resultMessage?.Data != null)
             {
+                TokenMessage tokenMessage = resultMessage.Data;
                 string myselfEndPoint = Config.Settings.GetRoute(Config.ApiUserMyself);
                 userData.TokenMessage = tokenMessage;
-                userData.user = await _apiService.GetAsync<UserDto>(myselfEndPoint, userData.GetToken());
+                ResultMessage<UserDto> resultMessageUser = await _apiService.GetAsync<UserDto>(myselfEndPoint, userData.GetToken());
+
+                userData.user = resultMessageUser.Data;
             }
             return userData;
         }

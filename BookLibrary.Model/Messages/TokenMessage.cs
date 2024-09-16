@@ -15,5 +15,7 @@ namespace BookLibrary.Model.Messages
             CreatedAt = DateTime.Now;
             ValidTo = CreatedAt.AddHours(1);
         }
+
+        public TokenMessage() { }
     }
 }

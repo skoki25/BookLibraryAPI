@@ -14,11 +14,11 @@ namespace WinformApp
             return await _bookApiController.GetAllBook(currentUserData.GetToken());
         }
 
-        public async void CreateBook(Book book)
+        public async Task CreateBook(Book book)
         {
             await _bookApiController.CreateBook(book,currentUserData.GetToken());
         }
-        public async void EditBook(Book book)
+        public async Task EditBook(Book book)
         {
             await _bookApiController.EditBook(book, currentUserData.GetToken());
         }

@@ -1,13 +1,14 @@
 ﻿using BookLibrary.Model.DTO;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+using BookLibrary.Model.Messages;
+using BookLibrary.WinformApp.API_Controll.UserApiController;
 using WinformApp.APIControll;
 
 namespace WinformApp.API_Controll.UserApiController
 {
-    public  class BookInfoApiController
+    public  class BookInfoApiController: ApiControllerBase
     {
         IApiService _apiService;
+
         public BookInfoApiController(IApiService apiService) 
         {
             _apiService = apiService;
@@ -18,12 +19,13 @@ namespace WinformApp.API_Controll.UserApiController
             try
             {
                 string loginEndPoint = Config.Settings.GetRoute(Config.ApiBookInfoExtra, id);
-                return await _apiService.GetAsync<BookInfoDto>(loginEndPoint, token);
+                ResultMessage<BookInfoDto> resultMessage = await _apiService.GetAsync<BookInfoDto>(loginEndPoint, token);
+                return GetDataFromApiCall(resultMessage);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
-                return null;
+                ErrorMessage(ex.Message);
+                return new BookInfoDto();
             }
         }
 
@@ -32,11 +34,12 @@ namespace WinformApp.API_Controll.UserApiController
             try
             {
                 string loginEndPoint = Config.Settings.GetRoute(Config.ApiBookInfo);
-                return await _apiService.GetAsync<List< BookInfoDto>> (loginEndPoint, token);
+                ResultMessage<List<BookInfoDto>> resultMessage = await _apiService.GetAsync<List< BookInfoDto>> (loginEndPoint, token);
+                return GetDataFromApiCall(resultMessage);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                ErrorMessage(ex.Message);
                 return null;
             }
         }

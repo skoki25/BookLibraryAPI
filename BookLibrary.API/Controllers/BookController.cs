@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.DTO;
+using BookLibrary.Models;
 using BookLibraryAPI.Data.CustomException;
 using BookLibraryAPI.Installation;
 using BookLibraryAPI.Models;
@@ -22,9 +23,9 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
-        public Task<IActionResult> GetAllBooks()
+        public async Task<IActionResult> GetAllBooks()
         {
-            return _bookService.GetAllBooks().Result();
+            return await _bookService.GetAllBooks().Result();
         }
 
         [HttpPost]
@@ -35,7 +36,7 @@ namespace BookLibraryAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public Task<IActionResult> EditBook(int id, Book book)
+        public Task<IActionResult> EditBook(int id, [FromBody] BookSimpleDto book)
         {
             return _bookService.EditBook(id, book).Result();
         }

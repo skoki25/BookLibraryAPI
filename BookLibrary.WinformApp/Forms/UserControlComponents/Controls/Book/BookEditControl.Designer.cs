@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            createEditBookPanel1 = new CreateEditBookPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             dataGridView1 = new DataGridView();
             ISOColumn = new DataGridViewTextBoxColumn();
@@ -37,16 +36,7 @@
             DetailColumn = new DataGridViewButtonColumn();
             panelBook = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panelBook.SuspendLayout();
             SuspendLayout();
-            // 
-            // createEditBookPanel1
-            // 
-            createEditBookPanel1.Location = new Point(3, 3);
-            createEditBookPanel1.Name = "createEditBookPanel1";
-            createEditBookPanel1.Size = new Size(693, 395);
-            createEditBookPanel1.TabIndex = 0;
-            createEditBookPanel1.Load += createEditBookPanel1_Load;
             // 
             // tableLayoutPanel2
             // 
@@ -113,7 +103,6 @@
             // panelBook
             // 
             panelBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panelBook.Controls.Add(createEditBookPanel1);
             panelBook.Location = new Point(333, 14);
             panelBook.Name = "panelBook";
             panelBook.Size = new Size(710, 446);
@@ -129,7 +118,6 @@
             Name = "BookEditControl";
             Size = new Size(1046, 534);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panelBook.ResumeLayout(false);
             ResumeLayout(false);
         }
 

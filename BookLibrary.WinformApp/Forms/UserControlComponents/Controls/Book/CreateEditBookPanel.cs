@@ -5,6 +5,8 @@ namespace WinformApp.Forms.UserControlComponents
 {
     public partial class CreateEditBookPanel : UserControl
     {
+        public event Action OnEdit;
+
         public ModeType modeType;
         private MainViewModel _viewModel;
         private Book _originBook;
@@ -56,6 +58,7 @@ namespace WinformApp.Forms.UserControlComponents
             cbBookInfo.DataSource = bookInfoDtos;
             cbBookInfo.DisplayMember = nameof(BookInfoDto.Title);
             cbBookInfo.ValueMember = nameof(BookInfoDto.Id);
+            cbBookInfo.SelectedValue = _book.BookInfoId;
         }
 
         public void DisableAll(bool disable)
@@ -70,16 +73,19 @@ namespace WinformApp.Forms.UserControlComponents
             SaveOrEditBook();
         }
 
-        public void SaveOrEditBook()
+        public async void SaveOrEditBook()
         {
             if (modeType == ModeType.Create)
             {
-                _viewModel.CreateBook(_book);
+                await _viewModel.CreateBook(_book);
             }
             else if(modeType == ModeType.Edit)
             {
-                _viewModel.EditBook(_book);
+                await _viewModel.EditBook(_book);
+                Thread.Sleep(2000);
             }
+            OnEdit?.Invoke();
+
         }
     }
 }

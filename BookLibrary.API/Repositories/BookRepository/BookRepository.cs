@@ -15,7 +15,7 @@ namespace BookLibraryAPI.Repositories
         public Book CreateBook(Book book)
         {
             _context.Book.Add(book);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
             return book;
         }
 
@@ -29,7 +29,7 @@ namespace BookLibraryAPI.Repositories
             }
             _context.Remove(book);
 
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
 
         public Book EditBook(int id, Book book)
@@ -38,6 +38,8 @@ namespace BookLibraryAPI.Repositories
             bookResult.EanCode = book.EanCode;
             bookResult.ISO = book.ISO;
             bookResult.PublicationDate = book.PublicationDate;
+            bookResult.BookInfoId = book.BookInfoId;
+            _context.SaveChanges();
             return bookResult;
         }
 

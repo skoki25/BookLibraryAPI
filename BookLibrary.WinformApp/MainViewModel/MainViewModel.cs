@@ -18,6 +18,15 @@ namespace WinformApp
             _userApiController = userApiController;
             _bookApiController = bookApiController;
             _bookInfoApiController = bookInfoApiController ;
+
+            _userApiController.OnErrorMessage     += HandleErrorMessage;
+            _bookApiController.OnErrorMessage     += HandleErrorMessage;
+            _bookInfoApiController.OnErrorMessage += HandleErrorMessage;
+        }
+
+        public void HandleErrorMessage(string error)
+        {
+            MessageBox.Show(error);
         }
 
         public async Task<bool> Login(string loginName, string password)

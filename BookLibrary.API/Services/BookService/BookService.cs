@@ -28,10 +28,10 @@ namespace BookLibraryAPI.Services
             return ServiceResult<Book>.Success(book);
         }
 
-        public ServiceResult<Book> EditBook(int id, Book book)
+        public ServiceResult<Book> EditBook(int id, BookSimpleDto bookSimple)
         {
+            Book book = _mapper.Map<Book>(bookSimple);
             CreateBookValidation createBookValid = new CreateBookValidation();
-
             if (!createBookValid.Validate(book, out string error))
             {
                 return ServiceResult<Book>.Failure(error, ResultType.BadRequest);
@@ -65,7 +65,7 @@ namespace BookLibraryAPI.Services
 
             
 
-            return ServiceResult<List<BookDto>>.Success(_mapper.Map<List<BookDto>>(books));
+            return ServiceResult<List<BookDto>>.Success( _mapper.Map<List<BookDto>>(books));
         }
     }
 }

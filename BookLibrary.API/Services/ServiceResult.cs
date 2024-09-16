@@ -1,18 +1,20 @@
 ﻿using BookLibrary.Model.Messages;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BookLibraryAPI.Services
 {
     public class ServiceResult<T>
     {
-        public T Data { get; private set; }
         public bool IsSuccess { get; private set; }
         public ResultType ResultType { get; private set; }
         public ResultMessage<T> ResultMessage { get; private set; }
 
         public static ServiceResult<T> Success(T data)
         {
-            return new ServiceResult<T> { Data = data, IsSuccess = true, ResultType = ResultType.Ok  };
+            return new ServiceResult<T> { ResultMessage = new ResultMessage<T>(true, data), IsSuccess = true, ResultType = ResultType.Ok  };
         }
 
         public static ServiceResult<T> Failure(string error, ResultType resultType)
@@ -22,19 +24,16 @@ namespace BookLibraryAPI.Services
 
         public async Task<IActionResult> Result()
         {
-            if (IsSuccess)
+            switch (IsSuccess,ResultType)
             {
-                return new OkObjectResult(Data);
-            }
-
-            switch (ResultType)
-            {
-                case ResultType.BadRequest:
+                case (true, ResultType.Ok):
+                    return new OkObjectResult(ResultMessage);
+                case (false, ResultType.BadRequest):
                     return new BadRequestObjectResult(ResultMessage);
-                case ResultType.NotFound:
-                    return new NotFoundResult();
-                case ResultType.NonContent:
-                    return new NoContentResult();
+                case (false, ResultType.NotFound):
+                    return new NotFoundObjectResult(ResultMessage);
+                case (false, ResultType.NonContent):
+                    return new BadRequestObjectResult(ResultMessage);
                 default:
                     return new BadRequestObjectResult(ResultMessage);
             }
