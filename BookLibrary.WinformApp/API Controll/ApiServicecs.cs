@@ -12,6 +12,7 @@ namespace WinformApp.APIControll
     public class ApiService : IApiService
     {
         private readonly HttpClient _httpClient;
+        public event Action<Exception> OnErrorMessage;
 
         public ApiService(HttpClient httpClient)
         {
@@ -83,6 +84,11 @@ namespace WinformApp.APIControll
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
+        }
+
+        public void ErrorMessage(Exception message)
+        {
+            OnErrorMessage?.Invoke(message);
         }
     }
 }

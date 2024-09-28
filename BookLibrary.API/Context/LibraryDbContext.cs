@@ -23,16 +23,9 @@ public partial class LibraryDbContext : DbContext
             author.Property(x => x.Id).ValueGeneratedOnAdd();
         });
 
-        modelBuilder.Entity<Book>(book =>
+        modelBuilder.Entity<Category>(category =>
         {
-            book.HasKey(x => x.Id);
-            book.HasIndex(x => x.EanCode).IsUnique();
-            book.HasIndex(x => x.ISO).IsUnique();
-        });
-
-        modelBuilder.Entity<BookBorrow>(bookBorrow =>
-        {
-            bookBorrow.HasKey(x => x.Id);
+            category.HasKey(x => x.Id);
         });
 
         modelBuilder.Entity<BookInfo>(booInfo =>
@@ -40,10 +33,25 @@ public partial class LibraryDbContext : DbContext
             booInfo.HasKey(x => x.Id);
         });
 
-        modelBuilder.Entity<Category>(category =>
+        modelBuilder.Entity<Book>(book =>
         {
-            category.HasKey(x => x.Id);
+            book.HasKey(x => x.Id);
+            book.HasIndex(x => x.EanCode).IsUnique();
+            book.HasIndex(x => x.ISO).IsUnique();
         });
+
+
+        modelBuilder.Entity<User>(user =>
+        {
+            user.HasKey(x => x.Id);
+            user.HasIndex(x => x.Email).IsUnique();
+        });
+
+        modelBuilder.Entity<BookBorrow>(bookBorrow =>
+        {
+            bookBorrow.HasKey(x => x.Id);
+        });
+
 
         modelBuilder.Entity<Role>(role =>
         {
@@ -51,11 +59,6 @@ public partial class LibraryDbContext : DbContext
             role.HasIndex(x => x.Type).IsUnique();
         });
 
-        modelBuilder.Entity<User>(user =>
-        {
-            user.HasKey(x => x.Id);
-            user.HasIndex(x => x.Email).IsUnique();
-        });
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

@@ -1,3 +1,4 @@
+using BookLibrary.WinformApp.API_Controll.UserApiController;
 using WinformApp.API_Controll.UserApiController;
 using WinformApp.APIControll;
 
@@ -18,13 +19,15 @@ namespace WinformApp
             MainViewModel mainView = new MainViewModel(
                 new UserApiController(apiService),
                 new BookApiController(apiService),
-                new BookInfoApiController(apiService));
+                new BookInfoApiController(apiService),
+                new CategoryApiController(apiService),
+                new AuthorApiController(apiService));
             LoginForm loginForm = new LoginForm(mainView);
             Application.Run(loginForm);
 
             if (loginForm.UserSuccessfullyAuthenticated)
             {
-                Application.Run(new LibraryForm(mainView));
+                Application.Run(new LibraryForm(mainView, apiService));
             }
         }
     }

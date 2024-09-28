@@ -1,15 +1,16 @@
-﻿using WinformApp.Forms.UserControlComponents;
-using WinformApp.Forms.UserControlComponents.UserComponentBuilder;
-using WinformApp.Forms.UserControlComponents.UserControlFactory;
+﻿using BookLibrary.WinformApp.Forms.Context;
+using BookLibrary.WinformApp.Forms.Menu;
+using BookLibrary.WinformApp.Forms.UserControlFactory;
+using WinformApp;
 
-namespace WinformApp.Forms
+namespace BookLibrary.WinformApp.Forms
 {
     public class MenuNavigationTree
     {
         private ComponentContext _context;
         private MenuComposite _main;
 
-        public MenuNavigationTree(MainViewModel viewModel, Panel navigationPanel, Panel contentPanel) 
+        public MenuNavigationTree(MainViewModel viewModel, Panel navigationPanel, Panel contentPanel)
         {
             _context = new ComponentContext(viewModel, contentPanel, navigationPanel);
             _main = new MenuComposite("Menu", EnumControl.Menu, _context);
@@ -35,8 +36,8 @@ namespace WinformApp.Forms
 
         public MenuComposite CreateBorrowBookMenu()
         {
-            MenuComposite menuComposite = new MenuComposite("Borrowed Book",EnumControl.Book, _context);
-            MenuItem bookBorrowMyHistory = new MenuItem("My borrow history",  EnumControl.BorrowHistory, _context);
+            MenuComposite menuComposite = new MenuComposite("Borrowed Book", EnumControl.Book, _context);
+            MenuItem bookBorrowMyHistory = new MenuItem("My borrow history", EnumControl.BorrowHistory, _context);
 
             menuComposite.Add(_main, 0);
             menuComposite.Add(bookBorrowMyHistory);
@@ -50,7 +51,7 @@ namespace WinformApp.Forms
             MenuItem bookEditItem = new MenuItem("Edit Book", EnumControl.BookEdit, _context);
             MenuItem bookDeleteItem = new MenuItem("Delete Book", EnumControl.BookDelete, _context);
 
-            menuComposite.Add(_main,0);
+            menuComposite.Add(_main, 0);
             menuComposite.Add(bookCreateItem);
             menuComposite.Add(bookEditItem);
             menuComposite.Add(bookDeleteItem);
@@ -59,9 +60,9 @@ namespace WinformApp.Forms
 
         public MenuComposite CreateCategoryMenu()
         {
-            MenuComposite menuComposite = new MenuComposite("Category", EnumControl.Book,_context);
+            MenuComposite menuComposite = new MenuComposite("Category", EnumControl.Book, _context);
             MenuItem categoryCreateItem = new MenuItem("Create Category", EnumControl.Other, _context);
-            MenuItem categoryEditItem = new MenuItem("Edit Category",EnumControl.Other, _context);
+            MenuItem categoryEditItem = new MenuItem("Edit Category", EnumControl.Other, _context);
 
             menuComposite.Add(_main, 0);
             menuComposite.Add(categoryCreateItem);

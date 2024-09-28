@@ -1,8 +1,8 @@
-﻿using WinformApp.Forms.UserControlComponents;
+﻿using BookLibrary.WinformApp.Forms.UserControlFactory;
+using WinformApp;
 using WinformApp.Forms.UserControlComponents.UserComponentBuilder;
-using WinformApp.Forms.UserControlComponents.UserControlFactory;
 
-namespace WinformApp.Forms
+namespace BookLibrary.WinformApp.Forms.Menu
 {
     public abstract class MenuComponentBase
     {
@@ -25,7 +25,7 @@ namespace WinformApp.Forms
             button.UseVisualStyleBackColor = true;
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderColor = Color.Blue;
-            button.FlatAppearance.BorderSize = 2; 
+            button.FlatAppearance.BorderSize = 2;
             button.Click += ButtonClick;
             return button;
         }
@@ -33,7 +33,7 @@ namespace WinformApp.Forms
         {
             Parent = parent;
         }
-        void ButtonClick(Object sender, EventArgs e)
+        void ButtonClick(object sender, EventArgs e)
         {
             SetActivate(true);
             if (this is MenuItem)
@@ -42,7 +42,7 @@ namespace WinformApp.Forms
             }
             else
             {
-                if(this is MenuComposite menu)
+                if (this is MenuComposite menu)
                 {
                     menu.ResetActive(this);
                 }
@@ -50,7 +50,7 @@ namespace WinformApp.Forms
 
             PanelContent.Controls.Clear();
             GenerateMenu();
-            UserControl userControl = UserControlFactory.CreateUserControl(EnumControl,ViewModel);
+            UserControl userControl = UserControlFactory.CreateUserControl(EnumControl, ViewModel);
             PanelContent.Controls.Add(userControl);
 
             userControl.Dock = DockStyle.Fill;

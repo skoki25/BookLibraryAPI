@@ -18,5 +18,8 @@ namespace WinformApp
         public const string ApiBookInfo       = "BookInfo";
         public const string ApiBookInfoExtra  = "BookInfo/Info";
 
+        public const string ApiCategory = "Category";
+
+
     }
 }

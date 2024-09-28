@@ -6,13 +6,18 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using WinformApp.APIControll;
 
 namespace BookLibrary.WinformApp.API_Controll.UserApiController
 {
     public abstract class ApiControllerBase
     {
-        public event Action<string> OnErrorMessage;
+        protected readonly IApiService _apiService;
 
+        public ApiControllerBase(IApiService apiService) 
+        { 
+            this._apiService = apiService;
+        }
         public T GetDataFromApiCall<T>(ResultMessage<T> resultMessage)
         {
             if (resultMessage.Data == null)
@@ -25,9 +30,5 @@ namespace BookLibrary.WinformApp.API_Controll.UserApiController
             }
         }
 
-        public void ErrorMessage(string  message)
-        {
-            OnErrorMessage?.Invoke(message);
-        }
     }
 }

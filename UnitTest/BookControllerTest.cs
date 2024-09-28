@@ -62,7 +62,7 @@ namespace UnitTest
         {
             string isoChange = "ISO66666";
             string eanChange = "AAAA-BBBB-CCCC";
-            Book bookUpdate = new Book { ISO = isoChange, EanCode = eanChange, PublicationDate = DateTime.Now };
+            BookSimpleDto bookUpdate = new BookSimpleDto { ISO = isoChange, EanCode = eanChange, PublicationDate = DateTime.Now };
             IActionResult result = bookController.EditBook(2,bookUpdate).Result;
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);

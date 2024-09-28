@@ -25,4 +25,8 @@
     <ProjectReference Include="..\BookLibrary.Model\BookLibrary.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

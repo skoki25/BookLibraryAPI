@@ -1,15 +1,17 @@
 ﻿using BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book;
 using WinformApp.Forms.UserControlComponents.Controls;
-using WinformApp.Forms.UserControlComponents.UserControlFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinformApp;
+using WinformApp.Forms;
+using WinformApp.Forms.UserControlComponents;
 
-namespace WinformApp.Forms.UserControlComponents.UserComponentBuilder
+namespace BookLibrary.WinformApp.Forms.UserControlFactory
 {
-    public class UserControlFactory 
+    public class UserControlFactory
     {
         static public UserControl CreateUserControl(EnumControl controlType, MainViewModel _viewModel)
         {

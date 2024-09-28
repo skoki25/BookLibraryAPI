@@ -8,10 +8,9 @@ namespace WinformApp.API_Controll.UserApiController
 {
     public class BookApiController: ApiControllerBase
     {
-        private IApiService _apiService;
         public BookApiController(IApiService apiService)
+            :base(apiService)
         {
-            _apiService = apiService;
         }
 
         public async Task<List<Book>> GetAllBook(string token)
@@ -22,14 +21,14 @@ namespace WinformApp.API_Controll.UserApiController
                 ResultMessage<List<Book>> resultMessage = await _apiService.GetAsync<List<Book>>(loginEndPoint, token);
                 if (resultMessage.Data == null)
                 {
-                    ErrorMessage(resultMessage.Message);
+                    _apiService.ErrorMessage(new ArgumentNullException("No data"));
                     return new List<Book>();
                 }
                 return resultMessage.Data;
             }
             catch(Exception ex)
             {
-                ErrorMessage(ex.Message);
+                _apiService.ErrorMessage(ex);
                 return new List<Book>();
             }
         }
@@ -42,14 +41,14 @@ namespace WinformApp.API_Controll.UserApiController
                 ResultMessage<Book> resultMessage = await _apiService.PostAsync<Book>(loginEndPoint, token);
                 if(resultMessage.Data == null)
                 {
-                    ErrorMessage(resultMessage.Message);
+                    _apiService.ErrorMessage(new ArgumentNullException("No data"));
                     return new Book();
                 }
                 return resultMessage.Data;
             }
             catch (Exception ex)
             {
-                ErrorMessage(ex.Message);
+                _apiService.ErrorMessage(ex);
                 return new Book();
             }
         }
@@ -69,7 +68,7 @@ namespace WinformApp.API_Controll.UserApiController
             }
             catch (Exception ex)
             {
-                ErrorMessage(ex.Message);
+                _apiService.ErrorMessage(ex);
                 return new Book();
             }
         }

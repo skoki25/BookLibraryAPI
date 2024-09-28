@@ -1,9 +1,9 @@
-﻿using WinformApp.Forms.UserControlComponents;
-using WinformApp.Forms.UserControlComponents.UserControlFactory;
+﻿using BookLibrary.WinformApp.Forms.Context;
+using BookLibrary.WinformApp.Forms.UserControlFactory;
 
-namespace WinformApp.Forms
+namespace BookLibrary.WinformApp.Forms.Menu
 {
-    public class MenuComposite: MenuComponentBase
+    public class MenuComposite : MenuComponentBase
     {
         private List<MenuComponentBase> components = new List<MenuComponentBase>();
         public Panel PanelNavigation { get; set; }
@@ -22,7 +22,7 @@ namespace WinformApp.Forms
 
         public void Add(MenuComponentBase component, int? position = null)
         {
-            if(position is not null)
+            if (position is not null)
             {
                 components.Insert(position.GetValueOrDefault(), component);
             }
@@ -36,7 +36,7 @@ namespace WinformApp.Forms
         public override void GenerateMenu()
         {
             PanelNavigation.Controls.Clear();
-            for(int i =0;i < components.Count();i++)
+            for (int i = 0; i < components.Count(); i++)
             {
                 MenuComponentBase component = components[i];
                 component.Button.Location = new Point(0, i * 38);
@@ -46,9 +46,9 @@ namespace WinformApp.Forms
 
         public void ResetActive(MenuComponentBase activated)
         {
-            foreach(MenuComponentBase component in components)
+            foreach (MenuComponentBase component in components)
             {
-                if(component != activated)
+                if (component != activated)
                 {
                     component.SetActivate(false);
                 }

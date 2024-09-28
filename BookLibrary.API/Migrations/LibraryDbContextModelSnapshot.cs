@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BookLibraryAPI.Migrations
+namespace BookLibrary.API.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
     partial class LibraryDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace BookLibraryAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Author", b =>
+            modelBuilder.Entity("BookLibrary.Models.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("Author");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Book", b =>
+            modelBuilder.Entity("BookLibrary.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.BookBorrow", b =>
+            modelBuilder.Entity("BookLibrary.Models.BookBorrow", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("BookBorrow");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.BookInfo", b =>
+            modelBuilder.Entity("BookLibrary.Models.BookInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,7 +147,7 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("BookInfo");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Category", b =>
+            modelBuilder.Entity("BookLibrary.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +164,7 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Role", b =>
+            modelBuilder.Entity("BookLibrary.Models.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,7 +184,7 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.User", b =>
+            modelBuilder.Entity("BookLibrary.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,9 +231,9 @@ namespace BookLibraryAPI.Migrations
                     b.ToTable("RoleUser");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Book", b =>
+            modelBuilder.Entity("BookLibrary.Models.Book", b =>
                 {
-                    b.HasOne("BookLibraryAPI.Models.BookInfo", "BookInfo")
+                    b.HasOne("BookLibrary.Models.BookInfo", "BookInfo")
                         .WithMany("Books")
                         .HasForeignKey("BookInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -242,15 +242,15 @@ namespace BookLibraryAPI.Migrations
                     b.Navigation("BookInfo");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.BookBorrow", b =>
+            modelBuilder.Entity("BookLibrary.Models.BookBorrow", b =>
                 {
-                    b.HasOne("BookLibraryAPI.Models.Book", "Book")
+                    b.HasOne("BookLibrary.Models.Book", "Book")
                         .WithMany("BookBorrow")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookLibraryAPI.Models.User", "User")
+                    b.HasOne("BookLibrary.Models.User", "User")
                         .WithMany("BookBorrow")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -261,15 +261,15 @@ namespace BookLibraryAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.BookInfo", b =>
+            modelBuilder.Entity("BookLibrary.Models.BookInfo", b =>
                 {
-                    b.HasOne("BookLibraryAPI.Models.Author", "Author")
+                    b.HasOne("BookLibrary.Models.Author", "Author")
                         .WithMany("BookInfo")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookLibraryAPI.Models.Category", "Category")
+                    b.HasOne("BookLibrary.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -282,35 +282,35 @@ namespace BookLibraryAPI.Migrations
 
             modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.HasOne("BookLibraryAPI.Models.Role", null)
+                    b.HasOne("BookLibrary.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookLibraryAPI.Models.User", null)
+                    b.HasOne("BookLibrary.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Author", b =>
+            modelBuilder.Entity("BookLibrary.Models.Author", b =>
                 {
                     b.Navigation("BookInfo");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.Book", b =>
+            modelBuilder.Entity("BookLibrary.Models.Book", b =>
                 {
                     b.Navigation("BookBorrow");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.BookInfo", b =>
+            modelBuilder.Entity("BookLibrary.Models.BookInfo", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("BookLibraryAPI.Models.User", b =>
+            modelBuilder.Entity("BookLibrary.Models.User", b =>
                 {
                     b.Navigation("BookBorrow");
                 });
