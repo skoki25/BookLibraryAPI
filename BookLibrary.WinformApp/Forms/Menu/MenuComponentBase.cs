@@ -1,6 +1,5 @@
-﻿using BookLibrary.WinformApp.Forms.UserControlFactory;
-using WinformApp;
-using WinformApp.Forms.UserControlComponents.UserComponentBuilder;
+﻿using WinformApp;
+using WinformApp.Forms;
 
 namespace BookLibrary.WinformApp.Forms.Menu
 {

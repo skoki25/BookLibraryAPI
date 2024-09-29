@@ -7,10 +7,8 @@ namespace WinformApp.APIControll
 {
     public class UserApiController: ApiControllerBase
     {
-        private IApiService _apiService;
-        public UserApiController(IApiService apiService)
-        {
-            _apiService = apiService;
+        public UserApiController(IApiService apiService) : base(apiService) 
+        { 
         }
 
         public async Task<UserData>? Login(UserLogin login)

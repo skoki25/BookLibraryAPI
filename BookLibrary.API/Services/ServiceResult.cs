@@ -22,7 +22,20 @@ namespace BookLibraryAPI.Services
             return new ServiceResult<T> { IsSuccess = false, ResultMessage = new ResultMessage<T>(error), ResultType = resultType };
         }
 
-        public async Task<IActionResult> Result()
+        public static IActionResult Success2(T data)
+        {
+            ServiceResult<T>serviceResult = new ServiceResult<T> { ResultMessage = new ResultMessage<T>(true, data), IsSuccess = true, ResultType = ResultType.Ok };
+            return serviceResult.Result();
+        }
+
+        public static IActionResult Failure2(string error, ResultType resultType)
+        {
+            ServiceResult<T> service = new ServiceResult<T> { IsSuccess = false, ResultMessage = new ResultMessage<T>(error), ResultType = resultType };
+
+            return service.Result();
+        }
+
+        public IActionResult Result()
         {
             switch (IsSuccess,ResultType)
             {

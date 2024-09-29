@@ -1,13 +1,15 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.Messages;
+using BookLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Services
 {
     public interface IAuthorService
     {
-        ServiceResult<Author> GetAuthorById(int id);
-        ServiceResult<List<Author>>GetAuthors();
-        ServiceResult<Author> CreateAuthor(Author author);
-        ServiceResult<Author> EditAuthor(int id, Author author);
-        ServiceResult<string> DeleteAuthor(int id);
+        Task<IActionResult> GetAuthorById(int id);
+        Task<IActionResult>GetAuthors();
+        Task<IActionResult> CreateAuthor(Author author);
+        Task<IActionResult> EditAuthor(int id, Author author);
+        Task<IActionResult> DeleteAuthor(int id);
     }
 }

@@ -22,30 +22,30 @@ namespace UnitTest.FakeRepositories
             authorList.Add(new Author { Id = 5, Age = 52, FirstName = "Fan", LastName = "Last" });
         }
 
-        public Author CreateAuthor(Author author)
+        public async Task<Author> CreateAuthor(Author author)
         {
             authorList.Add(author);
             return author;
 
         }
 
-        public Author FindAuthor(int id)
+        public async Task<Author> FindAuthor(int id)
         {
 
             return authorList.Where(x=> x.Id == id).FirstOrDefault();
         }
 
-        public List<Author> GetAuthors()
+        public async Task<List<Author>> GetAuthors()
         {
             return authorList;
         }
 
-        public List<BookInfo> GetBookInfoByAuthorId(int id)
+        public async Task<List<BookInfo>> GetBookInfoByAuthorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Author Update(int id, Author author)
+        public async Task<Author> Update(int id, Author author)
         {
             Author authorSearch = authorList.Where(x => x.Id == id).SingleOrDefault();
             authorSearch.FirstName = author.FirstName;

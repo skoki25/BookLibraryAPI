@@ -4,10 +4,10 @@ namespace BookLibraryAPI.Repositories
 {
     public interface IAuthorRepository
     {
-        public Author CreateAuthor(Author author);
-        public Author FindAuthor(int author);
-        public List<BookInfo> GetBookInfoByAuthorId(int id);
-        public Author Update(int id, Author author);
-        public List<Author> GetAuthors();
+        public Task<Author> CreateAuthor(Author author);
+        public Task<Author> FindAuthor(int author);
+        public Task<List<BookInfo>> GetBookInfoByAuthorId(int id);
+        public Task<Author> Update(int id, Author author);
+        public Task<List<Author>> GetAuthors();
     }
 }

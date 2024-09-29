@@ -1,5 +1,6 @@
 ﻿using BookLibrary.Models;
 using BookLibraryAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookLibraryAPI.Repositories
 {
@@ -13,35 +14,35 @@ namespace BookLibraryAPI.Repositories
             _context = context;
         }
 
-        public Author CreateAuthor(Author author)
+        public async Task<Author> CreateAuthor(Author author)
         {
             _context.Author.Add(author);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return author;
         }
 
-        public Author FindAuthor(int id)
+        public async Task<Author> FindAuthor(int id)
         {
-            return _context.Author.Where(x => x.Id == id).SingleOrDefault();
+            return await _context.Author.Where(x => x.Id == id).SingleOrDefaultAsync();
         }
 
-        public List<Author> GetAuthors()
+        public async Task<List<Author>> GetAuthors()
         {
-            return _context.Author.ToList();
+            return await _context.Author.ToListAsync();
         }
 
-        public List<BookInfo> GetBookInfoByAuthorId(int id)
+        public async Task<List<BookInfo>> GetBookInfoByAuthorId(int id)
         {
-            return _context.BookInfo.Where(x => x.AuthorId == id).ToList();
+            return await _context.BookInfo.Where(x => x.AuthorId == id).ToListAsync();
         }
 
-        public Author Update(int id, Author author)
+        public async Task<Author> Update(int id, Author author)
         {
-            Author authorResult = FindAuthor(id);
+            Author authorResult = await FindAuthor(id);
             authorResult.Age = author.Age;
             authorResult.FirstName = author.FirstName;
             authorResult.LastName = author.LastName;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return authorResult;
         }

@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.Messages;
+using BookLibrary.Models;
 using BookLibraryAPI.Controllers;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
@@ -84,7 +85,8 @@ namespace UnitTest
         private static void CheckAuthor(string firstNameChange, string secondNameChange, IActionResult result)
         {
             OkObjectResult okRequest = (OkObjectResult)result;
-            Author author = (Author)okRequest.Value;
+            ResultMessage<Author> resultMessage = (ResultMessage<Author>)okRequest.Value;
+            Author author = resultMessage.Data;
             TestDataGetItem.IsObjectNull(author);
             if (!author.FirstName.Equals(firstNameChange))
             {

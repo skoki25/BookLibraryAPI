@@ -1,7 +1,7 @@
 ﻿using BookLibrary.WinformApp.Forms.Context;
 using BookLibrary.WinformApp.Forms.Menu;
-using BookLibrary.WinformApp.Forms.UserControlFactory;
 using WinformApp;
+using WinformApp.Forms;
 
 namespace BookLibrary.WinformApp.Forms
 {
@@ -13,7 +13,7 @@ namespace BookLibrary.WinformApp.Forms
         public MenuNavigationTree(MainViewModel viewModel, Panel navigationPanel, Panel contentPanel)
         {
             _context = new ComponentContext(viewModel, contentPanel, navigationPanel);
-            _main = new MenuComposite("Menu", EnumControl.Menu, _context);
+            _main = new MenuComposite("Menu",EnumControl.Menu, _context);
             _main.Add(CreateUserMenu());
             _main.Add(CreateBookMenu());
             _main.Add(CreateBorrowBookMenu());

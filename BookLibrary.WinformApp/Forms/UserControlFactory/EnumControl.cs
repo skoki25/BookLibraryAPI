@@ -1,4 +1,4 @@
-﻿namespace BookLibrary.WinformApp.Forms.UserControlFactory
+﻿namespace WinformApp.Forms
 {
     public enum EnumControl
     {

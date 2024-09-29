@@ -7,11 +7,8 @@ namespace WinformApp.API_Controll.UserApiController
 {
     public  class BookInfoApiController: ApiControllerBase
     {
-        IApiService _apiService;
-
-        public BookInfoApiController(IApiService apiService) 
+        public BookInfoApiController(IApiService apiService):base(apiService)
         {
-            _apiService = apiService;
         }
 
         public async Task<BookInfoDto?> GetBookInfoExtra(int id, string token)
@@ -24,7 +21,7 @@ namespace WinformApp.API_Controll.UserApiController
             }
             catch (Exception ex)
             {
-                ErrorMessage(ex.Message);
+                _apiService.ErrorMessage(ex);
                 return new BookInfoDto();
             }
         }
@@ -39,7 +36,7 @@ namespace WinformApp.API_Controll.UserApiController
             }
             catch (Exception ex)
             {
-                ErrorMessage(ex.Message);
+                _apiService.ErrorMessage(ex);
                 return null;
             }
         }

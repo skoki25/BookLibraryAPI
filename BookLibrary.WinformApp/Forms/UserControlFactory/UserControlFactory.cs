@@ -1,15 +1,8 @@
-﻿using BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book;
-using WinformApp.Forms.UserControlComponents.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WinformApp;
-using WinformApp.Forms;
+﻿using WinformApp.Forms.UserControlComponents.Controls;
 using WinformApp.Forms.UserControlComponents;
+using BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book;
 
-namespace BookLibrary.WinformApp.Forms.UserControlFactory
+namespace WinformApp.Forms
 {
     public class UserControlFactory
     {
