@@ -46,7 +46,22 @@ namespace BookLibrary.WinformApp.UserControlComponents
 
         private void btCreateEdit_Click(object sender, EventArgs e)
         {
+            SetMode();
+        }
 
+        private void SetMode()
+        {
+            switch (modeType)
+            {
+                case ModeType.Create:
+                    _viewModel.CreateCategory(_category);
+                    break;
+                case ModeType.Edit:
+                    _viewModel.EditCategory(_category);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

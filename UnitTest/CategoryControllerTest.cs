@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.Messages;
+using BookLibrary.Models;
 using BookLibraryAPI.Controllers;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
@@ -26,8 +27,13 @@ namespace UnitTest
         {
             int id = 2;
             IActionResult result = categoryController.GetCategoryById(id).Result;
-            Category category = TestDataGetItem.ConvertItem<Category>(result);
+            ResultMessage<Category> category = TestDataGetItem.ConvertItem<ResultMessage<Category>>(result);
             TestDataGetItem.IsObjectNull(category);
+
+            if (category.Data == null)
+            {
+                Assert.Fail("ResiltMessage.Data cant be null");
+            }
         }
 
         [TestMethod]
@@ -39,9 +45,14 @@ namespace UnitTest
 
             OkObjectResult resultOk = (OkObjectResult)result;
 
-            List<Category> categoryList= (List<Category>)resultOk.Value;
+            ResultMessage<List<Category>> categoryList= (ResultMessage<List<Category>>)resultOk.Value;
 
-            if (categoryList.Count == 0) 
+            if(categoryList == null)
+            {
+                Assert.Fail("ResiltMessage.Data cant be null");
+            }
+
+            if (categoryList.Data.Count() == 0) 
             {
                 Assert.Fail("Failed");
             }
@@ -56,9 +67,15 @@ namespace UnitTest
             TestMethod.CheckIfIsBadRequest(result);
             TestMethod.IsBadRequest(result);
             IActionResult result22 = categoryController.GetCategoryById(id).Result;
-            Category category2 = TestDataGetItem.ConvertItem<Category>(result);
+            ResultMessage < Category >category2 = TestDataGetItem.ConvertItem<ResultMessage<Category>>(result);
             TestDataGetItem.IsObjectNull(category2);
-            if(category2.Type != type)
+
+            if(category2.Data == null)
+            {
+                Assert.Fail("TYpe dont match");
+            }
+
+            if (category2.Data.Type != type)
             {
                 Assert.Fail("TYpe dont match");
             }
