@@ -22,7 +22,7 @@ namespace BookLibraryAPI.Controllers
         [Route("Check")]
         public async Task<IActionResult> GetBookById(int id)
         {
-            return _borrowService.GetBookById(id).Result();
+            return await _borrowService.GetBookById(id);
         }
 
         [HttpPost]
@@ -30,21 +30,21 @@ namespace BookLibraryAPI.Controllers
         public async Task<IActionResult> Borrow(int id)
         {
             string userId = User.FindFirst(ClaimTypes.Name)?.Value;
-            return _borrowService.BorrowBook(id, userId).Result();
+            return await _borrowService.BorrowBook(id, userId);
         }
 
         [HttpPatch]
         [Route("Return/{bookId}")]
         public async Task<IActionResult> ReturnBook(int bookId) 
         {
-            return _borrowService.ReturnBook(bookId).Result();
+            return await _borrowService.ReturnBook(bookId);
         }
 
         [HttpGet]
         [Route("History/user/{userId}")]
         public async Task<IActionResult> GetBorrowHistory(int userId)
         {
-            return _borrowService.GetBorrowHistory(userId).Result();
+            return await _borrowService.GetBorrowHistory(userId);
         }
     }
 }

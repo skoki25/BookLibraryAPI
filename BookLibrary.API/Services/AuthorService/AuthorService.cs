@@ -24,11 +24,11 @@ namespace BookLibraryAPI.Services
 
             if (!validationRules.Validate(author,out string error))
             {
-                return ServiceResult<Author>.Failure2(error, ResultType.BadRequest);
+                return ServiceResult<Author>.Failure(error, ResultType.BadRequest);
             }
 
-            _authorRepository.CreateAuthor(author);     
-            return ServiceResult<Author>.Success2(author);
+            Author authorCreate = await _authorRepository.CreateAuthor(author);     
+            return ServiceResult<Author>.Success(authorCreate);
         }
 
         public async Task<IActionResult> DeleteAuthor(int id)
@@ -36,19 +36,17 @@ namespace BookLibraryAPI.Services
             Author author = await _authorRepository.FindAuthor(id);
             if(author == null)
             {
-                return ServiceResult<string>.Failure2("Author want found", ResultType.NotFound);
+                return ServiceResult<string>.Failure("Author want found", ResultType.NotFound);
             }
 
             List<BookInfo> bookInfo = await _authorRepository.GetBookInfoByAuthorId(id);
 
             if(bookInfo.Count > 0)
             {
-                return ServiceResult<string>.Failure2("Author cannot be remove", ResultType.BadRequest);
+                return ServiceResult<string>.Failure("Author cannot be remove", ResultType.BadRequest);
             }
 
-           // _context.Author.Remove(author);
-
-            return ServiceResult<string>.Success2("Success!");
+            return ServiceResult<string>.Success("Success!");
         }
 
         public async Task<IActionResult> EditAuthor(int id, Author author)
@@ -56,17 +54,17 @@ namespace BookLibraryAPI.Services
             Author authorResult = await _authorRepository.FindAuthor(id);
             if (author == null)
             {
-                return ServiceResult<Author>.Failure2("Author wanst found", ResultType.NotFound);
+                return ServiceResult<Author>.Failure("Author wanst found", ResultType.NotFound);
             }
 
             AuthorValidation validationRules = new AuthorValidation();
 
             if (!validationRules.Validate(author, out string error))
             {
-                return ServiceResult<Author>.Failure2(error, ResultType.BadRequest);
+                return ServiceResult<Author>.Failure(error, ResultType.BadRequest);
             }
 
-            return ServiceResult<Author>.Success2(await _authorRepository.Update(id, author));
+            return ServiceResult<Author>.Success(await _authorRepository.Update(id, author));
         }
 
         public async Task<IActionResult> GetAuthorById(int id)
@@ -74,15 +72,15 @@ namespace BookLibraryAPI.Services
             Author author = await _authorRepository.FindAuthor(id);
             if (author == null)
             {
-                return ServiceResult<Author>.Failure2("Author wanst found", ResultType.NotFound);
+                return ServiceResult<Author>.Failure("Author wanst found", ResultType.NotFound);
             }
 
-            return ServiceResult<Author>.Success2(author);
+            return ServiceResult<Author>.Success(author);
         }
 
         public async Task<IActionResult> GetAuthors()
         {
-            return ServiceResult<List<Author>>.Success2(await _authorRepository.GetAuthors());
+            return ServiceResult<List<Author>>.Success(await _authorRepository.GetAuthors());
         }
     }
 }

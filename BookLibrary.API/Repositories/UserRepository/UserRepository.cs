@@ -12,28 +12,28 @@ namespace BookLibraryAPI.Repositories
         {
             _context = context;
         }
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _context.User.Where(x => x.Id == id).SingleOrDefault();
+            return await _context.User.Where(x => x.Id == id).SingleOrDefaultAsync();
         }
 
-        public User GetUserByEmail(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
-            return _context.User.Where(x => x.Email == email).FirstOrDefault();
+            return await _context.User.Where(x => x.Email == email).FirstOrDefaultAsync();
         }
 
-        public User GetUserByEmailWithRole(string email)
+        public async Task<User> GetUserByEmailWithRole(string email)
         {
-            return _context.User.Where(x => x.Email == email)
+            return await _context.User.Where(x => x.Email == email)
                 .Include(x => x.Role)
-                .SingleOrDefault();
+                .SingleOrDefaultAsync();
 
         }
 
-        public User CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
             _context.User.Add(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return user;
         }
 

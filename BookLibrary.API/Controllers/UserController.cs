@@ -22,21 +22,21 @@ namespace BookLibraryAPI.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateUser(User user)
         {
-            return _userService.CreateUser(user).Result();
+            return await _userService.CreateUser(user);
         }
 
         [HttpGet()]
         [Authorize]
         public async Task<IActionResult> GetUserById(int id)
         {
-            return _userService.GetUserById(id).Result();
+            return await _userService.GetUserById(id);
         }
         [HttpGet()]
         [Authorize]
         [Route("email ={email}")]
         public async Task<IActionResult> GetUserByEmail(string email)
         {
-            return _userService.GetUserByEmail(email).Result();
+            return await _userService.GetUserByEmail(email);
         }
 
         [HttpGet()]
@@ -45,14 +45,14 @@ namespace BookLibraryAPI.Controllers
         public async Task<IActionResult> GetMyself()
         {
             string userId = User.FindFirst(ClaimTypes.Name)?.Value;
-            return _userService.GetUserByEmail(userId).Result();
+            return await _userService.GetUserByEmail(userId);
         }
 
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login(User user)
         {
-            return _userService.Login(user).Result();
+            return await _userService.Login(user);
         }
     }
 }

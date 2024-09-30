@@ -20,38 +20,38 @@ namespace BookLibraryAPI.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetBookInfo(int id)
         {
-            return _bookInfoService.GetBookInfo(id).Result();
+            return await _bookInfoService.GetBookInfo(id);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllBookInfo()
         {
-            return _bookInfoService.GetAllBookInfo().Result();
+            return await _bookInfoService.GetAllBookInfo();
         }
 
         [HttpGet]
         [Route("Info/{id}")]
         public async Task<IActionResult> GetBookInfoExtra(int id)
         {
-            return _bookInfoService.GetBookInfoExtraData(id).Result();
+            return await _bookInfoService.GetBookInfoExtraData(id);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateBookInfo(BookInfo bookInfo)
         {
-            return _bookInfoService.CreateBookInfo(bookInfo).Result();
+            return await _bookInfoService.CreateBookInfo(bookInfo);
         }
 
         [HttpPut]
         public async Task<IActionResult> EditBookInfo([FromForm] int id, BookInfo bookInfo)
         {
-            return _bookInfoService.EditBookInfo(id, bookInfo).Result();
+            return await _bookInfoService.EditBookInfo(id, bookInfo);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteBookInfo([FromForm] int id)
         {
-            return _bookInfoService.DeleteBookInfo(id).Result();
+            return await _bookInfoService.DeleteBookInfo(id);
         }
     }
 }

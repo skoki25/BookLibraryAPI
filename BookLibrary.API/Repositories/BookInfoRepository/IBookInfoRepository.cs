@@ -5,12 +5,12 @@ namespace BookLibraryAPI.Repositories
 {
     public interface IBookInfoRepository
     {
-        BookInfo CreateBookInfo(BookInfo bookInfo);
+        Task<BookInfo> CreateBookInfo(BookInfo bookInfo);
         void DeleteBookInfo(BookInfo bookInfo);
-        BookInfo EditBookInfo(int id, BookInfo bookInfo);
-        BookInfo GetBookInfoById(int id);
-        List<BookInfo> GetAllBookInfo();       
-        BookInfo GetBookInfoByIdWithExtra(int id);
-        BookInfo GetBookInfoWithBooks(int id);
+        Task<BookInfo> EditBookInfo(int id, BookInfo bookInfo);
+        Task<BookInfo> GetBookInfoById(int id);
+        Task<List<BookInfo>> GetAllBookInfo();       
+        Task<BookInfo> GetBookInfoByIdWithExtra(int id);
+        Task<BookInfo> GetBookInfoWithBooks(int id);
     }
 }

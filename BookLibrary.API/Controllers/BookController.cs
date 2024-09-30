@@ -25,26 +25,26 @@ namespace BookLibraryAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBooks()
         {
-            return _bookService.GetAllBooks().Result();
+            return await _bookService.GetAllBooks();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateBook(Book book) 
         {
-            return _bookService.CreateBook(book).Result();
+            return await _bookService.CreateBook(book);
         }
 
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> EditBook(int id, [FromBody] BookSimpleDto book)
         {
-            return _bookService.EditBook(id, book).Result();
+            return await _bookService.EditBook(id, book);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            return _bookService.DeleteBook(id).Result();
+            return await _bookService.DeleteBook(id);
         }
     }
 }

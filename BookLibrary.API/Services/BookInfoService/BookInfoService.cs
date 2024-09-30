@@ -3,6 +3,7 @@ using BookLibrary.Model.DTO;
 using BookLibrary.Models;
 using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Services
 {
@@ -17,7 +18,7 @@ namespace BookLibraryAPI.Services
             _map = map;
         }
 
-        public ServiceResult<BookInfo> CreateBookInfo(BookInfo bookInfo)
+        public async Task<IActionResult> CreateBookInfo(BookInfo bookInfo)
         {
             CreateBookInfoValidation validationRules = new CreateBookInfoValidation();
 
@@ -31,9 +32,9 @@ namespace BookLibraryAPI.Services
             return ServiceResult<BookInfo>.Success(bookInfo);
         }
 
-        public ServiceResult<string> DeleteBookInfo(int id)
+        public async Task<IActionResult> DeleteBookInfo(int id)
         {
-            BookInfo bookInfo = _bookInfoRepository.GetBookInfoWithBooks(id);
+            BookInfo bookInfo = await _bookInfoRepository.GetBookInfoWithBooks(id);
 
             if (bookInfo == null)
             {
@@ -49,7 +50,7 @@ namespace BookLibraryAPI.Services
             return ServiceResult<string>.Success("Success");
         }
 
-        public ServiceResult<BookInfo> EditBookInfo(int id, BookInfo bookInfo)
+        public async Task<IActionResult> EditBookInfo(int id, BookInfo bookInfo)
         {
             CreateBookInfoValidation validationRules = new CreateBookInfoValidation();
 
@@ -58,7 +59,7 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<BookInfo>.Failure(error, ResultType.BadRequest);
             }
 
-            BookInfo editBookInfo = _bookInfoRepository.GetBookInfoWithBooks(id);
+            BookInfo editBookInfo = await _bookInfoRepository.GetBookInfoWithBooks(id);
 
             if(editBookInfo == null)
             {
@@ -67,20 +68,23 @@ namespace BookLibraryAPI.Services
             return ServiceResult<BookInfo>.Success(editBookInfo);
         }
 
-        public ServiceResult<BookInfo> GetBookInfo(int id)
+        public async Task<IActionResult> GetBookInfo(int id)
         {
-            return ServiceResult<BookInfo>.Success(_bookInfoRepository.GetBookInfoWithBooks(id));
+            BookInfo bookInfo = await _bookInfoRepository.GetBookInfoWithBooks(id);
+            return ServiceResult<BookInfo>.Success(bookInfo);
         }
 
-        public ServiceResult<BookInfoDto> GetBookInfoExtraData(int id)
+        public async Task<IActionResult> GetBookInfoExtraData(int id)
         {
-            BookInfoDto bookInfoDto = _map.Map<BookInfoDto>(_bookInfoRepository.GetBookInfoByIdWithExtra(id));
+            BookInfo bookInfo = await _bookInfoRepository.GetBookInfoByIdWithExtra(id);
+            BookInfoDto bookInfoDto = _map.Map<BookInfoDto>(bookInfo);
             return ServiceResult<BookInfoDto>.Success(bookInfoDto);
         }
 
-        public ServiceResult<List<BookInfoDto>> GetAllBookInfo()
+        public async Task<IActionResult> GetAllBookInfo()
         {
-            List<BookInfoDto> bookInfoDtoList = _map.Map<List<BookInfoDto>>(_bookInfoRepository.GetAllBookInfo());
+            List<BookInfo> bookInfo = await _bookInfoRepository.GetAllBookInfo();
+            List<BookInfoDto> bookInfoDtoList = _map.Map<List<BookInfoDto>>(bookInfo);
             return ServiceResult<List<BookInfoDto>>.Success(bookInfoDtoList);
         }
     }

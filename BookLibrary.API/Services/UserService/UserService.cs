@@ -6,6 +6,7 @@ using BookLibraryAPI.Data;
 using BookLibraryAPI.Data.Config;
 using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookLibraryAPI.Services
@@ -22,27 +23,27 @@ namespace BookLibraryAPI.Services
             _userRepository = userRepository;
         }
 
-        public ServiceResult<UserDto> CreateUser(User user)
+        public async Task<IActionResult> CreateUser(User user)
         {
             CreateUserValidation userValidator = new CreateUserValidation();
             if (!userValidator.Validate(user, out string error))
             {
                 return ServiceResult<UserDto>.Failure(error, ResultType.BadRequest);
             }
-            User result = _userRepository.GetUserByEmail(user.Email);
+            User result = await _userRepository.GetUserByEmail(user.Email);
 
             if (result != null)
             {
                 return ServiceResult<UserDto>.Failure("Email already exist!", ResultType.BadRequest);
             }
-            _userRepository.CreateUser(user);
+            User userCreate = await _userRepository.CreateUser(user);
 
-            return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
+            return ServiceResult<UserDto>.Success(_map.Map<UserDto>(userCreate));
         }
 
-        public ServiceResult<UserDto> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
-            User user = _userRepository.GetUserById(id);
+            User user = await _userRepository.GetUserById(id);
 
             if(user == null)
             {
@@ -51,9 +52,9 @@ namespace BookLibraryAPI.Services
 
             return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
         }
-        public ServiceResult<UserDto> GetUserByEmail(string email)
+        public async Task<IActionResult> GetUserByEmail(string email)
         {
-            User user = _userRepository.GetUserByEmail(email);
+            User user = await _userRepository.GetUserByEmail(email);
 
             if (user == null)
             {
@@ -63,9 +64,9 @@ namespace BookLibraryAPI.Services
             return ServiceResult<UserDto>.Success(_map.Map<UserDto>(user));
         }
 
-        public ServiceResult<TokenMessage> Login(User user)
+        public async Task<IActionResult> Login(User user)
         {
-            var userResult = _userRepository.GetUserByEmailWithRole(user.Email);
+            var userResult = await _userRepository.GetUserByEmailWithRole(user.Email);
 
             if (userResult == null)
             {

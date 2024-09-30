@@ -4,11 +4,11 @@ namespace BookLibraryAPI.Repositories
 {
     public interface ICategoryRepository
     {
-        public Category CreateCategory(Category category);
-        public Category EditCategory(int id, Category category);
-        public List<Category> GetAllCategories();
-        public Category GetCategoryById(int id);
-        public Category GetCategoryByType(string type);
+        public Task<Category> CreateCategory(Category category);
+        public Task<Category> EditCategory(int id, Category category);
+        public Task<List<Category>> GetAllCategories();
+        public Task<Category> GetCategoryById(int id);
+        public Task<Category> GetCategoryByType(string type);
 
     }
 }

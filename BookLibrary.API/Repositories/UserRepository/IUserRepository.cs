@@ -4,9 +4,9 @@ namespace BookLibraryAPI.Repositories
 {
     public interface IUserRepository
     {
-        User CreateUser(User user);
-        User GetUserByEmail(string email);
-        User GetUserByEmailWithRole(string email);
-        User GetUserById(int id);
+        Task<User> CreateUser(User user);
+        Task<User> GetUserByEmail(string email);
+        Task<User> GetUserByEmailWithRole(string email);
+        Task<User> GetUserById(int id);
     }
 }

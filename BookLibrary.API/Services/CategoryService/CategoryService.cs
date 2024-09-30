@@ -3,6 +3,7 @@ using BookLibraryAPI.Data.CustomException;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Services
 {
@@ -14,7 +15,7 @@ namespace BookLibraryAPI.Services
         {
             _categoryRepository = categoryRepository;
         }
-        public ServiceResult<Category> AddCategory(Category category)
+        public async Task<IActionResult> CreateCategory(Category category)
         {
             CategoryCreateValidation validationRules = new CategoryCreateValidation();
 
@@ -23,40 +24,41 @@ namespace BookLibraryAPI.Services
                 return ServiceResult<Category>.Failure(error, ResultType.BadRequest);
             }
 
-            Category catergoryResult = _categoryRepository.GetCategoryByType(category.Type);
+            Category catergoryResult = await _categoryRepository.GetCategoryByType(category.Type);
 
             if ( catergoryResult != null )
             {
                 return ServiceResult<Category>.Failure("This category already exist", ResultType.BadRequest);
             }
-            _categoryRepository.CreateCategory(category);
+            Category categoryCreate = await _categoryRepository.CreateCategory(category);
 
+            return ServiceResult<Category>.Success(categoryCreate);
+        }
+
+        public async Task<IActionResult> GetCategoryById(int id)
+        {
+            Category category = await _categoryRepository.GetCategoryById(id);
             return ServiceResult<Category>.Success(category);
         }
 
-        public ServiceResult<Category> GetCategoryById(int id)
+        public async Task<IActionResult> EditCategory(int id, Category category)
         {
-            Category category = _categoryRepository.GetCategoryById(id);
-            return ServiceResult<Category>.Success(category);
-        }
-
-        public ServiceResult<Category> EditCategory(int id, Category category)
-        {
-            Category catergoryResult = _categoryRepository.GetCategoryById(id);
+            Category catergoryResult = await _categoryRepository.GetCategoryById(id);
 
             if (catergoryResult == null)
             {
                 return ServiceResult<Category>.Failure("Not found",ResultType.NotFound);
             }
-            _categoryRepository.EditCategory(id, category);
+            Category categoryEdit = await _categoryRepository.EditCategory(id, category);
 
 
-            return ServiceResult<Category>.Success(catergoryResult);
+            return ServiceResult<Category>.Success(categoryEdit);
         }
 
-        public ServiceResult<List<Category>> GetAllCategory()
+        public async Task<IActionResult> GetAllCategory()
         {
-            return ServiceResult<List<Category>>.Success(_categoryRepository.GetAllCategories());
+            List<Category> categories = await _categoryRepository.GetAllCategories();
+            return ServiceResult<List<Category>>.Success(categories);
         }
     }
 }

@@ -13,34 +13,34 @@ namespace BookLibraryAPI.Repositories
             _context = context;
         }
 
-        public Category GetCategoryByType(string type)
+        public async Task<Category> GetCategoryByType(string type)
         {
-            return _context.Category.Where(x => x.Type.Equals(type)).SingleOrDefault();
+            return await _context.Category.Where(x => x.Type.Equals(type)).SingleOrDefaultAsync();
         }
 
-        public Category GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
-            return _context.Category.Where(x => x.Id == id).SingleOrDefault();
+            return await _context.Category.Where(x => x.Id == id).SingleOrDefaultAsync();
         }
 
-        public Category CreateCategory(Category category)
+        public async Task<Category> CreateCategory(Category category)
         {
             _context.Category.Add(category);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return category;
         }
 
-        public Category EditCategory(int id, Category category)
+        public async Task<Category> EditCategory(int id, Category category)
         {
-            Category catergoryResult = GetCategoryById(id);
+            Category catergoryResult = await GetCategoryById(id);
             catergoryResult.Type = category.Type;
             _context.SaveChanges();
             return catergoryResult;
         }
 
-        public List<Category> GetAllCategories()
+        public async Task<List<Category>> GetAllCategories()
         {
-            return _context.Category.ToList();
+            return await _context.Category.ToListAsync();
         }
     }
 }

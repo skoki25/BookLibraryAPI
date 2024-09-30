@@ -1,12 +1,13 @@
 ﻿using BookLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Services
 {
     public interface ICategoryService
     {
-        ServiceResult<List<Category>> GetAllCategory();
-        ServiceResult<Category> EditCategory(int id, Category category);
-        ServiceResult<Category> AddCategory(Category category);
-        ServiceResult<Category> GetCategoryById(int id);
+        Task<IActionResult> GetAllCategory();
+        Task<IActionResult> EditCategory(int id, Category category);
+        Task<IActionResult> CreateCategory(Category category);
+        Task<IActionResult> GetCategoryById(int id);
     }
 }

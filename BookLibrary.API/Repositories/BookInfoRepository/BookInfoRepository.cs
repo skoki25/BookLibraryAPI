@@ -13,29 +13,30 @@ namespace BookLibraryAPI.Repositories
             _context = context;
         }
 
-        public BookInfo CreateBookInfo(BookInfo bookInfo)
+        public async Task<BookInfo> CreateBookInfo(BookInfo bookInfo)
         {
             _context.BookInfo.Add(bookInfo);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return bookInfo;
         }
 
-        public BookInfo GetBookInfoWithBooks(int id)
+        public async Task<BookInfo> GetBookInfoWithBooks(int id)
         {
-            BookInfo bookInfo = _context.BookInfo.Where(x => x.Id == id)
+            BookInfo bookInfo = await _context.BookInfo.Where(x => x.Id == id)
                 .Include(x => x.Books)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
             return bookInfo;
         }
 
-        public void DeleteBookInfo(BookInfo bookInfo)
+        public async void DeleteBookInfo(BookInfo bookInfo)
         {
             _context.Remove(bookInfo);
+            await _context.SaveChangesAsync();
         }
 
-        public BookInfo EditBookInfo(int id, BookInfo bookInfo)
+        public async  Task<BookInfo> EditBookInfo(int id, BookInfo bookInfo)
         {
-            BookInfo editBookInfo = GetBookInfoWithBooks(id);
+            BookInfo editBookInfo = await GetBookInfoWithBooks(id);
 
             editBookInfo.AuthorId = bookInfo.AuthorId;
             editBookInfo.CategoryId = bookInfo.CategoryId;
@@ -46,24 +47,24 @@ namespace BookLibraryAPI.Repositories
             return editBookInfo;
         }
 
-        public BookInfo GetBookInfoById(int id)
+        public async Task<BookInfo> GetBookInfoById(int id)
         {
-            return _context.BookInfo.Where(x => x.Id == id).SingleOrDefault();
+            return await _context.BookInfo.Where(x => x.Id == id).SingleOrDefaultAsync();
         }
 
-        public BookInfo GetBookInfoByIdWithExtra(int id)
+        public async Task<BookInfo> GetBookInfoByIdWithExtra(int id)
         {
-            return _context.BookInfo.Where(x => x.Id == id)
+            return await _context.BookInfo.Where(x => x.Id == id)
                 .Include(x => x.Author)
                 .Include(x => x.Category)
-                .SingleOrDefault();
+                .SingleOrDefaultAsync();
         }
 
-        public List<BookInfo> GetAllBookInfo()
+        public async Task<List<BookInfo>> GetAllBookInfo()
         {
-            return _context.BookInfo.Include(x => x.Author)
+            return await _context.BookInfo.Include(x => x.Author)
                 .Include(x => x.Category)
-                .ToList();
+                .ToListAsync();
         }
     }
 }

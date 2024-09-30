@@ -1,13 +1,14 @@
 ﻿using BookLibrary.Model.DTO;
 using BookLibrary.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Services
 {
     public interface IBookService
     {
-        ServiceResult<Book> CreateBook(Book book);
-        ServiceResult<List<BookDto>> GetAllBooks();
-        ServiceResult<string> DeleteBook(int id);
-        ServiceResult<Book> EditBook(int id, BookSimpleDto book);
+        Task<IActionResult> CreateBook(Book book);
+        Task<IActionResult> GetAllBooks();
+        Task<IActionResult> DeleteBook(int id);
+        Task<IActionResult> EditBook(int id, BookSimpleDto book);
     }
 }

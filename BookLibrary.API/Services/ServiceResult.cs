@@ -12,23 +12,23 @@ namespace BookLibraryAPI.Services
         public ResultType ResultType { get; private set; }
         public ResultMessage<T> ResultMessage { get; private set; }
 
-        public static ServiceResult<T> Success(T data)
-        {
-            return new ServiceResult<T> { ResultMessage = new ResultMessage<T>(true, data), IsSuccess = true, ResultType = ResultType.Ok  };
-        }
+        //public static ServiceResult<T> Success(T data)
+        //{
+        //    return new ServiceResult<T> { ResultMessage = new ResultMessage<T>(true, data), IsSuccess = true, ResultType = ResultType.Ok  };
+        //}
 
-        public static ServiceResult<T> Failure(string error, ResultType resultType)
-        {
-            return new ServiceResult<T> { IsSuccess = false, ResultMessage = new ResultMessage<T>(error), ResultType = resultType };
-        }
+        //public static ServiceResult<T> Failure(string error, ResultType resultType)
+        //{
+        //    return new ServiceResult<T> { IsSuccess = false, ResultMessage = new ResultMessage<T>(error), ResultType = resultType };
+        //}
 
-        public static IActionResult Success2(T data)
+        public static IActionResult Success(T data)
         {
             ServiceResult<T>serviceResult = new ServiceResult<T> { ResultMessage = new ResultMessage<T>(true, data), IsSuccess = true, ResultType = ResultType.Ok };
             return serviceResult.Result();
         }
 
-        public static IActionResult Failure2(string error, ResultType resultType)
+        public static IActionResult Failure(string error, ResultType resultType)
         {
             ServiceResult<T> service = new ServiceResult<T> { IsSuccess = false, ResultMessage = new ResultMessage<T>(error), ResultType = resultType };
 
