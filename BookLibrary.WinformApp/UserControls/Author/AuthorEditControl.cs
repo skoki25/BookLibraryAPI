@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinformApp.UserControls.Author
+namespace WinformApp.UserControls
 {
     public partial class AuthorEditControl : UserControl
     {

@@ -1,4 +1,4 @@
-﻿namespace BookLibrary.WinformApp
+﻿namespace WinformApp.UserControls
 {
     partial class AuthorCreateControl
     {
@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            SuspendLayout();
+            // 
+            // AuthorCreateControl
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Name = "AuthorCreateControl";
+            Size = new Size(558, 417);
+            ResumeLayout(false);
         }
 
         #endregion

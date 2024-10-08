@@ -16,12 +16,7 @@ namespace WinformApp
 
             IApiService apiService = new ApiService(new HttpClient());
 
-            MainViewModel mainView = new MainViewModel(
-                new UserApiController(apiService),
-                new BookApiController(apiService),
-                new BookInfoApiController(apiService),
-                new CategoryApiController(apiService),
-                new AuthorApiController(apiService));
+            MainViewModel mainView = new MainViewModel(apiService);
             LoginForm loginForm = new LoginForm(mainView);
             Application.Run(loginForm);
 

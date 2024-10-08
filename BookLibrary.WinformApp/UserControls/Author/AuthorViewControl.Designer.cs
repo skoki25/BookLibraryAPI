@@ -1,4 +1,4 @@
-﻿namespace WinformApp.UserControls.Author
+﻿namespace WinformApp.UserControls
 {
     partial class AuthorViewControl
     {

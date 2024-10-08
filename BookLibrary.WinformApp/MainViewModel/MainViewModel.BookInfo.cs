@@ -1,4 +1,6 @@
 ﻿using BookLibrary.Model.DTO;
+using BookLibrary.Model.Messages;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +13,16 @@ namespace WinformApp
     {
         public async Task<BookInfoDto> GetBookInfoExtra(int id)
         {
-            return await _bookInfoApiController.GetBookInfoExtra(id, currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiBookInfoExtra, id);
+            ResultMessage<BookInfoDto> resultMessage = await _apiService.GetAsync<BookInfoDto>(loginEndPoint, currentUserData.GetToken());
+            return  resultMessage.Data;
         }
 
         public async Task<List<BookInfoDto>> GetAllBookInfo()
         {
-            return await _bookInfoApiController.GetAllBookInfo(currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiBookInfo);
+            ResultMessage<List<BookInfoDto>> resultMessage = await _apiService.GetAsync<List<BookInfoDto>>(loginEndPoint, currentUserData.GetToken());
+            return resultMessage.Data;
         }
     }
 }

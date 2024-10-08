@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BookLibrary.WinformApp
+namespace WinformApp.UserControls
 {
     public partial class AuthorCreateControl : UserControl
     {

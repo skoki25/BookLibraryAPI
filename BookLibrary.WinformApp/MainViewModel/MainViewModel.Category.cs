@@ -1,4 +1,6 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.Messages;
+using BookLibrary.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +13,31 @@ namespace WinformApp
     {
         public async Task<List<Category>> GetAllCategories()
         {
-            return await _categoryApiController.GetAllCategories(currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiCategory);
+            ResultMessage<List<Category>> resultMessage = await _apiService.GetAsync<List<Category>>(loginEndPoint, currentUserData.GetToken());
+
+            return resultMessage.Data;
         }
 
         public async Task<List<Category>> GetAllCategoriesWithBooks()
         {
-            return await _categoryApiController.GetAllCategoriesWithBooks(currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiCategoryBooks);
+            ResultMessage<List<Category>> resultMessage = await _apiService.GetAsync<List<Category>>(loginEndPoint, currentUserData.GetToken());
+            return resultMessage.Data;
         }
 
         public async Task<Category> CreateCategory(Category category)
         {
-            return await _categoryApiController.CreateCategory(category,currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiCategory);
+            ResultMessage<Category> resultMessage = await _apiService.PostAsync<Category>(loginEndPoint, category, currentUserData.GetToken());
+            return resultMessage.Data;
         }
 
         public async Task<Category> EditCategory(Category category)
         {
-            return await _categoryApiController.EditCategory(category, currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiCategory, category.Id);
+            ResultMessage<Category> resultMessage = await _apiService.PutAsync<Category>(loginEndPoint, category, currentUserData.GetToken());
+            return resultMessage.Data;
         }
 
         

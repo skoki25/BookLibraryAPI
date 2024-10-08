@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using BookLibrary.Model.Messages;
+using BookLibrary.Models;
 using Newtonsoft.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
@@ -31,7 +32,13 @@ namespace WinformApp.APIControll
             response.EnsureSuccessStatusCode();
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            ResultMessage<T> resultMessage = JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            if (resultMessage.Data == null)
+            {
+                throw new ArgumentNullException("No data");
+            }
+            return resultMessage;
+
         }
 
         public async Task<ResultMessage<T>> GetAsync<T>(string endpoint, int id, string token)
@@ -41,7 +48,12 @@ namespace WinformApp.APIControll
             response.EnsureSuccessStatusCode();
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            ResultMessage<T> resultMessage = JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            if (resultMessage.Data == null)
+            {
+                throw new ArgumentNullException("No data");
+            }
+            return resultMessage;
         }
 
         public async Task<ResultMessage<T>> PostAsync<T>(string endpoint, object body)
@@ -52,7 +64,12 @@ namespace WinformApp.APIControll
             response.EnsureSuccessStatusCode();
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            ResultMessage<T> resultMessage = JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            if (resultMessage.Data == null)
+            {
+                throw new ArgumentNullException("No data");
+            }
+            return resultMessage;
         }
 
         public async Task<ResultMessage<T>> PostAsync<T>(string endpoint, object body, string token)
@@ -64,7 +81,12 @@ namespace WinformApp.APIControll
             response.EnsureSuccessStatusCode();
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            ResultMessage<T> resultMessage = JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            if (resultMessage.Data == null)
+            {
+                throw new ArgumentNullException("No data");
+            }
+            return resultMessage;
         }
 
         public async Task<ResultMessage<T>> PutAsync<T>(string endpoint, object body, string token)
@@ -75,7 +97,12 @@ namespace WinformApp.APIControll
             HttpResponseMessage response = await _httpClient.PutAsync(endpoint, content);
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            ResultMessage<T> resultMessage = JsonConvert.DeserializeObject<ResultMessage<T>>(jsonResponse);
+            if (resultMessage.Data == null)
+            {
+                throw new ArgumentNullException("No data");
+            }
+            return resultMessage;
         }
 
         private void AddAuthorizationHeader(string token)
@@ -88,7 +115,7 @@ namespace WinformApp.APIControll
 
         public void ErrorMessage(Exception message)
         {
-            OnErrorMessage?.Invoke(message);
+            throw new NotImplementedException();
         }
     }
 }

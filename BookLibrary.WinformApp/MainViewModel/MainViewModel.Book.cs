@@ -1,4 +1,6 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.Messages;
+using BookLibrary.Models;
+using Newtonsoft.Json.Linq;
 
 namespace WinformApp
 {
@@ -6,21 +8,21 @@ namespace WinformApp
     {
         public async Task<List<Book>> GetAllBooks()
         {
-            if (_bookApiController == null)
-            {
-                return new List<Book>();
-            }
-
-            return await _bookApiController.GetAllBook(currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiBook);
+            ResultMessage<List<Book>> resultMessage = await _apiService.GetAsync<List<Book>>(loginEndPoint, currentUserData.GetToken());
+            return resultMessage.Data;
         }
 
-        public async Task CreateBook(Book book)
+        public async Task<Book> CreateBook(Book book)
         {
-            await _bookApiController.CreateBook(book,currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiBook);
+            ResultMessage<Book> resultMessage = await _apiService.PostAsync<Book>(loginEndPoint, currentUserData.GetToken());
+            return resultMessage.Data;
         }
         public async Task EditBook(Book book)
         {
-            await _bookApiController.EditBook(book, currentUserData.GetToken());
+            string loginEndPoint = Config.Settings.GetRoute(Config.ApiBook, book.Id);
+            ResultMessage<Book> resultMessage = await _apiService.PutAsync<Book>(loginEndPoint, book, currentUserData.GetToken());
         }
     }
 }
