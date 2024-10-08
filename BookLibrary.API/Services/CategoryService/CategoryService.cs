@@ -62,7 +62,8 @@ namespace BookLibraryAPI.Services
         public async Task<IActionResult> GetAllCategory()
         {
             List<Category> categories = await _categoryRepository.GetAllCategories();
-            return ServiceResult<List<Category>>.Success(categories);
+            List<CategoryDto> categoriesDto = _map.Map<List<CategoryDto>>(categories);
+            return ServiceResult<List<CategoryDto>>.Success(categoriesDto);
         }
 
         public async Task<IActionResult> GetCategoriesWithBooks()

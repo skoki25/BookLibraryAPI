@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Model.DTO
 {
-    public class CategoriesWithBooks
+    public class CategoryDto
     {
         public int Id { get; set; }
         public string Type { get; set; }
-
-        public IEnumerable<BookInfo>? BookInfo { get; set; }
     }
 }

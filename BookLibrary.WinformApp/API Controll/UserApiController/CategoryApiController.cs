@@ -75,5 +75,24 @@ namespace BookLibrary.WinformApp.API_Controll.UserApiController
                 return new List<Category>();
             }
         }
+        public async Task<List<Category>> GetAllCategoriesWithBooks(string token)
+        {
+            try
+            {
+                string loginEndPoint = Config.Settings.GetRoute(Config.ApiCategoryBooks);
+                ResultMessage<List<Category>> resultMessage = await _apiService.GetAsync<List<Category>>(loginEndPoint, token);
+                if (resultMessage.Data == null)
+                {
+                    _apiService.ErrorMessage(new ArgumentNullException("No data"));
+                    return new List<Category>();
+                }
+                return resultMessage.Data;
+            }
+            catch (Exception ex)
+            {
+                _apiService.ErrorMessage(ex);
+                return new List<Category>();
+            }
+        }
     }
 }

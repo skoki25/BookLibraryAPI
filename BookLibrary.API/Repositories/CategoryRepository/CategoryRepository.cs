@@ -46,7 +46,7 @@ namespace BookLibraryAPI.Repositories
         public async Task<List<Category>> GetAllCategoriesWithBooks()
         {
             return await _context.Category
-                .Include(x=> x)               
+                .Include(x=> x.BookInfo)               
                 .ToListAsync();
         }
     }

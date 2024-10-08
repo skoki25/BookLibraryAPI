@@ -1,6 +1,8 @@
 ﻿using WinformApp.Forms.UserControlComponents.Controls;
 using WinformApp.Forms.UserControlComponents;
 using BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book;
+using BookLibrary.WinformApp.UserControlComponents;
+using BookLibrary.WinformApp;
 
 namespace WinformApp.Forms
 {
@@ -22,6 +24,8 @@ namespace WinformApp.Forms
                     return new BookCreateControl(_viewModel);
                 case EnumControl.BookEdit:
                     return new BookEditControl(_viewModel);
+                case EnumControl.Category:
+                    return new CategoryViewControl(_viewModel);
                 case EnumControl.CategoryCreate:
                     return new CategoryCreateControl(_viewModel);
                 case EnumControl.CategoryEdit:

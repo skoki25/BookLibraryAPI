@@ -18,6 +18,7 @@ namespace BookLibrary.WinformApp.Forms
             _main.Add(CreateBookMenu());
             _main.Add(CreateBorrowBookMenu());
             _main.Add(CreateCategoryMenu());
+            _main.Add(CreateAuthor());
             _main.Button.PerformClick();
         }
 
@@ -67,6 +68,19 @@ namespace BookLibrary.WinformApp.Forms
             menuComposite.Add(_main, 0);
             menuComposite.Add(categoryCreateItem);
             menuComposite.Add(categoryEditItem);
+
+            return menuComposite;
+        }
+
+        public MenuComposite CreateAuthor()
+        {
+            MenuComposite menuComposite = new MenuComposite("Author", EnumControl.Author, _context);
+            MenuItem authorCreateItem = new MenuItem("Create Author", EnumControl.AuthorCreate, _context);
+            MenuItem authorEditItem = new MenuItem("Edit Author", EnumControl.AuthorEdit, _context);
+
+            menuComposite.Add(_main, 0);
+            menuComposite.Add(authorCreateItem);
+            menuComposite.Add(authorEditItem);
 
             return menuComposite;
         }

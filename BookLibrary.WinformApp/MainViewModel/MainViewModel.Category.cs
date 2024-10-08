@@ -14,6 +14,11 @@ namespace WinformApp
             return await _categoryApiController.GetAllCategories(currentUserData.GetToken());
         }
 
+        public async Task<List<Category>> GetAllCategoriesWithBooks()
+        {
+            return await _categoryApiController.GetAllCategoriesWithBooks(currentUserData.GetToken());
+        }
+
         public async Task<Category> CreateCategory(Category category)
         {
             return await _categoryApiController.CreateCategory(category,currentUserData.GetToken());
@@ -23,5 +28,7 @@ namespace WinformApp
         {
             return await _categoryApiController.EditCategory(category, currentUserData.GetToken());
         }
+
+        
     }
 }

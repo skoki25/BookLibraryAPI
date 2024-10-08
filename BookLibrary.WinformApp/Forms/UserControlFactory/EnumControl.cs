@@ -13,6 +13,9 @@
         Other,
         Category,
         CategoryCreate,
-        CategoryEdit
+        CategoryEdit,
+        Author,
+        AuthorCreate,
+        AuthorEdit,
     }
 }

@@ -34,28 +34,32 @@
             // 
             // navigationPanel
             // 
+            navigationPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             navigationPanel.BorderStyle = BorderStyle.Fixed3D;
-            navigationPanel.Location = new Point(12, 12);
+            navigationPanel.Location = new Point(14, 16);
+            navigationPanel.Margin = new Padding(3, 4, 3, 4);
             navigationPanel.Name = "navigationPanel";
-            navigationPanel.Size = new Size(266, 508);
+            navigationPanel.Size = new Size(303, 676);
             navigationPanel.TabIndex = 1;
             // 
             // contentPanel
             // 
             contentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             contentPanel.BorderStyle = BorderStyle.FixedSingle;
-            contentPanel.Location = new Point(297, 12);
+            contentPanel.Location = new Point(339, 16);
+            contentPanel.Margin = new Padding(3, 4, 3, 4);
             contentPanel.Name = "contentPanel";
-            contentPanel.Size = new Size(763, 508);
+            contentPanel.Size = new Size(872, 677);
             contentPanel.TabIndex = 2;
             // 
             // LibraryForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1072, 532);
+            ClientSize = new Size(1225, 709);
             Controls.Add(contentPanel);
             Controls.Add(navigationPanel);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "LibraryForm";
             Text = "Form1";
             Load += LibraryForm_Load;

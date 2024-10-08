@@ -1,4 +1,4 @@
-﻿namespace BookLibrary.WinformApp.UserControlComponents
+﻿namespace BookLibrary.WinformApp
 {
     partial class CreateEditCategoryPanel
     {

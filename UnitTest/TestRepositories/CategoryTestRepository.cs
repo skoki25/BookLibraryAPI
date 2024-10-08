@@ -50,6 +50,11 @@ namespace UnitTest.TestRepositories
             throw new NotImplementedException();
         }
 
+        public Task<List<Category>> GetAllCategoriesWithBooks()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Category> GetCategoryById(int id)
         {
             return listCategory.Where(x => x.Id == id).SingleOrDefault();

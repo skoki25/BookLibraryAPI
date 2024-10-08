@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookLibrary.Models;
+using BookLibrary.WinformApp.UserControlComponents.Waiting;
 using WinformApp;
 using WinformApp.Forms;
 
-namespace BookLibrary.WinformApp.UserControlComponents
+namespace BookLibrary.WinformApp
 {
     public partial class CreateEditCategoryPanel : UserControl
     {
@@ -52,18 +53,34 @@ namespace BookLibrary.WinformApp.UserControlComponents
 
         private async void SetMode()
         {
-            switch (modeType)
+            WaitingPanel waitingPanel = new WaitingPanel();
+            try
             {
-                case ModeType.Create:
-                    await _viewModel.CreateCategory(_category);
-                    break;
-                case ModeType.Edit:
-                    await _viewModel.EditCategory(_category);
-                    break;
-                default:
-                    break;
+
+                this.Controls.Clear();
+                this.Controls.Add(waitingPanel);
+                waitingPanel.Dock = DockStyle.Fill;
+                switch (modeType)
+                {
+                    case ModeType.Create:
+                        await _viewModel.CreateCategory(_category);
+                        break;
+                    case ModeType.Edit:
+                        await _viewModel.EditCategory(_category);
+                        break;
+                    default:
+                        break;
+                }
+                OnEdit?.Invoke();
+                waitingPanel.Success();
+                //this.Controls.Clear();
+                //this.Controls.Add(this.tableLayoutPanel1);
             }
-            OnEdit?.Invoke();
+            catch (Exception ex)
+            {
+                waitingPanel.Fail();
+            }
         }
+
     }
 }
