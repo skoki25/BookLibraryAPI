@@ -1,4 +1,6 @@
-﻿using BookLibrary.Models;
+﻿using AutoMapper;
+using BookLibrary.Model.DTO;
+using BookLibrary.Models;
 using BookLibraryAPI.Data.CustomException;
 using BookLibraryAPI.Models;
 using BookLibraryAPI.Models.Validation;
@@ -9,11 +11,13 @@ namespace BookLibraryAPI.Services
 {
     public class CategoryService : ICategoryService
     {
-        private ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IMapper _map;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper map)
         {
             _categoryRepository = categoryRepository;
+            _map = map;
         }
         public async Task<IActionResult> CreateCategory(Category category)
         {
@@ -59,6 +63,13 @@ namespace BookLibraryAPI.Services
         {
             List<Category> categories = await _categoryRepository.GetAllCategories();
             return ServiceResult<List<Category>>.Success(categories);
+        }
+
+        public async Task<IActionResult> GetCategoriesWithBooks()
+        {
+            List<Category> listCateg0ry = await _categoryRepository.GetAllCategoriesWithBooks();
+            List<CategoriesWithBooks> categoriesWithBooks = _map.Map<List<CategoriesWithBooks>>(listCateg0ry);
+            return ServiceResult<List<CategoriesWithBooks>>.Success(categoriesWithBooks);
         }
     }
 }

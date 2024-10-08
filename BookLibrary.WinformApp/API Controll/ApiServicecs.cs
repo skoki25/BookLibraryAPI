@@ -59,7 +59,7 @@ namespace WinformApp.APIControll
         {
             AddAuthorizationHeader(token);
             string jsonContent = JsonConvert.SerializeObject(body);
-            HttpContent content = new StringContent(jsonContent);
+            HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync(endpoint, content);
             response.EnsureSuccessStatusCode();
 

@@ -1,4 +1,4 @@
-﻿namespace WinformApp.Forms.UserControlComponents.Controls.Category
+﻿namespace WinformApp.Forms.UserControlComponents
 {
     partial class CategoryCreateControl
     {
@@ -30,13 +30,10 @@
         {
             tableLayoutPanel2 = new TableLayoutPanel();
             label4 = new Label();
-            tableLayoutPanel3 = new TableLayoutPanel();
-            label2 = new Label();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            textBox1 = new TextBox();
-            label1 = new Label();
-            tableLayoutPanel3.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
+            dataGridView1 = new DataGridView();
+            panelCategory = new Panel();
+            TypeColumn = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -63,79 +60,50 @@
             label4.TabIndex = 1;
             label4.Text = "User Profile";
             // 
-            // tableLayoutPanel3
+            // dataGridView1
             // 
-            tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel3.ColumnCount = 3;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel3.Controls.Add(label2, 1, 0);
-            tableLayoutPanel3.Location = new Point(3, 3);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new Size(768, 55);
-            tableLayoutPanel3.TabIndex = 4;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { TypeColumn });
+            dataGridView1.Location = new Point(3, 4);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(222, 682);
+            dataGridView1.TabIndex = 7;
             // 
-            // label2
+            // panelBook
             // 
-            label2.Anchor = AnchorStyles.Top;
-            label2.AutoEllipsis = true;
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 238);
-            label2.Location = new Point(289, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(187, 45);
-            label2.TabIndex = 1;
-            label2.Text = "User Profile";
+            panelCategory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelCategory.Location = new Point(231, 4);
+            panelCategory.Margin = new Padding(3, 4, 3, 4);
+            panelCategory.Name = "panelBook";
+            panelCategory.Size = new Size(693, 682);
+            panelCategory.TabIndex = 8;
             // 
-            // tableLayoutPanel1
+            // TypeColumn
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25.00062F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25.0006256F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25.00063F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.998127F));
-            tableLayoutPanel1.Controls.Add(textBox1, 2, 0);
-            tableLayoutPanel1.Controls.Add(label1, 1, 0);
-            tableLayoutPanel1.Location = new Point(2, 194);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(768, 55);
-            tableLayoutPanel1.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(387, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(195, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
+            TypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            TypeColumn.HeaderText = "Type";
+            TypeColumn.MinimumWidth = 6;
+            TypeColumn.Name = "TypeColumn";
+            TypeColumn.ReadOnly = true;
             // 
             // CategoryCreateControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(tableLayoutPanel3);
+            Controls.Add(dataGridView1);
+            Controls.Add(panelCategory);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CategoryCreateControl";
-            Size = new Size(773, 443);
-            tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            Size = new Size(927, 690);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -143,10 +111,8 @@
 
         private TableLayoutPanel tableLayoutPanel2;
         private Label label4;
-        private TableLayoutPanel tableLayoutPanel3;
-        private Label label2;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TextBox textBox1;
-        private Label label1;
+        private DataGridView dataGridView1;
+        private Panel panelCategory;
+        private DataGridViewTextBoxColumn TypeColumn;
     }
 }

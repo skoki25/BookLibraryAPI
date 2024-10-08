@@ -22,6 +22,10 @@ namespace WinformApp.Forms
                     return new BookCreateControl(_viewModel);
                 case EnumControl.BookEdit:
                     return new BookEditControl(_viewModel);
+                case EnumControl.CategoryCreate:
+                    return new CategoryCreateControl(_viewModel);
+                case EnumControl.CategoryEdit:
+                    return new CategoryEditControl(_viewModel);
                 default:
                     return new UserControl();
             }

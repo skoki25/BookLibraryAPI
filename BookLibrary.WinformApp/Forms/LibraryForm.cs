@@ -24,20 +24,39 @@ namespace WinformApp
 
         private void OnErrorMessage(Exception ex)
         {
-            if (ex is UnauthorizedAccessException)
+            if (ex is HttpRequestException requestException)
             {
-                this.Enabled =false;
-
-                LoginForm loginForm = new LoginForm(_mainViewModelView);
-                if(loginForm.ShowDialog() == DialogResult.OK)
+                if(requestException.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    if (loginForm.UserSuccessfullyAuthenticated)
+                    this.Enabled = false;
+
+                    LoginForm loginForm = new LoginForm(_mainViewModelView);
+                    if (loginForm.ShowDialog() == DialogResult.OK)
                     {
-                        this.Enabled = true;
+                        if (loginForm.UserSuccessfullyAuthenticated)
+                        {
+                            this.Enabled = true;
+                        }
                     }
                 }
-
+                else
+                {
+                    ShowErrorMessage(ex.Message);
+                }
             }
+            else
+            {
+                ShowErrorMessage(ex.Message);
+            }
+
+
+
+        }
+
+        public void ShowErrorMessage(string errorMessage)
+        {
+            MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }

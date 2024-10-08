@@ -39,7 +39,7 @@ namespace UnitTest.TestRepositories
             bookInfo.Add(new BookInfo { Id = 5, Title = "E", Description = "Des5", AuthorId = 1, CategoryId = 1 });
         }
 
-        public Book CreateBook(Book book)
+        public async Task<Book> CreateBook(Book book)
         {
             bookList.Add(book);
             return book;
@@ -50,24 +50,24 @@ namespace UnitTest.TestRepositories
             bookList.Remove(book);
         }
 
-        public List<Book> GetAllBooks()
+        public async Task<List<Book>> GetAllBooks()
         {
             return bookList;
         }
 
-        public List<BookInfo> GetBookBookInfoId(int bookInfoId)
+        public async Task<List<BookInfo>> GetBookBookInfoId(int bookInfoId)
         {
             return bookInfo.Where(x => x.Id == bookInfoId).ToList();
         }
 
-        public Book GetBookById(int id)
+        public async Task<Book> GetBookById(int id)
         {
             return bookList.Where(x => x.Id == id).SingleOrDefault();
         }
 
-        public Book EditBook(int id, Book book)
+        public async Task<Book> EditBook(int id, Book book)
         {
-            Book bookResult = GetBookById(id);
+            Book bookResult = await GetBookById(id);
             bookResult.EanCode = book.EanCode;
             bookResult.ISO = book.ISO;
             bookResult.PublicationDate = book.PublicationDate;

@@ -12,6 +12,7 @@ namespace UnitTest.TestRepositories
     {
         public List<User> userTestList;
         public List<Role> roleTestList;
+
         public UserTestRepository()
         {
             userTestList = new List<User>();
@@ -37,23 +38,23 @@ namespace UnitTest.TestRepositories
             user1.Role = new List<Role> { roleTestList[1] };
         }
 
-        public User CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
             userTestList.Add(user);
             return user;
         }
 
-        public User GetUserByEmail(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
             return userTestList.Where(x => x.Email == email).SingleOrDefault();
         }
 
-        public User GetUserByEmailWithRole(string email)
+        public async Task<User> GetUserByEmailWithRole(string email)
         {
             return userTestList.Where(x => x.Email == email).SingleOrDefault();
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
             return userTestList.Where(x => x.Id == id).SingleOrDefault();
         }

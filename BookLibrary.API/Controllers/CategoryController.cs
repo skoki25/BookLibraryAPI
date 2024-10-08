@@ -36,16 +36,24 @@ namespace BookLibraryAPI.Controllers
 
         [HttpPut]
         [Authorize]
-        public async Task<IActionResult> EditCategory([FromForm]int id, [FromBody]Category category) 
+        [Route("{id}")]
+        public async Task<IActionResult> EditCategory(int id, Category category) 
         {
             return await _categoryService.EditCategory(id, category);
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddCategory(Category category)
         {
             return await _categoryService.CreateCategory(category);
         }
+        [HttpGet]
+        [Route("Books")]
+        public async Task<IActionResult> GetCategoriesWithBooks()
+        {
+            return await _categoryService.GetCategoriesWithBooks();
+        }
+
+
     }
 }

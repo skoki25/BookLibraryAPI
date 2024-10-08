@@ -15,6 +15,7 @@ namespace BookLibrary.WinformApp.UserControlComponents
     public partial class CreateEditCategoryPanel : UserControl
     {
         private readonly MainViewModel _viewModel;
+        public event Action OnEdit;
         private Category _category;
         ModeType modeType;
 
@@ -49,19 +50,20 @@ namespace BookLibrary.WinformApp.UserControlComponents
             SetMode();
         }
 
-        private void SetMode()
+        private async void SetMode()
         {
             switch (modeType)
             {
                 case ModeType.Create:
-                    _viewModel.CreateCategory(_category);
+                    await _viewModel.CreateCategory(_category);
                     break;
                 case ModeType.Edit:
-                    _viewModel.EditCategory(_category);
+                    await _viewModel.EditCategory(_category);
                     break;
                 default:
                     break;
             }
+            OnEdit?.Invoke();
         }
     }
 }

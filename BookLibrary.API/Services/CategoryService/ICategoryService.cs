@@ -9,5 +9,6 @@ namespace BookLibraryAPI.Services
         Task<IActionResult> EditCategory(int id, Category category);
         Task<IActionResult> CreateCategory(Category category);
         Task<IActionResult> GetCategoryById(int id);
+        Task<IActionResult> GetCategoriesWithBooks();
     }
 }

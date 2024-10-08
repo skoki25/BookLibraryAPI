@@ -10,11 +10,7 @@ namespace WinformApp.Model
 
         public string GetToken()
         {
-            if(TokenMessage == null)
-            {
-                return string.Empty;
-            }
-            return TokenMessage.Token;
+            return TokenMessage?.Token ?? string.Empty;
         }
     }
 }

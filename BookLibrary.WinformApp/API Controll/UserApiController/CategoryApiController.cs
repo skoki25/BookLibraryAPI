@@ -22,7 +22,7 @@ namespace BookLibrary.WinformApp.API_Controll.UserApiController
             try
             {
                 string loginEndPoint = Config.Settings.GetRoute(Config.ApiCategory);
-                ResultMessage<Category> resultMessage = await _apiService.PostAsync<Category>(loginEndPoint, token);
+                ResultMessage<Category> resultMessage = await _apiService.PostAsync<Category>(loginEndPoint, book, token);
                 if (resultMessage.Data == null)
                 {
                     _apiService.ErrorMessage(new ArgumentNullException("No data"));

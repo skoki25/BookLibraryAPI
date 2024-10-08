@@ -9,6 +9,7 @@ namespace BookLibraryAPI.Repositories
         public Task<List<Category>> GetAllCategories();
         public Task<Category> GetCategoryById(int id);
         public Task<Category> GetCategoryByType(string type);
+        public Task<List<Category>> GetAllCategoriesWithBooks();
 
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace WinformApp.Forms.UserControlComponents.Controls.Category
+﻿namespace WinformApp.Forms.UserControlComponents
 {
     partial class CategoryEditControl
     {
@@ -28,20 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panelBook = new Panel();
             dataGridView1 = new DataGridView();
             TypeColumn = new DataGridViewTextBoxColumn();
             DetailColumn = new DataGridViewButtonColumn();
+            panelCategory = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // panelBook
-            // 
-            panelBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panelBook.Location = new Point(193, 3);
-            panelBook.Name = "panelBook";
-            panelBook.Size = new Size(581, 444);
-            panelBook.TabIndex = 6;
             // 
             // dataGridView1
             // 
@@ -52,45 +44,57 @@
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { TypeColumn, DetailColumn });
-            dataGridView1.Location = new Point(3, 3);
+            dataGridView1.Location = new Point(3, 4);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(184, 444);
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(256, 627);
             dataGridView1.TabIndex = 5;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // TypeColumn
             // 
-            TypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            TypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             TypeColumn.HeaderText = "Type";
+            TypeColumn.MinimumWidth = 6;
             TypeColumn.Name = "TypeColumn";
             TypeColumn.ReadOnly = true;
-            TypeColumn.Width = 56;
             // 
             // DetailColumn
             // 
-            DetailColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            DetailColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             DetailColumn.HeaderText = "Detail";
+            DetailColumn.MinimumWidth = 6;
             DetailColumn.Name = "DetailColumn";
             DetailColumn.Resizable = DataGridViewTriState.False;
             DetailColumn.SortMode = DataGridViewColumnSortMode.Automatic;
-            DetailColumn.Width = 62;
+            // 
+            // panelCategory
+            // 
+            panelCategory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelCategory.Location = new Point(265, 4);
+            panelCategory.Margin = new Padding(3, 4, 3, 4);
+            panelCategory.Name = "panelCategory";
+            panelCategory.Size = new Size(641, 627);
+            panelCategory.TabIndex = 6;
             // 
             // CategoryEditControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(dataGridView1);
-            Controls.Add(panelBook);
+            Controls.Add(panelCategory);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CategoryEditControl";
-            Size = new Size(777, 450);
+            Size = new Size(911, 635);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panelBook;
         private DataGridView dataGridView1;
+        private Panel panelCategory;
         private DataGridViewTextBoxColumn TypeColumn;
         private DataGridViewButtonColumn DetailColumn;
     }

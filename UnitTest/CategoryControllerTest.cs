@@ -1,6 +1,8 @@
-﻿using BookLibrary.Model.Messages;
+﻿using AutoMapper;
+using BookLibrary.Model.Messages;
 using BookLibrary.Models;
 using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +19,13 @@ namespace UnitTest
         [TestInitialize]
         public void Inicialization()
         {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new ProfileMapping());
+            });
+
             ICategoryRepository categoryRepository = new CategoryTestRepository();
-            ICategoryService categoryService = new CategoryService(categoryRepository);
+            ICategoryService categoryService = new CategoryService(categoryRepository, config.CreateMapper());
             categoryController = new CategoryController(categoryService);
 
         }

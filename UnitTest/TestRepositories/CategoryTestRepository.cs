@@ -27,30 +27,35 @@ namespace UnitTest.TestRepositories
             listCategory.Add(new Category { Id = 5, Type = "Documentarne" });
         }
 
-        public Category CreateCategory(Category category)
+        public async Task<Category> CreateCategory(Category category)
         {
             listCategory.Add(category);
             return category;
         }
 
-        public Category EditCategory(int id, Category category)
+        public async Task<Category> EditCategory(int id, Category category)
         {
             Category categoryResult = listCategory.Where(x=> x.Id == id).SingleOrDefault();
             categoryResult.Type = category.Type;
             return categoryResult;
         }
 
-        public List<Category> GetAllCategories()
+        public async Task<List<Category>> GetAllCategories()
         {
             return listCategory;
         }
 
-        public Category GetCategoryById(int id)
+        public Task<Category> GetAllCategoriesWithBooks(string type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Category> GetCategoryById(int id)
         {
             return listCategory.Where(x => x.Id == id).SingleOrDefault();
         }
 
-        public Category GetCategoryByType(string type)
+        public async Task<Category> GetCategoryByType(string type)
         {
             return listCategory.Where(x => x.Type.Equals(type)).SingleOrDefault();
         }

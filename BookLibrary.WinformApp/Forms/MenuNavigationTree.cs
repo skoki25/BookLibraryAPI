@@ -60,9 +60,9 @@ namespace BookLibrary.WinformApp.Forms
 
         public MenuComposite CreateCategoryMenu()
         {
-            MenuComposite menuComposite = new MenuComposite("Category", EnumControl.Book, _context);
-            MenuItem categoryCreateItem = new MenuItem("Create Category", EnumControl.Other, _context);
-            MenuItem categoryEditItem = new MenuItem("Edit Category", EnumControl.Other, _context);
+            MenuComposite menuComposite = new MenuComposite("Category", EnumControl.Category, _context);
+            MenuItem categoryCreateItem = new MenuItem("Create Category", EnumControl.CategoryCreate, _context);
+            MenuItem categoryEditItem = new MenuItem("Edit Category", EnumControl.CategoryEdit, _context);
 
             menuComposite.Add(_main, 0);
             menuComposite.Add(categoryCreateItem);
