@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Installation\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BookLibrary.Model\BookLibrary.Model.csproj" />
   </ItemGroup>
 

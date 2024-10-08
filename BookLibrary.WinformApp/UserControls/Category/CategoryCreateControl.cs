@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformApp.Forms.UserControlComponents.CustomObject;
+using WinformApp.Installation;
 
 namespace WinformApp.Forms.UserControlComponents
 {
@@ -29,7 +30,7 @@ namespace WinformApp.Forms.UserControlComponents
             createEditCategoryPanel.Dock = DockStyle.Fill;
             createEditCategoryPanel.OnEdit += FillDataGridView;
             panelCategory.Controls.Add(createEditCategoryPanel);
-            createEditCategoryPanel.Dock = DockStyle.Fill;
+            createEditCategoryPanel.FillDock();
             FillDataGridView();
         }
 

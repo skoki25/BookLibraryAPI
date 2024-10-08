@@ -33,15 +33,13 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
-            tbEanCode = new TextBox();
-            tbIso = new TextBox();
-            dtPublicationDate = new DateTimePicker();
-            label3 = new Label();
-            cbBookInfo = new ComboBox();
-            label4 = new Label();
+            tbFirstName = new TextBox();
+            tbLastName = new TextBox();
+            lbAge = new Label();
             comboBox2 = new ComboBox();
             chbCreateNewAuthor = new CheckBox();
             btCreateEdit = new Button();
+            tbAge = new TextBox();
             titlePanelCreate.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -84,15 +82,13 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
             tableLayoutPanel1.Controls.Add(label1, 1, 1);
             tableLayoutPanel1.Controls.Add(label2, 1, 2);
-            tableLayoutPanel1.Controls.Add(tbEanCode, 2, 1);
-            tableLayoutPanel1.Controls.Add(tbIso, 2, 2);
-            tableLayoutPanel1.Controls.Add(dtPublicationDate, 2, 3);
-            tableLayoutPanel1.Controls.Add(label3, 1, 3);
-            tableLayoutPanel1.Controls.Add(cbBookInfo, 2, 4);
-            tableLayoutPanel1.Controls.Add(label4, 1, 4);
+            tableLayoutPanel1.Controls.Add(tbFirstName, 2, 1);
+            tableLayoutPanel1.Controls.Add(tbLastName, 2, 2);
+            tableLayoutPanel1.Controls.Add(lbAge, 1, 3);
             tableLayoutPanel1.Controls.Add(comboBox2, 2, 0);
             tableLayoutPanel1.Controls.Add(chbCreateNewAuthor, 1, 0);
             tableLayoutPanel1.Controls.Add(btCreateEdit, 2, 5);
+            tableLayoutPanel1.Controls.Add(tbAge, 2, 3);
             tableLayoutPanel1.Location = new Point(19, 55);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -110,79 +106,49 @@
             // 
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(324, 96);
+            label1.Location = new Point(321, 96);
             label1.Name = "label1";
-            label1.Size = new Size(80, 20);
+            label1.Size = new Size(83, 20);
             label1.TabIndex = 0;
-            label1.Text = "EAN Code:";
+            label1.Text = "First Name:";
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(369, 167);
+            label2.Location = new Point(322, 167);
             label2.Name = "label2";
-            label2.Size = new Size(35, 20);
+            label2.Size = new Size(82, 20);
             label2.TabIndex = 1;
-            label2.Text = "ISO:";
+            label2.Text = "Last Name:";
             // 
-            // tbEanCode
+            // tbFirstName
             // 
-            tbEanCode.Anchor = AnchorStyles.Left;
-            tbEanCode.Location = new Point(410, 93);
-            tbEanCode.Margin = new Padding(3, 4, 3, 4);
-            tbEanCode.Name = "tbEanCode";
-            tbEanCode.Size = new Size(228, 27);
-            tbEanCode.TabIndex = 2;
+            tbFirstName.Anchor = AnchorStyles.Left;
+            tbFirstName.Location = new Point(410, 93);
+            tbFirstName.Margin = new Padding(3, 4, 3, 4);
+            tbFirstName.Name = "tbFirstName";
+            tbFirstName.Size = new Size(228, 27);
+            tbFirstName.TabIndex = 2;
             // 
-            // tbIso
+            // tbLastName
             // 
-            tbIso.Anchor = AnchorStyles.Left;
-            tbIso.Location = new Point(410, 164);
-            tbIso.Margin = new Padding(3, 4, 3, 4);
-            tbIso.Name = "tbIso";
-            tbIso.Size = new Size(228, 27);
-            tbIso.TabIndex = 3;
+            tbLastName.Anchor = AnchorStyles.Left;
+            tbLastName.Location = new Point(410, 164);
+            tbLastName.Margin = new Padding(3, 4, 3, 4);
+            tbLastName.Name = "tbLastName";
+            tbLastName.Size = new Size(228, 27);
+            tbLastName.TabIndex = 3;
             // 
-            // dtPublicationDate
+            // lbAge
             // 
-            dtPublicationDate.Anchor = AnchorStyles.Left;
-            dtPublicationDate.Location = new Point(410, 235);
-            dtPublicationDate.Margin = new Padding(3, 4, 3, 4);
-            dtPublicationDate.Name = "dtPublicationDate";
-            dtPublicationDate.Size = new Size(228, 27);
-            dtPublicationDate.TabIndex = 4;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Location = new Point(282, 238);
-            label3.Name = "label3";
-            label3.Size = new Size(122, 20);
-            label3.TabIndex = 5;
-            label3.Text = "Publication Date:";
-            // 
-            // cbBookInfo
-            // 
-            cbBookInfo.Anchor = AnchorStyles.Left;
-            cbBookInfo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbBookInfo.FormattingEnabled = true;
-            cbBookInfo.Location = new Point(410, 305);
-            cbBookInfo.Margin = new Padding(3, 4, 3, 4);
-            cbBookInfo.Name = "cbBookInfo";
-            cbBookInfo.Size = new Size(228, 28);
-            cbBookInfo.TabIndex = 6;
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.Location = new Point(332, 309);
-            label4.Name = "label4";
-            label4.Size = new Size(72, 20);
-            label4.TabIndex = 7;
-            label4.Text = "BookInfo:";
+            lbAge.Anchor = AnchorStyles.Right;
+            lbAge.AutoSize = true;
+            lbAge.Location = new Point(365, 238);
+            lbAge.Name = "lbAge";
+            lbAge.Size = new Size(39, 20);
+            lbAge.TabIndex = 5;
+            lbAge.Text = "Age:";
             // 
             // comboBox2
             // 
@@ -224,6 +190,15 @@
             btCreateEdit.UseVisualStyleBackColor = true;
             btCreateEdit.Click += btCreateEdit_Click;
             // 
+            // tbAge
+            // 
+            tbAge.Anchor = AnchorStyles.Left;
+            tbAge.Location = new Point(410, 235);
+            tbAge.Margin = new Padding(3, 4, 3, 4);
+            tbAge.Name = "tbAge";
+            tbAge.Size = new Size(228, 27);
+            tbAge.TabIndex = 12;
+            // 
             // CreateEditAuthorPanel
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -244,14 +219,15 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private Label label2;
-        private TextBox tbEanCode;
-        private TextBox tbIso;
+        private TextBox tbFirstName;
+        private TextBox tbLastName;
         private DateTimePicker dtPublicationDate;
-        private Label label3;
+        private Label lbAge;
         private ComboBox cbBookInfo;
         private Label label4;
         private ComboBox comboBox2;
         private CheckBox chbCreateNewAuthor;
         private Button btCreateEdit;
+        private TextBox tbAge;
     }
 }

@@ -3,6 +3,7 @@ using WinformApp.Forms.UserControlComponents;
 using BookLibrary.WinformApp.Forms.UserControlComponents.Controls.Book;
 using BookLibrary.WinformApp.UserControlComponents;
 using BookLibrary.WinformApp;
+using WinformApp.UserControls;
 
 namespace WinformApp.Forms
 {
@@ -30,6 +31,12 @@ namespace WinformApp.Forms
                     return new CategoryCreateControl(_viewModel);
                 case EnumControl.CategoryEdit:
                     return new CategoryEditControl(_viewModel);
+                case EnumControl.Author:
+                    return new AuthorViewControl(_viewModel);
+                case EnumControl.AuthorCreate:
+                    return new AuthorCreateControl(_viewModel);
+                case EnumControl.AuthorEdit:
+                    return new AuthorEditControl(_viewModel);
                 default:
                     return new UserControl();
             }

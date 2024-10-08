@@ -43,12 +43,21 @@ namespace WinformApp.UserControls
 
         private void Setup()
         {
-            tbEanCode.DataBindings.Add(new Binding(nameof(tbEanCode.Text), _author, nameof(Author.FirstName)));
+            tbFirstName.DataBindings.Add(new Binding(nameof(tbFirstName.Text), _author, nameof(Author.FirstName)));
+            tbLastName.DataBindings.Add(new Binding(nameof(tbLastName.Text), _author, nameof(Author.LastName)));
         }
 
         private void btCreateEdit_Click(object sender, EventArgs e)
         {
-            SetMode();
+            if (int.TryParse(tbAge.Text, out var age))
+            {
+                _author.Age = age;
+                SetMode();
+            }
+            else
+            {
+                MessageBox.Show($"Text '{tbAge.Text}' isnt number");
+            }
         }
 
         private async void SetMode()
@@ -73,8 +82,6 @@ namespace WinformApp.UserControls
                 }
                 OnEdit?.Invoke();
                 waitingPanel.Success();
-                //this.Controls.Clear();
-                //this.Controls.Add(this.tableLayoutPanel1);
             }
             catch (Exception ex)
             {

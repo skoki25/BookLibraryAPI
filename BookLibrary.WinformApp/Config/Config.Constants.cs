@@ -21,6 +21,9 @@ namespace WinformApp
         public const string ApiCategory      = "Category";
         public const string ApiCategoryBooks = "Category/Books";
 
+        public const string ApiAuthor = "Author";
+
+
 
     }
 }

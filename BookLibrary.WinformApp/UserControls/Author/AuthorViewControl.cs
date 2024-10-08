@@ -12,7 +12,7 @@ namespace WinformApp.UserControls
 {
     public partial class AuthorViewControl : UserControl
     {
-        public AuthorViewControl()
+        public AuthorViewControl(MainViewModel _vieModel)
         {
             InitializeComponent();
         }
