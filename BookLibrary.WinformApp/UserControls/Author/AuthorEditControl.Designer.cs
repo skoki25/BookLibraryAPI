@@ -61,6 +61,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(323, 605);
             dataGridView1.TabIndex = 5;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // ISOColumn
             // 
