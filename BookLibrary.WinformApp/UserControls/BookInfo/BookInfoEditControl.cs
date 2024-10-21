@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformApp.Forms.UserControlComponents.CustomObject;
 
-namespace WinformApp
+namespace WinformApp.Forms.UserControlComponents
 {
-    public partial class CategoryEditControl : UserControl
+    public partial class BookInfoEditControl : UserControl
     {
 
         private List<Category> _categories;
         private readonly MainViewModel _viewModel;
 
-        public CategoryEditControl(MainViewModel viewModel)
+        public BookInfoEditControl(MainViewModel viewModel)
         {
             _viewModel = viewModel;
 

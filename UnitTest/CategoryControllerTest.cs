@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookLibrary.Model.DTO;
 using BookLibrary.Model.Messages;
 using BookLibrary.Models;
 using BookLibraryAPI.Controllers;
@@ -52,7 +53,7 @@ namespace UnitTest
 
             OkObjectResult resultOk = (OkObjectResult)result;
 
-            ResultMessage<List<Category>> categoryList= (ResultMessage<List<Category>>)resultOk.Value;
+            ResultMessage<List<CategoryDto>> categoryList = (ResultMessage<List<CategoryDto>>)resultOk.Value;
 
             if(categoryList == null)
             {
@@ -64,6 +65,7 @@ namespace UnitTest
                 Assert.Fail("Failed");
             }
         }
+
         [TestMethod]
         public void EditCategoryTest()
         {

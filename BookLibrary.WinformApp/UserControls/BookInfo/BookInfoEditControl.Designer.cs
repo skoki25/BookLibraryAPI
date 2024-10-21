@@ -1,6 +1,6 @@
-﻿namespace WinformApp
+﻿namespace WinformApp.Forms.UserControlComponents
 {
-    partial class CategoryEditControl
+    partial class BookInfoEditControl
     {
         /// <summary> 
         /// Required designer variable.

@@ -13,15 +13,14 @@ using WinformApp.Forms;
 
 namespace BookLibrary.WinformApp
 {
-    public partial class CreateEditCategoryPanel : UserControl
+    public partial class BookInfoEditCategoryPanel : UserControl
     {
         private readonly MainViewModel _viewModel;
         public event Action OnEdit;
-        public event Action<Category> OnSaveAction;
         private Category _category;
         ModeType modeType;
 
-        public CreateEditCategoryPanel(MainViewModel mainViewModel)
+        public BookInfoEditCategoryPanel(MainViewModel mainViewModel)
         {
             InitializeComponent();
 
@@ -31,7 +30,7 @@ namespace BookLibrary.WinformApp
             Setup();
         }
 
-        public CreateEditCategoryPanel(MainViewModel mainViewModel, Category category)
+        public BookInfoEditCategoryPanel(MainViewModel mainViewModel, Category category)
         {
             InitializeComponent();
 
@@ -60,21 +59,19 @@ namespace BookLibrary.WinformApp
 
                 this.Controls.Clear();
                 this.Controls.Add(waitingPanel);
-                Category category = new Category();
                 waitingPanel.Dock = DockStyle.Fill;
                 switch (modeType)
                 {
                     case ModeType.Create:
-                        category = await _viewModel.CreateCategory(_category);
+                        await _viewModel.CreateCategory(_category);
                         break;
                     case ModeType.Edit:
-                        category = await _viewModel.EditCategory(_category);
+                        await _viewModel.EditCategory(_category);
                         break;
                     default:
                         break;
                 }
                 OnEdit?.Invoke();
-                OnSaveAction?.Invoke(category);
                 waitingPanel.Success();
                 //this.Controls.Clear();
                 //this.Controls.Add(this.tableLayoutPanel1);

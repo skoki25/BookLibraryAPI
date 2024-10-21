@@ -45,7 +45,7 @@ namespace WinformApp.Forms.UserControlComponents
 
         private async void GetBookDetail(Book book)
         {
-            BookInfoDto bookInfo = await _mainViewModel.GetBookInfoExtra(book.BookInfoId);
+            BookInfo bookInfo = await _mainViewModel.GetBookInfoExtra(book.BookInfoId);
 
             if (bookInfo == null)
                 return;

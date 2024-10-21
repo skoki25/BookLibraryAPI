@@ -17,4 +17,19 @@
     <ProjectReference Include="..\BookLibrary.Model\BookLibrary.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UserControls\BookInfo\BookInfoCreateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\BookInfo\BookInfoEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\BookInfo\BookInfoViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\BookInfo\BookInfoEditCategoryPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

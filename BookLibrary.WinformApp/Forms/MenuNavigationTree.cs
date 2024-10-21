@@ -16,6 +16,7 @@ namespace BookLibrary.WinformApp.Forms
             _main = new MenuComposite("Menu",EnumControl.Menu, _context);
             _main.Add(CreateUserMenu());
             _main.Add(CreateBookMenu());
+            _main.Add(CreateBookInfoMenu());
             _main.Add(CreateBorrowBookMenu());
             _main.Add(CreateCategoryMenu());
             _main.Add(CreateAuthor());
@@ -51,6 +52,20 @@ namespace BookLibrary.WinformApp.Forms
             MenuItem bookCreateItem = new MenuItem("Create Book", EnumControl.BookCreate, _context);
             MenuItem bookEditItem = new MenuItem("Edit Book", EnumControl.BookEdit, _context);
             MenuItem bookDeleteItem = new MenuItem("Delete Book", EnumControl.BookDelete, _context);
+
+            menuComposite.Add(_main, 0);
+            menuComposite.Add(bookCreateItem);
+            menuComposite.Add(bookEditItem);
+            menuComposite.Add(bookDeleteItem);
+            return menuComposite;
+        }
+
+        public MenuComposite CreateBookInfoMenu()
+        {
+            MenuComposite menuComposite = new MenuComposite("Book Info", EnumControl.BookInfo, _context);
+            MenuItem bookCreateItem = new MenuItem("Create Book Info", EnumControl.BookInfoCreate, _context);
+            MenuItem bookEditItem = new MenuItem("Edit Book Info", EnumControl.BookInfoEdit, _context);
+            MenuItem bookDeleteItem = new MenuItem("Delete Book Info", EnumControl.BookInfoDelete, _context);
 
             menuComposite.Add(_main, 0);
             menuComposite.Add(bookCreateItem);

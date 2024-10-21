@@ -48,6 +48,7 @@ namespace UnitTest
                 Assert.Fail();
             }
         }
+
         private bool Login(User user)
         {
             var result = userController.Login(user);

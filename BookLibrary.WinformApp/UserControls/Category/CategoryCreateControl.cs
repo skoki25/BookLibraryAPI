@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using WinformApp.Forms.UserControlComponents.CustomObject;
 using WinformApp.Installation;
 
-namespace WinformApp.Forms.UserControlComponents
+namespace WinformApp
 {
     public partial class CategoryCreateControl : UserControl
     {

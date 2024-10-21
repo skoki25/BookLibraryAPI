@@ -1,4 +1,4 @@
-﻿namespace WinformApp.UserControls
+﻿namespace WinformApp
 {
     partial class CreateEditAuthorPanel
     {
@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             titlePanelCreate = new BookLibrary.WinformApp.Forms.Custom_Form_Item.TitledPanel();
-            button1 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
             tbFirstName = new TextBox();
             tbLastName = new TextBox();
             lbAge = new Label();
-            comboBox2 = new ComboBox();
+            cbAuthor = new ComboBox();
             chbCreateNewAuthor = new CheckBox();
             btCreateEdit = new Button();
             tbAge = new TextBox();
@@ -47,7 +46,6 @@
             // titlePanelCreate
             // 
             titlePanelCreate.BorderColor = Color.Black;
-            titlePanelCreate.Controls.Add(button1);
             titlePanelCreate.Controls.Add(tableLayoutPanel1);
             titlePanelCreate.Dock = DockStyle.Fill;
             titlePanelCreate.Location = new Point(0, 0);
@@ -60,17 +58,6 @@
             titlePanelCreate.TitleBackColor = Color.LightGray;
             titlePanelCreate.TitleFont = new Font("Arial", 12F);
             titlePanelCreate.TitleForeColor = Color.Black;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(1461, 1220);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(231, 59);
-            button1.TabIndex = 1;
-            button1.Text = "Create";
-            button1.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -85,7 +72,7 @@
             tableLayoutPanel1.Controls.Add(tbFirstName, 2, 1);
             tableLayoutPanel1.Controls.Add(tbLastName, 2, 2);
             tableLayoutPanel1.Controls.Add(lbAge, 1, 3);
-            tableLayoutPanel1.Controls.Add(comboBox2, 2, 0);
+            tableLayoutPanel1.Controls.Add(cbAuthor, 2, 0);
             tableLayoutPanel1.Controls.Add(chbCreateNewAuthor, 1, 0);
             tableLayoutPanel1.Controls.Add(btCreateEdit, 2, 5);
             tableLayoutPanel1.Controls.Add(tbAge, 2, 3);
@@ -150,17 +137,18 @@
             lbAge.TabIndex = 5;
             lbAge.Text = "Age:";
             // 
-            // comboBox2
+            // cbAuthor
             // 
-            comboBox2.Anchor = AnchorStyles.Left;
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(410, 21);
-            comboBox2.Margin = new Padding(3, 4, 3, 4);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(228, 28);
-            comboBox2.TabIndex = 9;
-            comboBox2.Visible = false;
+            cbAuthor.Anchor = AnchorStyles.Left;
+            cbAuthor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAuthor.FormattingEnabled = true;
+            cbAuthor.Location = new Point(410, 21);
+            cbAuthor.Margin = new Padding(3, 4, 3, 4);
+            cbAuthor.Name = "cbAuthor";
+            cbAuthor.Size = new Size(228, 28);
+            cbAuthor.TabIndex = 9;
+            cbAuthor.Visible = false;
+            cbAuthor.SelectedIndexChanged += cbAuthor_SelectedIndexChanged;
             // 
             // chbCreateNewAuthor
             // 
@@ -178,6 +166,7 @@
             chbCreateNewAuthor.TextImageRelation = TextImageRelation.TextBeforeImage;
             chbCreateNewAuthor.UseVisualStyleBackColor = true;
             chbCreateNewAuthor.Visible = false;
+            chbCreateNewAuthor.CheckedChanged += chbCreateNewAuthor_CheckedChanged;
             // 
             // btCreateEdit
             // 
@@ -215,7 +204,6 @@
         #endregion
 
         private BookLibrary.WinformApp.Forms.Custom_Form_Item.TitledPanel titlePanelCreate;
-        private Button button1;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private Label label2;
@@ -225,7 +213,7 @@
         private Label lbAge;
         private ComboBox cbBookInfo;
         private Label label4;
-        private ComboBox comboBox2;
+        private ComboBox cbAuthor;
         private CheckBox chbCreateNewAuthor;
         private Button btCreateEdit;
         private TextBox tbAge;

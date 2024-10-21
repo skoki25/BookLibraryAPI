@@ -53,7 +53,7 @@ namespace WinformApp.Forms.UserControlComponents
 
         private async void FillComboBookInfo() 
         {
-            List<BookInfoDto> bookInfoDtos = await _viewModel.GetAllBookInfo();
+            List<BookInfo> bookInfoDtos = await _viewModel.GetAllBookInfo();
 
             cbBookInfo.DataSource = bookInfoDtos;
             cbBookInfo.DisplayMember = nameof(BookInfoDto.Title);
