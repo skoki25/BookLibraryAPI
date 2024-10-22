@@ -10,5 +10,6 @@ namespace WinformApp.Forms
     {
         Create,
         Edit,
+        Readonly,
     }
 }

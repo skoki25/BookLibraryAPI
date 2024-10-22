@@ -7,9 +7,9 @@
         public int AuthorId { get;set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Author Author { get; set; }
-        public Category Category { get; set; }
-        public IEnumerable<Book> Books { get; set; }
+        public Author? Author { get; set; }
+        public Category? Category { get; set; }
+        public IEnumerable<Book>? Books { get; set; }
 
         public string GetAuthorName()
         {
@@ -21,7 +21,7 @@
 
         public string GetCategory()
         {
-            return Category?.ToString() ?? string.Empty;
+            return Category?.Type ?? string.Empty;
         }
 
         public BookInfo Clone()

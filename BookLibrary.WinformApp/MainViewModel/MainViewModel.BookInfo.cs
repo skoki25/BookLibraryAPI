@@ -21,8 +21,21 @@ namespace WinformApp
 
         public async Task<List<BookInfo>> GetAllBookInfo()
         {
-            string loginEndPoint = Config.Settings.GetRoute(Config.ApiBookInfo);
-            ResultMessage<List<BookInfo>> resultMessage = await _apiService.GetAsync<List<BookInfo>>(loginEndPoint, currentUserData.GetToken());
+            string endPoint = Config.Settings.GetRoute(Config.ApiBookInfo);
+            ResultMessage<List<BookInfo>> resultMessage = await _apiService.GetAsync<List<BookInfo>>(endPoint, currentUserData.GetToken());
+            return resultMessage.Data;
+        }
+
+        public async Task<BookInfo> CreateBookInfo(BookInfo bookInfo)
+        {
+            string endPoint = Config.Settings.GetRoute(Config.ApiBookInfo);
+            ResultMessage<BookInfo> resultMessage = await _apiService.PostAsync<BookInfo>(endPoint, bookInfo, currentUserData.GetToken());
+            return resultMessage.Data;
+        }
+        public async Task<BookInfo> EditBookInfo(BookInfo bookInfo)
+        {
+            string endPoint = Config.Settings.GetRoute(Config.ApiBookInfo,bookInfo.Id);
+            ResultMessage<BookInfo> resultMessage = await _apiService.PutAsync<BookInfo>(endPoint,bookInfo, currentUserData.GetToken());
             return resultMessage.Data;
         }
     }

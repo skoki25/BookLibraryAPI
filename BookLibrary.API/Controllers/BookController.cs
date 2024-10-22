@@ -1,9 +1,5 @@
 ﻿using BookLibrary.Model.DTO;
 using BookLibrary.Models;
-using BookLibraryAPI.Data.CustomException;
-using BookLibraryAPI.Installation;
-using BookLibraryAPI.Models;
-using BookLibraryAPI.Models.Validation;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

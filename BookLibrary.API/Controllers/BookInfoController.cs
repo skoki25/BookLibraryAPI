@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Controllers
 {
+    [ApiController]
     [Authorize]
     [Route("[controller]")]
     public class BookInfoController : ControllerBase

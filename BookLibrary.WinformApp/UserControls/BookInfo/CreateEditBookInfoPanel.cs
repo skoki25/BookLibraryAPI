@@ -1,48 +1,52 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.WinformApp.UserControlComponents.Waiting;
-using WinformApp;
 using WinformApp.Forms;
+using WinformApp.Installation;
 
-namespace BookLibrary.WinformApp
+namespace WinformApp
 {
-    public partial class CreateEditCategoryPanel : UserControl
+    public partial class CreateEditBookInfoPanel : UserControl
     {
         private readonly MainViewModel _viewModel;
         public event Action OnEdit;
-        public event Action<Category> OnSaveAction;
-        private Category _category;
-        private List<Category> _categories;
+        public event Action<BookInfo> OnSaveAction;
+        private BookInfo _bookInfo;
+        private List<BookInfo> _bookInfos;
         ModeType modeType;
 
-        public CreateEditCategoryPanel(MainViewModel mainViewModel)
+        public CreateEditBookInfoPanel(MainViewModel mainViewModel, int idCategory,int idAuthor)
         {
             InitializeComponent();
 
             _viewModel = mainViewModel;
-            _category = new Category();
+            _bookInfo = new BookInfo();
+            _bookInfo.AuthorId =idAuthor;
+            _bookInfo.CategoryId =idCategory;
             modeType = ModeType.Create;
             Setup();
         }
 
-        public CreateEditCategoryPanel(MainViewModel mainViewModel, Category category)
+        public CreateEditBookInfoPanel(MainViewModel mainViewModel, BookInfo bookInfo)
         {
             InitializeComponent();
 
             _viewModel = mainViewModel;
-            _category = category;
+            _bookInfo = bookInfo;
             modeType = ModeType.Edit;
 
             Setup();
         }
 
-        public CreateEditCategoryPanel(MainViewModel mainViewModel, bool isCreateMode)
+        public CreateEditBookInfoPanel(MainViewModel mainViewModel, int idCategory, int idAuthor, bool isCreateMode)
         {
             InitializeComponent();
             chbCreateNewAuthor.Visible = true;
             cbCategory.Visible = true;
 
             _viewModel = mainViewModel;
-            _category = new Category();
+            _bookInfo = new BookInfo();
+            _bookInfo.AuthorId = idAuthor;
+            _bookInfo.CategoryId = idCategory;
             Setup();
             SetupMultipleMode(isCreateMode);
 
@@ -51,18 +55,19 @@ namespace BookLibrary.WinformApp
 
         private void Setup()
         {
-            tbEanCode.DataBindings.Add(new Binding(nameof(tbEanCode.Text), _category, nameof(Category.Type)));
+            tbTitle.DataBindings.Add(new Binding(nameof(tbTitle.Text), _bookInfo, nameof(BookInfo.Title)));
+            tbDescription.DataBindings.Add(new Binding(nameof(tbDescription.Text), _bookInfo, nameof(BookInfo.Description)));
         }
         private async void SetupMultipleMode(bool isCreateMode)
         {
             ChangeMode(isCreateMode);
             cbCategory.Enabled = isCreateMode;
-            _categories = await _viewModel.GetAllCategories();
+            _bookInfos = await _viewModel.GetAllBookInfo();
 
-            cbCategory.DataSource = _categories;
+            cbCategory.DataSource = _bookInfos;
             cbCategory.DisplayMember = nameof(Category.Type);
             cbCategory.ValueMember = nameof(Category.Id);
-            cbCategory.SelectedValue = _category?.Id;
+            cbCategory.SelectedValue = _bookInfo?.Id;
         }
 
         private void ChangeMode(bool isEditMode)
@@ -80,24 +85,24 @@ namespace BookLibrary.WinformApp
             WaitingPanel waitingPanel = new WaitingPanel();
             try
             {
-                Category category;
+                BookInfo bookInfo;
                 this.Controls.Clear();
                 this.Controls.Add(waitingPanel);
-                waitingPanel.Dock = DockStyle.Fill;
+                waitingPanel.FillDock();
                 if (modeType == ModeType.Create)
                 {
-                    category = await _viewModel.CreateCategory(_category);
+                    bookInfo = await _viewModel.CreateBookInfo(_bookInfo);
                 }
                 else if (modeType == ModeType.Edit)
                 {
-                    category = await _viewModel.EditCategory(_category);
+                    bookInfo = await _viewModel.EditBookInfo(_bookInfo);
                 }
                 else
                 {
-                    category = _category;
+                    bookInfo = _bookInfo;
                 }
                 OnEdit?.Invoke();
-                OnSaveAction?.Invoke(category);
+                OnSaveAction?.Invoke(bookInfo);
                 waitingPanel.Success();
             }
             catch (Exception ex)
@@ -118,13 +123,8 @@ namespace BookLibrary.WinformApp
             if (cbCategory.SelectedValue is int)
             {
                 int id = (int)cbCategory.SelectedValue;
-                _category = _categories.Where(x => x.Id == id).SingleOrDefault();
+                _bookInfo = _bookInfos.Where(x => x.Id == id).SingleOrDefault();
             }
-        }
-
-        private void titlePanelCreate_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

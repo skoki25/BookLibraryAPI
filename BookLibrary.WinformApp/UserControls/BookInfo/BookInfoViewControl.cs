@@ -16,12 +16,11 @@ namespace WinformApp
 
         public async void FillDataGrid()
         {
-            List<BookInfo> categoryList = await _viewModel.GetAllBookInfo();
-
-            foreach (BookInfo category in categoryList)
+            List<BookInfo> bookInfoList = await _viewModel.GetAllBookInfo();
+            this.dataGridView1.Rows.Clear();
+            foreach (BookInfo bookInfo in bookInfoList)
             {
-                //int count = category?.Count() ?? 0;
-                //this.dataGridView1.Rows.Add(category.Type, count);
+                this.dataGridView1.Rows.Add(bookInfo.Title, bookInfo.GetCategory(), bookInfo.Description, bookInfo.GetAuthorName());
             }
         }
     }

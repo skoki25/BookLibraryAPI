@@ -24,12 +24,12 @@ namespace BookLibraryAPI.Services
 
             if (!validationRules.Validate(bookInfo,out string error))
             {
-                ServiceResult<BookInfo>.Failure(error, ResultType.BadRequest);
+                return ServiceResult<BookInfo>.Failure(error, ResultType.BadRequest);
             }
 
-            _bookInfoRepository.CreateBookInfo(bookInfo);
+            BookInfo bookInfoResult = await _bookInfoRepository.CreateBookInfo(bookInfo);
 
-            return ServiceResult<BookInfo>.Success(bookInfo);
+            return ServiceResult<BookInfo>.Success(bookInfoResult);
         }
 
         public async Task<IActionResult> DeleteBookInfo(int id)

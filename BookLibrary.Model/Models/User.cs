@@ -10,6 +10,5 @@
         public string? Address { get; set; }
         public IEnumerable<BookBorrow>? BookBorrow { get; set; }
         public IEnumerable<Role>? Role { get; set; }
-
     }
 }

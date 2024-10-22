@@ -27,7 +27,7 @@
     <Compile Update="UserControls\BookInfo\BookInfoViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControls\BookInfo\BookInfoEditCategoryPanel.cs">
+    <Compile Update="UserControls\BookInfo\CreateEditBookInfoPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

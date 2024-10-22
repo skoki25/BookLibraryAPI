@@ -1,12 +1,7 @@
 ﻿using BookLibrary.Models;
-using BookLibraryAPI.Data.CustomException;
-using BookLibraryAPI.Installation;
-using BookLibraryAPI.Models;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace BookLibraryAPI.Controllers
 {

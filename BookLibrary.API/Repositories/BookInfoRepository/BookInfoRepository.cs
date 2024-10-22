@@ -1,4 +1,5 @@
-﻿using BookLibrary.Models;
+﻿using BookLibrary.Model.DTO;
+using BookLibrary.Models;
 using BookLibraryAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,7 +63,8 @@ namespace BookLibraryAPI.Repositories
 
         public async Task<List<BookInfo>> GetAllBookInfo()
         {
-            return await _context.BookInfo.Include(x => x.Author)
+            return await _context.BookInfo
+                .Include(x => x.Author)
                 .Include(x => x.Category)
                 .ToListAsync();
         }
