@@ -1,6 +1,6 @@
 ﻿namespace WinformApp.Forms.UserControlComponents
 {
-    partial class BookControl
+    partial class BookViewControl
     {
         /// <summary> 
         /// Required designer variable.

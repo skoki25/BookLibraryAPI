@@ -4,12 +4,12 @@ using WinformApp.Forms.UserControlComponents.CustomObject;
 
 namespace WinformApp.Forms.UserControlComponents
 {
-    public partial class BookControl : UserControl
+    public partial class BookViewControl : UserControl
     {
         private MainViewModel _mainViewModel;
         private List<Book> _books;
 
-        public BookControl(MainViewModel mainViewModel)
+        public BookViewControl(MainViewModel mainViewModel)
         {
             InitializeComponent();
 

@@ -51,7 +51,8 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteBookInfo([FromForm] int id)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteBookInfo(int id)
         {
             return await _bookInfoService.DeleteBookInfo(id);
         }

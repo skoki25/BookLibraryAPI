@@ -33,6 +33,9 @@
     <Compile Update="UserControls\BookInfo\CreateEditBookInfoExistObjPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\Book\CreateEditBookExistObjPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

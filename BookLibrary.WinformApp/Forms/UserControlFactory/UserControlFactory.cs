@@ -20,7 +20,7 @@ namespace WinformApp.Forms
                 case EnumControl.UserPassword:
                     return new UserPasswordChange();
                 case EnumControl.Book:
-                    return new BookControl(_viewModel);
+                    return new BookViewControl(_viewModel);
                 case EnumControl.BookCreate:
                     return new BookCreateControl(_viewModel);
                 case EnumControl.BookEdit:
