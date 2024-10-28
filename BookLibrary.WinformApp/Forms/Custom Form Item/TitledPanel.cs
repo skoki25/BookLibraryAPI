@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BookLibrary.WinformApp.Forms.Custom_Form_Item
+namespace WinformApp
 {
     [ToolboxItem(true)]
     public class TitledPanel :Panel

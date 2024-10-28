@@ -41,10 +41,11 @@ namespace BookLibraryAPI.Repositories
 
             editBookInfo.AuthorId = bookInfo.AuthorId;
             editBookInfo.CategoryId = bookInfo.CategoryId;
+            editBookInfo.AuthorId = bookInfo.AuthorId;
             editBookInfo.Description = bookInfo.Description;
             editBookInfo.Title = bookInfo.Title;
 
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return editBookInfo;
         }
 

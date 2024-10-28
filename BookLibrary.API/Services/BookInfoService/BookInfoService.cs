@@ -65,7 +65,8 @@ namespace BookLibraryAPI.Services
             {
                 return ServiceResult<BookInfo>.Failure(error, ResultType.NotFound);
             }
-            return ServiceResult<BookInfo>.Success(editBookInfo);
+            BookInfo resultBookInfo = await _bookInfoRepository.EditBookInfo(id, bookInfo);
+            return ServiceResult<BookInfo>.Success(resultBookInfo);
         }
 
         public async Task<IActionResult> GetBookInfo(int id)

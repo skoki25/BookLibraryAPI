@@ -1,6 +1,8 @@
-﻿using BookLibrary.Model.Messages;
+﻿using AutoMapper;
+using BookLibrary.Model.Messages;
 using BookLibrary.Models;
 using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;

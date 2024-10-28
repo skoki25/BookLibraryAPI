@@ -44,7 +44,8 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditBookInfo([FromForm] int id, BookInfo bookInfo)
+        [Route("{id}")]
+        public async Task<IActionResult> EditBookInfo(int id, BookInfo bookInfo)
         {
             return await _bookInfoService.EditBookInfo(id, bookInfo);
         }

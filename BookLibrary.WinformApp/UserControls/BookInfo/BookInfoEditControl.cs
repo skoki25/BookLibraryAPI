@@ -11,13 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformApp.Forms.UserControlComponents.CustomObject;
+using WinformApp.Installation;
 
 namespace WinformApp.Forms.UserControlComponents
 {
     public partial class BookInfoEditControl : UserControl
     {
 
-        private List<Category> _categories;
+        private List<BookInfo> _bookInfos;
         private readonly MainViewModel _viewModel;
 
         public BookInfoEditControl(MainViewModel viewModel)
@@ -31,12 +32,12 @@ namespace WinformApp.Forms.UserControlComponents
         public async void FillDataGridView()
         {
             this.dataGridView1.Rows.Clear();
-            _categories = await _viewModel.GetAllCategories();
+            _bookInfos = await _viewModel.GetAllBookInfo();
 
-            foreach (Category category in _categories)
+            foreach (BookInfo bookInfo in _bookInfos)
             {
-                CustomDataRow<Category> row = new CustomDataRow<Category>(this.dataGridView1, category);
-                row.Add(category.Type, "Edit");
+                CustomDataRow<BookInfo> row = new CustomDataRow<BookInfo>(this.dataGridView1, bookInfo);
+                row.Add(bookInfo.Title, "Edit");
                 this.dataGridView1.Rows.Add(row);
             }
         }
@@ -47,14 +48,13 @@ namespace WinformApp.Forms.UserControlComponents
                 return;
 
             DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-            if (row is CustomDataRow<Category> customDataRow)
+            if (row is CustomDataRow<BookInfo> customDataRow)
             {
                 panelCategory.Controls.Clear();
-                CreateEditCategoryPanel createEditCategoryPanel = new CreateEditCategoryPanel(_viewModel, customDataRow.GetData());
-                createEditCategoryPanel.Dock = DockStyle.Fill;
+                CreateEditBookInfoExistObjPanel createEditCategoryPanel = new CreateEditBookInfoExistObjPanel(_viewModel, customDataRow.GetData());
+                createEditCategoryPanel.FillDock();
                 createEditCategoryPanel.OnEdit += FillDataGridView;
                 panelCategory.Controls.Add(createEditCategoryPanel);
-                createEditCategoryPanel.Dock = DockStyle.Fill;
             }
         }
     }

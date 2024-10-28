@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            titlePanelCreate = new BookLibrary.WinformApp.Forms.Custom_Form_Item.TitledPanel();
+            titlePanelCreate = new TitledPanel();
             button1 = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -54,7 +54,7 @@
             titlePanelCreate.Name = "titlePanelCreate";
             titlePanelCreate.Size = new Size(934, 501);
             titlePanelCreate.TabIndex = 0;
-            titlePanelCreate.TextAligns = BookLibrary.WinformApp.Forms.Custom_Form_Item.TextAlign.Center;
+            titlePanelCreate.TextAligns = TextAlign.Center;
             titlePanelCreate.Title = "Edit Book";
             titlePanelCreate.TitleBackColor = Color.LightGray;
             titlePanelCreate.TitleFont = new Font("Arial", 12F);
@@ -203,7 +203,7 @@
 
         #endregion
 
-        private BookLibrary.WinformApp.Forms.Custom_Form_Item.TitledPanel titlePanelCreate;
+        private TitledPanel titlePanelCreate;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private Label label2;

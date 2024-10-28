@@ -1,9 +1,8 @@
 ﻿using BookLibrary.Models;
 using BookLibrary.WinformApp.UserControlComponents.Waiting;
-using WinformApp;
 using WinformApp.Forms;
 
-namespace BookLibrary.WinformApp
+namespace WinformApp
 {
     public partial class CreateEditCategoryPanel : UserControl
     {

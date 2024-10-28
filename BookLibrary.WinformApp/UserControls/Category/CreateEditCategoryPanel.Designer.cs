@@ -1,4 +1,4 @@
-﻿namespace BookLibrary.WinformApp
+﻿namespace WinformApp
 {
     partial class CreateEditCategoryPanel
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            titlePanelCreate = new Forms.Custom_Form_Item.TitledPanel();
+            titlePanelCreate = new TitledPanel();
             tableLayoutPanel1 = new TableLayoutPanel();
             btCreateEdit = new Button();
             tbEanCode = new TextBox();
@@ -49,7 +49,7 @@
             titlePanelCreate.Name = "titlePanelCreate";
             titlePanelCreate.Size = new Size(608, 705);
             titlePanelCreate.TabIndex = 1;
-            titlePanelCreate.TextAligns = Forms.Custom_Form_Item.TextAlign.Center;
+            titlePanelCreate.TextAligns = TextAlign.Center;
             titlePanelCreate.Title = "Create Category";
             titlePanelCreate.TitleBackColor = Color.LightGray;
             titlePanelCreate.TitleFont = new Font("Arial", 12F);
@@ -157,7 +157,7 @@
 
         #endregion
 
-        private Forms.Custom_Form_Item.TitledPanel titlePanelCreate;
+        private TitledPanel titlePanelCreate;
         private TableLayoutPanel tableLayoutPanel1;
         private Button btCreateEdit;
         private TextBox tbEanCode;
