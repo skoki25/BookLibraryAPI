@@ -1,5 +1,8 @@
-﻿using BookLibraryAPI.Controllers;
-using BookLibraryAPI.Models;
+﻿using AutoMapper;
+using BookLibrary.Model.Messages;
+using BookLibrary.Models;
+using BookLibraryAPI.Controllers;
+using BookLibraryAPI.Mapper;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +34,8 @@ namespace UnitTest
             TestMethod.IsBadRequest(result);
 
             OkObjectResult okRequest = (OkObjectResult)result;
-            Author author = (Author)okRequest.Value;
+            ResultMessage<Author> resultMessage = (ResultMessage<Author>)okRequest.Value;
+            Author author = resultMessage.Data;
             if(author == null)
             {
                 Assert.Fail("Author nebol najdeny");
@@ -46,7 +50,8 @@ namespace UnitTest
             TestMethod.IsBadRequest(result);
 
             OkObjectResult okRequest = (OkObjectResult)result;
-            List<Author> listAuthor = (List<Author>)okRequest.Value;
+            ResultMessage<List<Author>> resultMessage = (ResultMessage<List<Author>>)okRequest.Value;
+            List<Author> listAuthor = resultMessage.Data;
             if(listAuthor.Count() == 0)
             {
                 Assert.Fail("Canntot be null");
@@ -79,12 +84,13 @@ namespace UnitTest
             IActionResult result = await _authorController.CreateAuthor(authorCreate);
             TestMethod.IsBadRequest(result);
             CheckAuthor(firstNameChange, secondNameChange, result);
-
         }
+
         private static void CheckAuthor(string firstNameChange, string secondNameChange, IActionResult result)
         {
             OkObjectResult okRequest = (OkObjectResult)result;
-            Author author = (Author)okRequest.Value;
+            ResultMessage<Author> resultMessage = (ResultMessage<Author>)okRequest.Value;
+            Author author = resultMessage.Data;
             TestDataGetItem.IsObjectNull(author);
             if (!author.FirstName.Equals(firstNameChange))
             {

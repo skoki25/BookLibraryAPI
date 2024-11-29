@@ -1,0 +1,113 @@
+﻿namespace WinformApp.UserControls
+{
+    partial class AuthorEditControl
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            panelBook = new Panel();
+            dataGridView1 = new DataGridView();
+            ISOColumn = new DataGridViewTextBoxColumn();
+            EanColumn = new DataGridViewTextBoxColumn();
+            DetailColumn = new DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            SuspendLayout();
+            // 
+            // panelBook
+            // 
+            panelBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelBook.Location = new Point(332, 13);
+            panelBook.Margin = new Padding(3, 4, 3, 4);
+            panelBook.Name = "panelBook";
+            panelBook.Size = new Size(639, 605);
+            panelBook.TabIndex = 6;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ISOColumn, EanColumn, DetailColumn });
+            dataGridView1.Location = new Point(3, 13);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(323, 605);
+            dataGridView1.TabIndex = 5;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // ISOColumn
+            // 
+            ISOColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ISOColumn.FillWeight = 60F;
+            ISOColumn.HeaderText = "First Name";
+            ISOColumn.MinimumWidth = 6;
+            ISOColumn.Name = "ISOColumn";
+            ISOColumn.ReadOnly = true;
+            ISOColumn.Width = 109;
+            // 
+            // EanColumn
+            // 
+            EanColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            EanColumn.HeaderText = "Last Name";
+            EanColumn.MinimumWidth = 6;
+            EanColumn.Name = "EanColumn";
+            EanColumn.ReadOnly = true;
+            // 
+            // DetailColumn
+            // 
+            DetailColumn.HeaderText = "Detail";
+            DetailColumn.MinimumWidth = 6;
+            DetailColumn.Name = "DetailColumn";
+            DetailColumn.Resizable = DataGridViewTriState.False;
+            DetailColumn.SortMode = DataGridViewColumnSortMode.Automatic;
+            DetailColumn.Width = 80;
+            // 
+            // AuthorEditControl
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(panelBook);
+            Controls.Add(dataGridView1);
+            Name = "AuthorEditControl";
+            Size = new Size(977, 638);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private Panel panelBook;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn ISOColumn;
+        private DataGridViewTextBoxColumn EanColumn;
+        private DataGridViewButtonColumn DetailColumn;
+    }
+}
